@@ -1,0 +1,3 @@
+-Textures not working. Maybe needs geckolib.
+-add better combat and assign items properly to their categories.
+-Add translations.

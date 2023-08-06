@@ -23,5 +23,6 @@
   "item.triforgeweapons.stone_halberd_handheld": "Stone Halberd",
   "item.triforgeweapons.stone_hammer_handheld": "Stone Hammer",
   "item.triforgeweapons.stone_scythe_handheld": "Stone Scythe",
-  "item.triforgeweapons.stone_warglaive_handheld": "Stone Warglaive"
+  "item.triforgeweapons.stone_warglaive_handheld": "Stone Warglaive",
+  "itemGroup.triforgeweaponstab": "Triforge Weapons"
 }
