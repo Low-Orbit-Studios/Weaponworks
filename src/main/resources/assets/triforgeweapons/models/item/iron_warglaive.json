@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"parent": "minecraft:item/handheld",
 	"textures": {
-		"layer0": "triforgeweapons:item/iron_warglaive_handheld"
+		"layer0": "triforgeweapons:item/iron_warglaive"
 	},
 	"display": {
 		"thirdperson_righthand": {

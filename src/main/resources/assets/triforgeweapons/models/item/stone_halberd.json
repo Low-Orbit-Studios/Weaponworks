@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
 	"textures": {
-		"layer0": "triforgeweapons:item/iron_halberd_handheld"
+		"layer0": "triforgeweapons:item/stone_halberd"
 	},
 	"elements": [
 		{

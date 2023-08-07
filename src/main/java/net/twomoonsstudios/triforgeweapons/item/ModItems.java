@@ -29,7 +29,7 @@ public class ModItems {
                     new Item.Properties().tab(ModCreativeModeTab.MOD_TAB)
             )
     );
-    public static final RegistryObject<Item> GOLD_HALBERD = ITEMS.register("gold_halberd",
+    public static final RegistryObject<Item> GOLD_HALBERD = ITEMS.register("golden_halberd",
             () -> new TriforgeTieredWeapon(Tiers.GOLD
                     , WeaponDataConstants.GOLD_HALBERD_BASE_DMG
                     , WeaponDataConstants.HALBERD_BASE_ATK_SPD,
@@ -58,7 +58,7 @@ public class ModItems {
                     new Item.Properties().tab(ModCreativeModeTab.MOD_TAB)
             )
     );
-    public static final RegistryObject<Item> GOLD_GREATSWORD = ITEMS.register("gold_greatsword",
+    public static final RegistryObject<Item> GOLD_GREATSWORD = ITEMS.register("golden_greatsword",
             () -> new TriforgeTieredWeapon(Tiers.GOLD
                     , WeaponDataConstants.GOLD_GREATSWORD_BASE_DMG
                     , WeaponDataConstants.GREATSWORD_BASE_ATK_SPD,
@@ -87,7 +87,7 @@ public class ModItems {
                     new Item.Properties().tab(ModCreativeModeTab.MOD_TAB)
             )
     );
-    public static final RegistryObject<Item> GOLD_HAMMER = ITEMS.register("gold_hammer",
+    public static final RegistryObject<Item> GOLD_HAMMER = ITEMS.register("golden_hammer",
             () -> new TriforgeTieredWeapon(Tiers.GOLD
                     , WeaponDataConstants.GOLD_HAMMER_BASE_DMG
                     , WeaponDataConstants.HAMMER_BASE_ATK_SPD,
@@ -116,7 +116,7 @@ public class ModItems {
                     new Item.Properties().tab(ModCreativeModeTab.MOD_TAB)
             )
     );
-    public static final RegistryObject<Item> GOLD_SCYTHE = ITEMS.register("gold_scythe",
+    public static final RegistryObject<Item> GOLD_SCYTHE = ITEMS.register("golden_scythe",
             () -> new TriforgeTieredWeapon(Tiers.GOLD
                     , WeaponDataConstants.GOLD_SCYTHE_BASE_DMG
                     , WeaponDataConstants.SCYTHE_BASE_ATK_SPD,
@@ -145,7 +145,7 @@ public class ModItems {
                     new Item.Properties().tab(ModCreativeModeTab.MOD_TAB)
             )
     );
-    public static final RegistryObject<Item> GOLD_WARGLAIVE = ITEMS.register("gold_warglaive",
+    public static final RegistryObject<Item> GOLD_WARGLAIVE = ITEMS.register("golden_warglaive",
             () -> new TriforgeTieredWeapon(Tiers.GOLD
                     , WeaponDataConstants.GOLD_WARGLAIVE_BASE_DMG
                     , WeaponDataConstants.WARGLAIVE_BASE_ATK_SPD,

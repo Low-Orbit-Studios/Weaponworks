@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
-		"layer0": "triforgeweapons:item/netherite_scythe_handheld"
+		"layer0": "triforgeweapons:item/golden_scythe"
 	},
 	"elements": [
 		{
@@ -23,12 +23,12 @@
 			"to": [9, 15, 7],
 			"rotation": {"angle": 0, "axis": "y", "origin": [0, 15, 0]},
 			"faces": {
-				"north": {"uv": [0.5, 9.25, 0, 9.75], "texture": "#layer0"},
-				"east": {"uv": [0.5, 9.5, 0, 8.5], "rotation": 90, "texture": "#layer0"},
-				"south": {"uv": [0.5, 3.25, 0, 3.75], "texture": "#layer0"},
-				"west": {"uv": [0, 8.5, 0.5, 9.5], "rotation": 90, "texture": "#layer0"},
-				"up": {"uv": [0, 9.5, 0.5, 8.5], "texture": "#layer0"},
-				"down": {"uv": [0.5, 8.5, 0, 9.5], "texture": "#layer0"}
+				"north": {"uv": [0.5, 5.25, 0, 5.75], "texture": "#layer0"},
+				"east": {"uv": [0, 2, 0.5, 3], "rotation": 90, "texture": "#layer0"},
+				"south": {"uv": [0.5, 0, 0, 8], "texture": "#layer0"},
+				"west": {"uv": [0, 4.25, 0.5, 3.25], "rotation": 90, "texture": "#layer0"},
+				"up": {"uv": [0, 5.25, 0.5, 6.25], "texture": "#layer0"},
+				"down": {"uv": [0.5, 3.75, 0, 4.75], "texture": "#layer0"}
 			}
 		},
 		{
