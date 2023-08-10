@@ -1,3 +1,5 @@
--Textures not working. Maybe needs geckolib.
+-Textures not working. Maybe needs geckolib. OK
+
+-add GUI icons for all items. Just copy the base icons and add "_gui" suffix to them
 -add better combat and assign items properly to their categories.
 -Add translations.

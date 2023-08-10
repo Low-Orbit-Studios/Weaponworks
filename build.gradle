@@ -124,10 +124,6 @@ repositories {
     // flatDir {
     //     dir 'libs'
     // }
-    maven {
-        name = 'GeckoLib'
-        url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
-    }
 }
 
 dependencies {
@@ -136,7 +132,7 @@ dependencies {
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft "net.minecraftforge:forge:${mcver}-${forgeversion}"
 
-    implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.19:3.1.40')
+    //implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.19:3.1.40')
     // Real mod deobf dependency examples - these get remapped to your current mappings
     // compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api") // Adds JEI API as a compile dependency
     // runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}") // Adds the full JEI mod as a runtime dependency

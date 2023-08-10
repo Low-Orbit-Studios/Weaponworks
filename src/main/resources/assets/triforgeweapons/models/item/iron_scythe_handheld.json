@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
-		"layer0": "triforgeweapons:item/stone_scythe"
+		"layer0": "triforgeweapons:item/iron_scythe_handheld"
 	},
 	"elements": [
 		{

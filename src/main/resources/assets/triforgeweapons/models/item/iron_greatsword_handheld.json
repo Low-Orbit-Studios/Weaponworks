@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"parent": "minecraft:item/handheld",
 	"textures": {
-		"layer0": "triforgeweapons:item/stone_greatsword"
+		"layer0": "triforgeweapons:item/iron_greatsword_handheld"
 	},
 	"display": {
 		"thirdperson_righthand": {

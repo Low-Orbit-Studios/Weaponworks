@@ -33,7 +33,7 @@ public class ModItems {
             () -> new TriforgeTieredWeapon(Tiers.GOLD
                     , WeaponDataConstants.GOLD_HALBERD_BASE_DMG
                     , WeaponDataConstants.HALBERD_BASE_ATK_SPD,
-                    new Item.Properties().tab(ModCreativeModeTab.MOD_TAB)
+                    new Item.Properties().tab(ModCreativeModeTab.MOD_TAB).stacksTo(1)
             )
     );
     public static final RegistryObject<Item> IRON_HALBERD = ITEMS.register("iron_halberd",

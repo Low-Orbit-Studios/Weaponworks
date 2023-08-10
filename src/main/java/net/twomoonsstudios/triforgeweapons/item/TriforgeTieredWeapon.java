@@ -7,24 +7,18 @@ import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.TieredItem;
+import net.minecraft.world.item.*;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
-import software.bernie.geckolib3.util.GeckoLibUtil;
 
 import java.util.function.Consumer;
 
-public class TriforgeTieredWeapon extends TieredItem {
+public class TriforgeTieredWeapon extends SwordItem implements Vanishable {
     private final float attackDamage;
     /** Modifiers applied when the item is in the mainhand of a user. */
-    private final Multimap<Attribute, AttributeModifier> defaultModifiers;
+    protected final Multimap<Attribute, AttributeModifier> defaultModifiers;
 
     public TriforgeTieredWeapon(Tier pTier, int pAttackDamageModifier, float pAttackSpeedModifier, Item.Properties pProperties) {
-        super(pTier, pProperties);
+        super(pTier, pAttackDamageModifier, pAttackSpeedModifier, pProperties);
         this.attackDamage = (float)pAttackDamageModifier + pTier.getAttackDamageBonus();
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
         builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", (double)this.attackDamage, AttributeModifier.Operation.ADDITION));
