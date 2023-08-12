@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smithing",
+  "addition": {
+    "item": "minecraft:netherite_ingot"
+  },
+  "base": {
+    "item": "triforgeweapons:diamond_scythe"
+  },
+  "result": {
+    "item": "triforgeweapons:netherite_scythe"
+  }
+}

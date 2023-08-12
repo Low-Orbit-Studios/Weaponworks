@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "X": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "pattern": [
+    "  X",
+    " #X",
+    "XX "
+  ],
+  "result": {
+    "item": "triforgeweapons:diamond_warglaive"
+  }
+}
