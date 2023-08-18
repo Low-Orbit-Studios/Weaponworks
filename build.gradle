@@ -6,8 +6,8 @@ plugins {
 }
 
 version = '1.0.1-1.19.2'
-group = 'net.twomoonsstudios.triforgeweapons' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'triforgeweapons'
+group = 'net.twomoonsstudios.moonsweaponry' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = 'moonsweaponry'
 
 // Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
@@ -50,10 +50,10 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
-            property 'forge.enabledGameTestNamespaces', 'triforgeweapons'
+            property 'forge.enabledGameTestNamespaces', 'moonsweaponry'
 
             mods {
-                triforgeweapons {
+                moonsweaponry {
                     source sourceSets.main
                 }
             }
@@ -66,10 +66,10 @@ minecraft {
 
             property 'forge.logging.console.level', 'debug'
 
-            property 'forge.enabledGameTestNamespaces', 'triforgeweapons'
+            property 'forge.enabledGameTestNamespaces', 'moonsweaponry'
 
             mods {
-                triforgeweapons {
+                moonsweaponry {
                     source sourceSets.main
                 }
             }
@@ -85,10 +85,10 @@ minecraft {
 
             property 'forge.logging.console.level', 'debug'
 
-            property 'forge.enabledGameTestNamespaces', 'triforgeweapons'
+            property 'forge.enabledGameTestNamespaces', 'moonsweaponry'
 
             mods {
-                triforgeweapons {
+                moonsweaponry {
                     source sourceSets.main
                 }
             }
@@ -102,10 +102,10 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
-            args '--mod', 'triforgeweapons', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args '--mod', 'moonsweaponry', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
 
             mods {
-                triforgeweapons {
+                moonsweaponry {
                     source sourceSets.main
                 }
             }
@@ -150,12 +150,12 @@ dependencies {
 jar {
     manifest {
         attributes([
-                "Specification-Title"     : "triforgeweapons",
-                "Specification-Vendor"    : "triforgeweaponssareus",
+                "Specification-Title"     : "moonsweaponry",
+                "Specification-Vendor"    : "moonsweaponrysareus",
                 "Specification-Version"   : "1", // We are version 1 of ourselves
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : project.jar.archiveVersion,
-                "Implementation-Vendor"   : "triforgeweaponssareus",
+                "Implementation-Vendor"   : "moonsweaponrysareus",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
