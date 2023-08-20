@@ -27,7 +27,7 @@ displayName="Moons Weaponry" #mandatory
 # A URL for the "homepage" for this mod, displayed in the mod UI
 #displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
-logoFile="examplemod.png" #optional
+logoFile="moonsweaponryicon.png" #optional
 # A text field displayed in the mod UI
 credits="" #optional
 # A text field displayed in the mod UI
@@ -42,8 +42,7 @@ authors="CrazedAerialCable, Cakeman, Strgnv" #optional
 
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-Adds custom weapons to the game. Created and tailored for Triforge 2 modpack.
-'''
+Adds custom weapons to the game. Created and tailored for Triforge 2 modpack.'''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.moonsweaponry]] #optional
     # the modid of the dependency
