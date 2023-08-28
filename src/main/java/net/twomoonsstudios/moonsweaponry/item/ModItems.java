@@ -58,8 +58,8 @@ public class ModItems {
     );
     public static final RegistryObject<Item> GOLD_GREATSWORD = ITEMS.register("golden_greatsword",
             () -> new TriforgeTieredWeapon(Tiers.GOLD
-                    , MoonsWeaponryCommonConfig.GOLD_GREATSWORD_BASE_DMG.get()//WeaponDataConstants.GOLD_GREATSWORD_BASE_DMG
-                    , MoonsWeaponryCommonConfig.GREATSWORD_BASE_ATK_SPD.get().floatValue(),//WeaponDataConstants.GREATSWORD_BASE_ATK_SPD,
+                    , WeaponDataConstants.GOLD_GREATSWORD_BASE_DMG
+                    , WeaponDataConstants.GREATSWORD_BASE_ATK_SPD,
                     new Item.Properties().tab(ModCreativeModeTab.MOD_TAB)
             )
     );
