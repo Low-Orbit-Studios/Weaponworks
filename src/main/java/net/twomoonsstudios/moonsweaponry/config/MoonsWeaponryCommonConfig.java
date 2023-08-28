@@ -3,8 +3,6 @@ package net.twomoonsstudios.moonsweaponry.config;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.twomoonsstudios.moonsweaponry.constants.WeaponDataConstants;
 
-import static net.twomoonsstudios.moonsweaponry.item.ModItems.DIAMOND_HALBERD;
-
 public class MoonsWeaponryCommonConfig {
     public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
     public static final ForgeConfigSpec SPEC;

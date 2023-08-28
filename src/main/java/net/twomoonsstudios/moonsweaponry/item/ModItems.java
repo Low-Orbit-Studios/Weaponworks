@@ -1,18 +1,22 @@
 package net.twomoonsstudios.moonsweaponry.item;
 
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Tiers;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 import net.twomoonsstudios.moonsweaponry.MoonsWeaponry;
-import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponryCommonConfig;
-import net.twomoonsstudios.moonsweaponry.constants.WeaponDataConstants;
+import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 
 public class ModItems {
     public static DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MoonsWeaponry.MOD_ID);
 
+    public static void register(IEventBus eventBus){
+        for (String id : MoonsWeaponsConfig.WEAPONS.keySet())
+            ITEMS.register(id, () -> new TriforgeTieredWeapon(MoonsWeaponsConfig.WEAPONS.get(id)));
+
+        ITEMS.register(eventBus);
+    }
+/*
     public static final RegistryObject<Item> NETHERITE_HALBERD = ITEMS.register("netherite_halberd",
             () -> new TriforgeTieredWeapon(Tiers.NETHERITE
                     , WeaponDataConstants.NETHERITE_HALBERD_BASE_DMG
@@ -156,10 +160,5 @@ public class ModItems {
                     , WeaponDataConstants.WARGLAIVE_BASE_ATK_SPD,
                     new Item.Properties().tab(ModCreativeModeTab.MOD_TAB)
             )
-    );
-
-
-    public static void register(IEventBus eventBus){
-        ITEMS.register(eventBus);
-    }
+    );*/
 }

@@ -15,6 +15,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponryCommonConfig;
+import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 import net.twomoonsstudios.moonsweaponry.item.ModItems;
 import org.slf4j.Logger;
 
@@ -25,11 +26,16 @@ public class MoonsWeaponry
     // Define mod id in a common place for everything to reference
     public static final String MOD_ID = "moonsweaponry";
     // Directly reference a slf4j logger
-    private static final Logger LOGGER = LogUtils.getLogger();
+    protected static final Logger LOGGER = LogUtils.getLogger();
+
+    public static Logger getLogger() {
+        return LOGGER;
+    }
 
     public MoonsWeaponry()
     {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        MoonsWeaponsConfig.read();
 
         ModItems.register(modEventBus);
         // Register the commonSetup method for modloading
