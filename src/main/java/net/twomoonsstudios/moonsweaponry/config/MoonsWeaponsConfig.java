@@ -14,54 +14,156 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
+import static net.twomoonsstudios.moonsweaponry.constants.WeaponDataConstants.*;
+
 public class MoonsWeaponsConfig {
     public static Map<String, WeaponInfo> WEAPONS = new HashMap<>();
 
     public static final Map<String, Float> WEAPON_SPEEDS = Map.of(
-            "halberd", -3.9f,
-            "warglaive", -2f,
-            "scythe", -3.8f,
-            "greatsword", -3.4f,
-            "hammer", -3f
+            "halberd", HALBERD_BASE_ATK_SPD,
+            "warglaive", WARGLAIVE_BASE_ATK_SPD,
+            "scythe", SCYTHE_BASE_ATK_SPD,
+            "greatsword", GREATSWORD_BASE_ATK_SPD,
+            "hammer", HAMMER_BASE_ATK_SPD
     );
     public static final String DEFAULT_CONFIG = """
-{
-  "halberd": {
-    "wooden": {
-      "tier": "WOOD",
-      "damage": 3
-    }
-  },
-  "warglaive": {
-    "stone": {
-      "tier": "STONE",
-      "damage": 3
-    }
-  },
-  "scythe": {
-    "golden": {
-      "tier": "GOLD",
-      "damage": 3
-    },
-    "iron": {
-      "tier": "IRON",
-      "damage": 3
-    }
-  },
-  "greatsword": {
-    "diamond": {
-      "tier": "DIAMOND",
-      "damage": 3
-    }
-  },
-  "hammer": {
-    "netherite": {
-      "tier": "NETHERITE",
-      "damage": 3,
-      "fire_resistant": true
-    }
-  }
-}""";
+    {
+      "halberd": {
+        "wooden": {
+          "tier": "WOOD",
+          "damage": 3
+        },
+        "stone": {
+          "tier": "STONE",
+          "damage": 4
+        },
+        "iron": {
+          "tier": "IRON",
+          "damage": 5
+        },
+        "golden": {
+            "tier": "GOLD",
+            "damage": 6
+        },
+        "diamond":{
+            "tier": "DIAMOND",
+            "damage": 7
+        },
+        "netherite": {
+          "tier": "NETHERITE",
+          "damage": 8,
+          "fire_resistant": true
+        }
+      },
+      "warglaive": {
+        "wooden": {
+          "tier": "WOOD",
+          "damage": 1
+        },
+        "stone": {
+          "tier": "STONE",
+          "damage": 1
+        },
+        "iron": {
+          "tier": "IRON",
+          "damage": 1
+        },
+        "golden": {
+            "tier": "GOLD",
+            "damage": 2
+        },
+        "diamond":{
+            "tier": "DIAMOND",
+            "damage": 3
+        },
+        "netherite": {
+          "tier": "NETHERITE",
+          "damage": 4,
+          "fire_resistant": true
+        }
+      },
+      "scythe": {
+        "wooden": {
+          "tier": "WOOD",
+          "damage": 2
+        },
+        "stone": {
+          "tier": "STONE",
+          "damage": 3
+        },
+        "iron": {
+          "tier": "IRON",
+          "damage": 4
+        },
+        "golden": {
+            "tier": "GOLD",
+            "damage": 5
+        },
+        "diamond":{
+            "tier": "DIAMOND",
+            "damage": 6
+        },
+        "netherite": {
+          "tier": "NETHERITE",
+          "damage": 7,
+          "fire_resistant": true
+        }
+      },
+      "greatsword": {
+        "wooden": {
+          "tier": "WOOD",
+          "damage": 6
+        },
+        "stone": {
+          "tier": "STONE",
+          "damage": 7
+        },
+        "iron": {
+          "tier": "IRON",
+          "damage": 8
+        },
+        "golden": {
+            "tier": "GOLD",
+            "damage": 9
+        },
+        "diamond":{
+            "tier": "DIAMOND",
+            "damage": 10
+        },
+        "netherite": {
+          "tier": "NETHERITE",
+          "damage": 11,
+          "fire_resistant": true
+        }
+      },
+      "hammer": {
+        "wooden": {
+          "tier": "WOOD",
+          "damage": 4
+        },
+        "stone": {
+          "tier": "STONE",
+          "damage": 5
+        },
+        "iron": {
+          "tier": "IRON",
+          "damage": 6
+        },
+        "golden": {
+            "tier": "GOLD",
+            "damage": 7
+        },
+        "diamond":{
+            "tier": "DIAMOND",
+            "damage": 8
+        },
+        "netherite": {
+          "tier": "NETHERITE",
+          "damage": 9,
+          "fire_resistant": true
+        }
+      }
+    }""";
 
     public static class WeaponInfo {
         public WeaponInfo(Map<String, ?> dict, String weapon_type) {
