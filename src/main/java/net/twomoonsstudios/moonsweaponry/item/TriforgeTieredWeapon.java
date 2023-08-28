@@ -6,10 +6,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.TieredItem;
-import net.minecraft.world.item.Vanishable;
+import net.minecraft.world.item.*;
 import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 
 public class TriforgeTieredWeapon extends TieredItem implements Vanishable {
@@ -19,9 +16,9 @@ public class TriforgeTieredWeapon extends TieredItem implements Vanishable {
 
     public TriforgeTieredWeapon(MoonsWeaponsConfig.WeaponInfo stats) {
         this(stats.tier, stats.damage, stats.speed, stats.fireRes
-                ? new Item.Properties().tab(ModCreativeModeTab.MOD_TAB)
+                ? new Item.Properties().tab(CreativeModeTab.TAB_COMBAT)
                         .defaultDurability(stats.durability).fireResistant()
-                : new Item.Properties().tab(ModCreativeModeTab.MOD_TAB)
+                : new Item.Properties().tab(CreativeModeTab.TAB_COMBAT)
                         .defaultDurability(stats.durability));
     }
 
