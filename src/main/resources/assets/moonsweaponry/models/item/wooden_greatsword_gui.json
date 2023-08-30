@@ -1,6 +1,6 @@
 {
 	"parent": "minecraft:item/handheld",
 	"textures": {
-		"layer0": "moonsweaponry:item/stone_greatsword"
+		"layer0": "moonsweaponry:item/wooden_greatsword"
 	}
 }

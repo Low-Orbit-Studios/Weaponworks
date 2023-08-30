@@ -17,7 +17,7 @@ public class WeaponDataConstants {
     public static final int DIAMOND_GREATSWORD_BASE_DMG = 11 - DIAMOND_TIER_DMG_BOOST - FIST_ATTACK_POWER;
     public static final int NETHERITE_GREATSWORD_BASE_DMG = 12 - NETHERITE_TIER_DMG_BOOST - FIST_ATTACK_POWER;
 
-    public static final float GREATSWORD_BASE_ATK_SPD = -(DEFAULT_ATTACK_SPEED - 0.6f);
+    public static final float GREATSWORD_BASE_ATK_SPD = -(DEFAULT_ATTACK_SPEED - 0.8f);
 
 
     public static final int IRON_HAMMER_BASE_DMG = 7 - IRON_TIER_DMG_BOOST - FIST_ATTACK_POWER;
@@ -41,7 +41,7 @@ public class WeaponDataConstants {
     public static final int DIAMOND_WARGLAIVE_BASE_DMG = 3 - DIAMOND_TIER_DMG_BOOST - FIST_ATTACK_POWER;
     public static final int NETHERITE_WARGLAIVE_BASE_DMG = 4 - NETHERITE_TIER_DMG_BOOST - FIST_ATTACK_POWER;
 
-    public static final float WARGLAIVE_BASE_ATK_SPD = -(DEFAULT_ATTACK_SPEED - 2f);
+    public static final float WARGLAIVE_BASE_ATK_SPD = -(DEFAULT_ATTACK_SPEED - 2.1f);
 
 
     public static final int IRON_HALBERD_BASE_DMG = 5 - IRON_TIER_DMG_BOOST - FIST_ATTACK_POWER;
@@ -49,5 +49,5 @@ public class WeaponDataConstants {
     public static final int DIAMOND_HALBERD_BASE_DMG = 7 - DIAMOND_TIER_DMG_BOOST - FIST_ATTACK_POWER;
     public static final int NETHERITE_HALBERD_BASE_DMG = 8 - NETHERITE_TIER_DMG_BOOST - FIST_ATTACK_POWER;
 
-    public static final float HALBERD_BASE_ATK_SPD = -(DEFAULT_ATTACK_SPEED - 1.1f);
+    public static final float HALBERD_BASE_ATK_SPD = -(DEFAULT_ATTACK_SPEED - 1.6f);
 }

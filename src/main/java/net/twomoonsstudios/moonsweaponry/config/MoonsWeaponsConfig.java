@@ -31,27 +31,27 @@ public class MoonsWeaponsConfig {
       "halberd": {
         "wooden": {
           "tier": "WOOD",
-          "damage": 3
+          "damage": 6
         },
         "stone": {
           "tier": "STONE",
-          "damage": 4
+          "damage": 6
         },
         "iron": {
           "tier": "IRON",
-          "damage": 5
+          "damage": 7
         },
         "golden": {
             "tier": "GOLD",
-            "damage": 6
+            "damage": 8
         },
         "diamond":{
             "tier": "DIAMOND",
-            "damage": 7
+            "damage": 8
         },
         "netherite": {
           "tier": "NETHERITE",
-          "damage": 8,
+          "damage": 9,
           "fire_resistant": true
         }
       },
@@ -66,11 +66,11 @@ public class MoonsWeaponsConfig {
         },
         "iron": {
           "tier": "IRON",
-          "damage": 1
+          "damage": 2
         },
         "golden": {
             "tier": "GOLD",
-            "damage": 2
+            "damage": 3
         },
         "diamond":{
             "tier": "DIAMOND",
@@ -85,46 +85,46 @@ public class MoonsWeaponsConfig {
       "scythe": {
         "wooden": {
           "tier": "WOOD",
-          "damage": 2
+          "damage": 5
         },
         "stone": {
           "tier": "STONE",
-          "damage": 3
+          "damage": 5
         },
         "iron": {
           "tier": "IRON",
-          "damage": 4
+          "damage": 6
         },
         "golden": {
             "tier": "GOLD",
-            "damage": 5
+            "damage": 7
         },
         "diamond":{
             "tier": "DIAMOND",
-            "damage": 6
+            "damage": 7
         },
         "netherite": {
           "tier": "NETHERITE",
-          "damage": 7,
+          "damage": 8,
           "fire_resistant": true
         }
       },
       "greatsword": {
         "wooden": {
           "tier": "WOOD",
-          "damage": 6
+          "damage": 8
         },
         "stone": {
           "tier": "STONE",
-          "damage": 7
+          "damage": 8
         },
         "iron": {
           "tier": "IRON",
-          "damage": 8
+          "damage": 9
         },
         "golden": {
             "tier": "GOLD",
-            "damage": 9
+            "damage": 10
         },
         "diamond":{
             "tier": "DIAMOND",
@@ -143,23 +143,23 @@ public class MoonsWeaponsConfig {
         },
         "stone": {
           "tier": "STONE",
-          "damage": 5
+          "damage": 4
         },
         "iron": {
           "tier": "IRON",
-          "damage": 6
+          "damage": 5
         },
         "golden": {
             "tier": "GOLD",
-            "damage": 7
+            "damage": 6
         },
         "diamond":{
             "tier": "DIAMOND",
-            "damage": 8
+            "damage": 6
         },
         "netherite": {
           "tier": "NETHERITE",
-          "damage": 9,
+          "damage": 7,
           "fire_resistant": true
         }
       }
