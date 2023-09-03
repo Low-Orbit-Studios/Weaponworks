@@ -223,9 +223,7 @@ public class MoonsWeaponsConfig {
     public static void read() {
         String path = System.getProperty("user.dir")+ File.separator;
 
-        while (path.length() > 0 && !path.endsWith("\\"))
-            path = path.substring(0, path.length() - 1);
-        path += "config\\" + MoonsWeaponry.MOD_ID + "-weapons.json";
+        path += "config" + File.separator + MoonsWeaponry.MOD_ID + "-weapons.json";
 
         // Create config file if it doesn't exist already
         File config = new File(path);
