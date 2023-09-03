@@ -221,7 +221,8 @@ public class MoonsWeaponsConfig {
 
 
     public static void read() {
-        String path = Minecraft.getInstance().gameDirectory.getAbsolutePath();
+        String path = System.getProperty("user.dir")+ File.separator;
+
         while (path.length() > 0 && !path.endsWith("\\"))
             path = path.substring(0, path.length() - 1);
         path += "config\\" + MoonsWeaponry.MOD_ID + "-weapons.json";
