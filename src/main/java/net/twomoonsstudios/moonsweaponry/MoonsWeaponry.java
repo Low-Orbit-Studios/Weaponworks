@@ -14,7 +14,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponryCommonConfig;
 import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 import net.twomoonsstudios.moonsweaponry.item.ModItems;
 import org.slf4j.Logger;
@@ -40,8 +39,6 @@ public class MoonsWeaponry
         ModItems.register(modEventBus);
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
-
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, MoonsWeaponryCommonConfig.SPEC, "moonsweaponry-common.toml");
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
