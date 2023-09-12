@@ -6,13 +6,21 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.twomoonsstudios.moonsweaponry.MoonsWeaponry;
 import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
+import net.twomoonsstudios.moonsweaponry.item.weapons.*;
 
 public class ModItems {
     public static DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MoonsWeaponry.MOD_ID);
 
     public static void register(IEventBus eventBus){
-        for (String id : MoonsWeaponsConfig.WEAPONS.keySet())
-            ITEMS.register(id, () -> new TriforgeTieredItem(MoonsWeaponsConfig.WEAPONS.get(id)));
+        for (String id : MoonsWeaponsConfig.WEAPONS.keySet()) {
+            switch (id.substring(0, id.indexOf("_") - 1)) {
+                case "greatsword" -> ITEMS.register(id, () -> new GreatswordItem(MoonsWeaponsConfig.WEAPONS.get(id)));
+                case "halberd" -> ITEMS.register(id, () -> new HalberdItem(MoonsWeaponsConfig.WEAPONS.get(id)));
+                case "hammer" -> ITEMS.register(id, () -> new HammerItem(MoonsWeaponsConfig.WEAPONS.get(id)));
+                case "scythe" -> ITEMS.register(id, () -> new ScytheItem(MoonsWeaponsConfig.WEAPONS.get(id)));
+                case "warglaive" -> ITEMS.register(id, () -> new WarglaiveItem(MoonsWeaponsConfig.WEAPONS.get(id)));
+            }
+        }
 
         ITEMS.register(eventBus);
     }
