@@ -12,7 +12,7 @@ public class ModItems {
 
     public static void register(IEventBus eventBus){
         for (String id : MoonsWeaponsConfig.WEAPONS.keySet())
-            ITEMS.register(id, () -> new TriforgeTieredWeapon(MoonsWeaponsConfig.WEAPONS.get(id)));
+            ITEMS.register(id, () -> new TriforgeTieredItem(MoonsWeaponsConfig.WEAPONS.get(id)));
 
         ITEMS.register(eventBus);
     }
