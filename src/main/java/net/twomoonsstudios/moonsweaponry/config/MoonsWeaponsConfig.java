@@ -11,10 +11,12 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class MoonsWeaponsConfig {
+    public static final ConfigEntry<Double> VERSION = new ConfigEntry<>("TECHNICAL.VERSION_DO_NOT_EDIT", 0d);
+    public static final ConfigEntry<Boolean> RELOAD = new ConfigEntry<>("TECHNICAL.FORCE_RESET", false);
+
     public static Map<String, WeaponInfo> WEAPONS = new HashMap<>();
 
     public static final Map<String, Float> WEAPON_SPEEDS = Map.of(
@@ -26,6 +28,11 @@ public class MoonsWeaponsConfig {
     );
     public static final String DEFAULT_CONFIG = """
 {
+  "TECHNICAL": {
+    "VERSION_DO_NOT_EDIT": 1,
+    "FORCE_RESET": false
+  },
+      
   "halberd": {
     "wooden": {
       "tier": "WOOD",
@@ -62,6 +69,23 @@ public class MoonsWeaponsConfig {
     }
   }
 }""";
+
+    public static Map CONFIG = new TreeMap<>();
+
+    public static double getVersion() {
+        String text = DEFAULT_CONFIG;
+        int start = 0;
+
+        while (!List.of('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.').contains(text.charAt(start))) {
+            start++;
+        }
+        int end = start + 1;
+        while (List.of('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.').contains(text.charAt(end))) {
+            end++;
+        }
+
+        return Double.parseDouble(text.substring(start, end));
+    }
 
     public static class WeaponInfo {
         public WeaponInfo(Map<String, ?> dict, String weapon_type) {
@@ -118,25 +142,28 @@ public class MoonsWeaponsConfig {
     }
 
 
-    public static void read() {
-        String path = Minecraft.getInstance().gameDirectory.getAbsolutePath();
-        while (path.length() > 0 && !path.endsWith("\\"))
-            path = path.substring(0, path.length() - 1);
-        path += "config\\" + MoonsWeaponry.MOD_ID + "-weapons.json";
+    public static void register() {
+        register(false);
+    }
+
+    public static void register(boolean force) {
+        String path = System.getProperty("user.dir") + File.separator +
+                "config" + File.separator + MoonsWeaponry.MOD_ID + "-common.json";
 
         // Create config file if it doesn't exist already
         File config = new File(path);
         boolean create = !config.isFile();
 
-        if (create) {
+        if (create || force) {
             try {
+                config.delete();
                 config.createNewFile();
 
                 FileWriter writer = new FileWriter(path);
                 writer.write(DEFAULT_CONFIG);
                 writer.close();
 
-                MoonsWeaponry.getLogger().info("Moons' Weapons Config file created");
+                MoonsWeaponry.getLogger().info("Moons' Weaponry Config file created");
             }
             catch (IOException e) {
                 e.printStackTrace();
@@ -144,7 +171,6 @@ public class MoonsWeaponsConfig {
         }
 
 
-        Gson gson = new Gson();
         String configContent = DEFAULT_CONFIG;
         try {
             configContent = FileUtils.readFileToString(config, StandardCharsets.UTF_8);
@@ -152,40 +178,18 @@ public class MoonsWeaponsConfig {
         catch (IOException e) {
             e.printStackTrace();
         }
-        Map<String, Map<String, Map<String, ?>>> json = gson.fromJson(configContent, Map.class);
+        CONFIG = new Gson().fromJson(configContent, Map.class);
 
+        if (!force && (RELOAD.get() || VERSION.get() < getVersion())) {
+            register(true);
+            return;
+        }
 
         WEAPONS = new HashMap<>();
         for (String target : new String[]{"halberd", "warglaive", "scythe", "greatsword", "hammer"}) {
-            for (String id : json.get(target).keySet()) {
-                WEAPONS.put(id + "_" + target, new WeaponInfo(json.get(target).get(id), target));
+            for (String id : ((Map<String, Map>) CONFIG.get(target)).keySet()) {
+                WEAPONS.put(id + "_" + target, new WeaponInfo(((Map<String, Map>) CONFIG.get(target)).get(id), target));
             }
         }
-
-        /*String target = "halberd";
-        HALBERDS = new HashMap<>();
-        for (String id : json.get(target).keySet()) {
-            HALBERDS.put(id + "_" + target, new WeaponInfo(json.get(target).get(id)));
-        }
-        target = "warglaive";
-        WARGLAIVES = new HashMap<>();
-        for (String id : json.get(target).keySet()) {
-            WARGLAIVES.put(id + "_" + target, new WeaponInfo(json.get(target).get(id)));
-        }
-        target = "scythe";
-        SCYTHES = new HashMap<>();
-        for (String id : json.get(target).keySet()) {
-            SCYTHES.put(id + "_" + target, new WeaponInfo(json.get(target).get(id)));
-        }
-        target = "greatsword";
-        GREATSWORDS = new HashMap<>();
-        for (String id : json.get(target).keySet()) {
-            GREATSWORDS.put(id + "_" + target, new WeaponInfo(json.get(target).get(id)));
-        }
-        target = "hammer";
-        HAMMERS = new HashMap<>();
-        for (String id : json.get(target).keySet()) {
-            HAMMERS.put(id + "_" + target, new WeaponInfo(json.get(target).get(id)));
-        }*/
     }
 }

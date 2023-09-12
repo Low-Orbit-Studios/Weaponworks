@@ -35,7 +35,7 @@ public class MoonsWeaponry
     public MoonsWeaponry()
     {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        MoonsWeaponsConfig.read();
+        MoonsWeaponsConfig.register();
 
         ModItems.register(modEventBus);
         // Register the commonSetup method for modloading
