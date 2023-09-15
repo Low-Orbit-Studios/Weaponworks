@@ -16,17 +16,28 @@ import java.util.*;
 import static net.twomoonsstudios.moonsweaponry.constants.WeaponDataConstants.*;
 
 public class MoonsWeaponsConfig {
+    /**Base ID for the halberd. For editor support and typo reduction.*/
+    public static final String HALBERD_BASE_ID = "halberd";
+    /**Base ID for the warglaive. For editor support and typo reduction.*/
+    public static final String WARGLAIVE_BASE_ID = "warglaive";
+    /**Base ID for the scythe. For editor support and typo reduction.*/
+    public static final String SCYTHE_BASE_ID = "scythe";
+    /**Base ID for the greatsword. For editor support and typo reduction.*/
+    public static final String GREATSWORD_BASE_ID = "greatsword";
+    /**Base ID for the hammer. For editor support and typo reduction.*/
+    public static final String HAMMER_BASE_ID = "hammer";
+
     public static final ConfigEntry<Double> VERSION = new ConfigEntry<>("TECHNICAL.VERSION_DO_NOT_EDIT", 0d);
     public static final ConfigEntry<Boolean> RELOAD = new ConfigEntry<>("TECHNICAL.FORCE_RESET", false);
 
     public static Map<String, WeaponInfo> WEAPONS = new HashMap<>();
 
     public static final Map<String, Float> WEAPON_SPEEDS = Map.of(
-            "halberd", HALBERD_BASE_ATK_SPD,
-            "warglaive", WARGLAIVE_BASE_ATK_SPD,
-            "scythe", SCYTHE_BASE_ATK_SPD,
-            "greatsword", GREATSWORD_BASE_ATK_SPD,
-            "hammer", HAMMER_BASE_ATK_SPD
+            HALBERD_BASE_ID, HALBERD_BASE_ATK_SPD,
+            WARGLAIVE_BASE_ID, WARGLAIVE_BASE_ATK_SPD,
+            SCYTHE_BASE_ID, SCYTHE_BASE_ATK_SPD,
+            GREATSWORD_BASE_ID, GREATSWORD_BASE_ATK_SPD,
+            HAMMER_BASE_ID, HAMMER_BASE_ATK_SPD
     );
     public static final String DEFAULT_CONFIG = """
 {
@@ -289,7 +300,7 @@ public class MoonsWeaponsConfig {
         }
 
         WEAPONS = new HashMap<>();
-        for (String target : new String[]{"halberd", "warglaive", "scythe", "greatsword", "hammer"}) {
+        for (String target : new String[]{HALBERD_BASE_ID, WARGLAIVE_BASE_ID, SCYTHE_BASE_ID, GREATSWORD_BASE_ID, HAMMER_BASE_ID}) {
             for (String id : ((Map<String, Map>) CONFIG.get(target)).keySet()) {
                 WEAPONS.put(id + "_" + target, new WeaponInfo(((Map<String, Map>) CONFIG.get(target)).get(id), target));
             }

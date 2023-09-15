@@ -31,8 +31,7 @@ public class MoonsWeaponry
         return LOGGER;
     }
 
-    public MoonsWeaponry()
-    {
+    public MoonsWeaponry(){
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         MoonsWeaponsConfig.register();
 
