@@ -5,6 +5,7 @@ public class WeaponDataConstants {
     //from it and then assigning the result with sign changed to negative,
     //we receive the desired speed in the game.
     public static final float DEFAULT_ATTACK_SPEED = 4f;
+
     public static final float GREATSWORD_BASE_ATK_SPD = -(DEFAULT_ATTACK_SPEED - 0.8f);
 
     public static final float HAMMER_BASE_ATK_SPD = -(DEFAULT_ATTACK_SPEED - 1f);

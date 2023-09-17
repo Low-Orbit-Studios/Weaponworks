@@ -24,7 +24,7 @@ public class TriforgeTieredItem extends TieredItem implements Vanishable {
 
     public TriforgeTieredItem(Tier pTier, int pAttackDamageModifier, float pAttackSpeedModifier, Item.Properties pProperties) {
         super(pTier, pProperties);
-        this.attackDamage = (float)pAttackDamageModifier;// + pTier.getAttackDamageBonus();
+        this.attackDamage = (float)pAttackDamageModifier;
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
         builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", (double)this.attackDamage, AttributeModifier.Operation.ADDITION));
         builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", (double)pAttackSpeedModifier, AttributeModifier.Operation.ADDITION));
