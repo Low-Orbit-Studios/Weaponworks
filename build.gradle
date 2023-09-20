@@ -3,6 +3,7 @@ plugins {
     id 'maven-publish'
     id 'net.minecraftforge.gradle' version '5.1.+'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+    id 'org.spongepowered.mixin' version '0.7.+'
 }
 
 version = '1.2.0-1.19.2'
@@ -52,6 +53,11 @@ minecraft {
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
             property 'forge.enabledGameTestNamespaces', 'moonsweaponry'
 
+            //BetterCombat
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            //BetterCombat/
+
             mods {
                 moonsweaponry {
                     source sourceSets.main
@@ -67,6 +73,11 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             property 'forge.enabledGameTestNamespaces', 'moonsweaponry'
+
+            //BetterCombat
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            //BetterCombat/
 
             mods {
                 moonsweaponry {
@@ -120,6 +131,17 @@ repositories {
     // Put repositories for dependencies here
     // ForgeGradle automatically adds the Forge maven and Maven Central for you
 
+    maven { url "https://www.cursemaven.com" }
+    //BetterCOmbat
+    maven { url 'https://api.modrinth.com/maven' }
+    maven {
+        name "KosmX's maven"
+        url 'https://maven.kosmx.dev/'
+    }
+    maven { url "https://maven.shedaniel.me/" }
+    maven { url "https://maven.terraformersmc.com/releases/" }
+
+    //BetterCombat/
     // If you have mod jar dependencies in ./libs, you can declare them as a repository like so:
     // flatDir {
     //     dir 'libs'
@@ -138,6 +160,14 @@ dependencies {
     // runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}") // Adds the full JEI mod as a runtime dependency
     // implementation fg.deobf("com.tterrag.registrate:Registrate:MC${mc_version}-${registrate_version}") // Adds registrate as a dependency
 
+    //BetterCombat
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+    runtimeOnly fg.deobf("dev.kosmx.player-anim:player-animation-lib-forge:1.0.2")
+    runtimeOnly fg.deobf('maven.modrinth:better-combat:1.7.1+1.19-forge')
+    runtimeOnly fg.deobf("me.shedaniel.cloth:cloth-config-forge:8.0.75")
+    //BetterCombat/
+
     // Examples using mod jars from ./libs
     // implementation fg.deobf("blank:coolmod-${mc_version}:${coolmod_version}")
 
@@ -145,6 +175,8 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 }
+
+
 
 // Example for how to get properties into the manifest for reading at runtime.
 jar {
