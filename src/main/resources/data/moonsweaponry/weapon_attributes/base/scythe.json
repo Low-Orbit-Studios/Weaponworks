@@ -1,0 +1,35 @@
+{
+  "parent": "bettercombat:scythe",
+  "attributes": {
+    "attack_range": 3.5,
+    "attacks": [
+      {
+        "hitbox": "HORIZONTAL_PLANE",
+        "animation": "bettercombat:two_handed_slash_horizontal_left",
+        "upswing": 0.5,
+        "swing_sound":
+        {
+          "id": "bettercombat:scythe_slash"
+        }
+      },
+      {
+        "hitbox": "HORIZONTAL_PLANE",
+        "animation": "bettercombat:two_handed_slash_horizontal_right",
+        "upswing": 0.5,
+        "swing_sound":
+        {
+          "id": "bettercombat:scythe_slash"
+        }
+      },
+      {
+        "hitbox": "HORIZONTAL_PLANE",
+        "animation": "bettercombat:two_handed_spin",
+        "upswing": 0.36,
+        "swing_sound":
+        {
+          "id": "bettercombat:scythe_slash"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "bettercombat:spear",
+  "attributes": {
+    "attack_range": 3.5,
+    "attacks": [
+      {
+        "hitbox": "FORWARD_BOX",
+        "animation": "bettercombat:two_handed_stab_right",
+        "swing_sound":
+        {
+          "id": "bettercombat:spear_stab"
+        }
+      },
+      {
+        "hitbox": "VERTICAL_PLANE",
+        "animation": "bettercombat:two_handed_slam",
+        "swing_sound":
+        {
+          "id": "bettercombat:claymore_slam"
+        }
+      },
+      {
+        "hitbox": "FORWARD_BOX",
+        "animation": "bettercombat:two_handed_stab_right",
+        "swing_sound":
+        {
+          "id": "bettercombat:spear_stab"
+        }
+      }
+    ]
+  }
+}
