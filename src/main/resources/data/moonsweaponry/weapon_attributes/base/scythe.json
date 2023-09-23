@@ -25,6 +25,7 @@
         "hitbox": "HORIZONTAL_PLANE",
         "animation": "bettercombat:two_handed_spin",
         "upswing": 0.36,
+        "angle": 360,
         "swing_sound":
         {
           "id": "bettercombat:scythe_slash"
