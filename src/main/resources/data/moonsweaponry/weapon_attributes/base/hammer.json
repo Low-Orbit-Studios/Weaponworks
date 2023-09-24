@@ -5,6 +5,7 @@
     "attacks": [
       {
         "hitbox": "HORIZONTAL_PLANE",
+        "damage_multiplier": 1,
         "animation": "bettercombat:one_handed_slash_horizontal_right",
         "swing_sound":
         {
@@ -14,7 +15,9 @@
       {
         "hitbox": "VERTICAL_PLANE",
         "animation": "bettercombat:one_handed_slam",
+        "damage_multiplier": 1,
         "angle": 90,
+        "upswing": 0.5,
         "swing_sound":
         {
           "id": "bettercombat:mace_slam"

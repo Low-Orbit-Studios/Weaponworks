@@ -24,6 +24,7 @@
       {
         "hitbox": "HORIZONTAL_PLANE",
         "animation": "bettercombat:two_handed_spin",
+        "damage_multiplier": 1,
         "upswing": 0.36,
         "angle": 360,
         "swing_sound":

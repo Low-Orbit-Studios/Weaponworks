@@ -6,6 +6,9 @@
       {
         "hitbox": "FORWARD_BOX",
         "animation": "bettercombat:two_handed_stab_right",
+        "upswing": 0.5,
+        "damage_multiplier": 1,
+        "angle": 0,
         "swing_sound":
         {
           "id": "bettercombat:spear_stab"
@@ -14,6 +17,8 @@
       {
         "hitbox": "VERTICAL_PLANE",
         "animation": "bettercombat:two_handed_slam",
+        "angle": 150,
+        "upswing": 0.5,
         "swing_sound":
         {
           "id": "bettercombat:claymore_slam"
@@ -22,6 +27,9 @@
       {
         "hitbox": "FORWARD_BOX",
         "animation": "bettercombat:two_handed_stab_right",
+        "upswing": 0.5,
+        "damage_multiplier": 1,
+        "angle": 0,
         "swing_sound":
         {
           "id": "bettercombat:spear_stab"
