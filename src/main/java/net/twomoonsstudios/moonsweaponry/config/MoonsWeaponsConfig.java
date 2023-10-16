@@ -49,7 +49,9 @@ public class MoonsWeaponsConfig {
   "halberd": {
         "wooden": {
           "tier": "WOOD",
-          "damage": 6
+          "damage": 6,
+          "speed": 1.6,
+          "durability": 59
         },
         "stone": {
           "tier": "STONE",
@@ -222,9 +224,9 @@ public class MoonsWeaponsConfig {
             catch (IllegalArgumentException e) {
                 this.tier = Tiers.WOOD;
             }
-            this.damage = dmg;
+            this.damage = dmg;//Minus the fist damage itself.
             this.speed = (speed == 0f) ?
-                    WEAPON_SPEEDS.get(weapon_type) : speed;
+                    WEAPON_SPEEDS.get(weapon_type) : calcWeaponSpeed(speed);
             this.durability = (dura == -1) ?
                     this.tier.getUses() : dura;
             this.fireRes = fire_res;
@@ -252,6 +254,9 @@ public class MoonsWeaponsConfig {
                     ", fireRes=" + fireRes +
                     ", dependency='" + dependency + '\'' +
                     '}';
+        }
+        public float calcWeaponSpeed(float desiredValue){
+            return -(DEFAULT_ATTACK_SPEED - desiredValue);
         }
     }
 
