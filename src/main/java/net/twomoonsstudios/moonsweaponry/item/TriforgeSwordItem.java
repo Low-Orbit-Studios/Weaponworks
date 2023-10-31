@@ -8,7 +8,6 @@ import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 
 
 public class TriforgeSwordItem extends SwordItem {
-
     private TriforgeSwordItem(Tier pTier, int pAttackDamageModifier, float pAttackSpeedModifier, Item.Properties pProperties) {
         super(pTier, pAttackDamageModifier, pAttackSpeedModifier, pProperties);
     }
@@ -17,9 +16,9 @@ public class TriforgeSwordItem extends SwordItem {
         //straightforward. No other way of doing this since SwordItem is adding tier damage
         //in its constructor.
         this(stats.tier, CorrectDamage(stats.tier, stats.damage), stats.speed, stats.fireRes
-                ? new Properties().tab(CreativeModeTab.TAB_COMBAT)
+                ? new Properties()//.tab(CreativeModeTab.TAB_COMBAT)
                         .defaultDurability(stats.durability).fireResistant()
-                : new Properties().tab(CreativeModeTab.TAB_COMBAT)
+                : new Properties()//.tab(CreativeModeTab.TAB_COMBAT)
                         .defaultDurability(stats.durability));
     }
     /**

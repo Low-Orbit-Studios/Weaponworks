@@ -2,6 +2,7 @@ package net.twomoonsstudios.moonsweaponry.item;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -14,7 +15,6 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 
 public class TriforgeTieredItem extends TieredItem implements Vanishable {
@@ -24,9 +24,9 @@ public class TriforgeTieredItem extends TieredItem implements Vanishable {
 
     public TriforgeTieredItem(MoonsWeaponsConfig.WeaponInfo stats) {
         this(stats.tier, stats.damage, stats.speed, stats.fireRes
-                ? new Item.Properties().tab(CreativeModeTab.TAB_COMBAT)
+                ? new Item.Properties()//.tab(CreativeModeTab.TAB_COMBAT)
                         .defaultDurability(stats.durability).fireResistant()
-                : new Item.Properties().tab(CreativeModeTab.TAB_COMBAT)
+                : new Item.Properties()//.tab(CreativeModeTab.TAB_COMBAT)
                         .defaultDurability(stats.durability));
     }
 
@@ -73,12 +73,5 @@ public class TriforgeTieredItem extends TieredItem implements Vanishable {
 
     public boolean canAttackBlock(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer) {
         return !pPlayer.isCreative();
-    }
-
-    @Override
-    public float getDestroySpeed(ItemStack pStack, BlockState pState) {
-        Material material = pState.getMaterial();
-        return material != Material.PLANT && material != Material.REPLACEABLE_PLANT && !pState.is(BlockTags.LEAVES) && material != Material.VEGETABLE ? 1.0F : 1.5F;
-
     }
 }
