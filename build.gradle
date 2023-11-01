@@ -5,6 +5,7 @@ plugins {
     id 'net.minecraftforge.gradle' version '[6.0,6.2)'
     // This should be below the net.minecraftforge.gradle plugin
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+    id 'org.spongepowered.mixin' version '0.7.+'
 }
 
 version = mod_version
@@ -86,11 +87,33 @@ minecraft {
         client {
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
             property 'forge.enabledGameTestNamespaces', mod_id
+
+            //BetterCombat
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            //BetterCombat/
+
+            mods {
+                moonsweaponry {
+                    source sourceSets.main
+                }
+            }
         }
 
         server {
             property 'forge.enabledGameTestNamespaces', mod_id
             args '--nogui'
+
+            //BetterCombat
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            //BetterCombat/
+
+            mods {
+                moonsweaponry {
+                    source sourceSets.main
+                }
+            }
         }
 
         // This run config launches GameTestServer and runs all registered gametests, then exits.
@@ -122,6 +145,12 @@ repositories {
     // flatDir {
     //     dir 'libs'
     // }
+    maven {
+        name = "KosmX's maven"
+        url = 'https://maven.kosmx.dev/'
+    }
+    maven { url = "https://maven.shedaniel.me/" }
+    maven { url = 'https://api.modrinth.com/maven' }
 }
 
 dependencies {
@@ -132,6 +161,11 @@ dependencies {
     // then special handling is done to allow a setup of a vanilla dependency without the use of an external repository.
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+    runtimeOnly fg.deobf("me.shedaniel.cloth:cloth-config-forge:${cloth_ver}")
+    runtimeOnly fg.deobf("dev.kosmx.player-anim:player-animation-lib-forge:${player_animator_ver}")
+    runtimeOnly fg.deobf("maven.modrinth:better-combat:${better_combat_ver}-forge")
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
     // compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
