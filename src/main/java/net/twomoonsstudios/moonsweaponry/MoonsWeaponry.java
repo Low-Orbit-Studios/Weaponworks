@@ -1,6 +1,7 @@
 package net.twomoonsstudios.moonsweaponry;
 
 import com.mojang.logging.LogUtils;
+import io.github.hornster.itemfig.api.serialization.ItemFigApi;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
@@ -34,7 +35,6 @@ public class MoonsWeaponry
     public MoonsWeaponry(){
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         MoonsWeaponsConfig.register();
-
         ModItems.register(modEventBus);
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);

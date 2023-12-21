@@ -140,6 +140,7 @@ repositories {
     }
     maven { url "https://maven.shedaniel.me/" }
     maven { url "https://maven.terraformersmc.com/releases/" }
+    maven { url "https://s01.oss.sonatype.org/content/repositories/releases/"}
 
     //BetterCombat/
     // If you have mod jar dependencies in ./libs, you can declare them as a repository like so:
@@ -166,6 +167,9 @@ dependencies {
     runtimeOnly fg.deobf("dev.kosmx.player-anim:player-animation-lib-forge:1.0.2")
     runtimeOnly fg.deobf('maven.modrinth:better-combat:1.7.1+1.19-forge')
     runtimeOnly fg.deobf("me.shedaniel.cloth:cloth-config-forge:8.0.75")
+
+    compileOnly fg.deobf("io.github.hornster.itemfig:itemfig:${itemfigver}:api")
+    runtimeOnly fg.deobf("io.github.hornster.itemfig:itemfig:${itemfigver}")
     //BetterCombat/
 
     // Examples using mod jars from ./libs
