@@ -1,6 +1,7 @@
 package net.twomoonsstudios.moonsweaponry.config.objects;
 
 import io.github.hornster.itemfig.api.serialization.config.ConfigObj;
+import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
 import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 import net.twomoonsstudios.moonsweaponry.config.helpers.ConfigHelper;
@@ -48,6 +49,10 @@ public abstract class WeaponConfigObj extends ConfigObj {
         if(durability == null){
             durability = getDefaultDurability();
         }
+    }
+
+    public Tier getTier(){
+        return Tiers.valueOf(tier);
     }
 
     protected abstract String getDefaultTier();

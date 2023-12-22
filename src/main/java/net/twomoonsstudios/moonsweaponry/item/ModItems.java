@@ -1,13 +1,17 @@
 package net.twomoonsstudios.moonsweaponry.item;
 
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Tiers;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.twomoonsstudios.moonsweaponry.MoonsWeaponry;
 import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
+import net.twomoonsstudios.moonsweaponry.config.objects.WeaponConfigObj;
 import net.twomoonsstudios.moonsweaponry.constants.CommonConstants;
 import net.twomoonsstudios.moonsweaponry.item.weapons.*;
+
+import java.util.Map;
 
 import static net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig.*;
 
@@ -16,17 +20,39 @@ public class ModItems {
 
     public static void register(IEventBus eventBus){
         try{
-            for (String id : MoonsWeaponsConfig.WEAPONS.keySet()) {
-                var subId = id.substring(id.indexOf("_") + 1);
-                switch (subId) {
-                    case CommonConstants.GREATSWORD_BASE_ID -> ITEMS.register(id, () -> new GreatswordItem(WEAPONS.get(id)));
-                    case CommonConstants.HALBERD_BASE_ID -> ITEMS.register(id, () -> new HalberdItem(WEAPONS.get(id)));
-                    case CommonConstants.HAMMER_BASE_ID -> ITEMS.register(id, () -> new HammerItem(WEAPONS.get(id)));
-                    case CommonConstants.SCYTHE_BASE_ID -> ITEMS.register(id, () -> new ScytheItem(WEAPONS.get(id)));
-                    case CommonConstants.WARGLAIVE_BASE_ID -> ITEMS.register(id, () -> new WarglaiveItem(WEAPONS.get(id)));
-                    case CommonConstants.RAPIER_BASE_ID -> ITEMS.register(id, () ->new RapierItem(WEAPONS.get(id)));
-                    case CommonConstants.KATANA_BASE_ID -> ITEMS.register(id, ()->new KatanaItem(WEAPONS.get(id)));
-                    default -> throw new Exception("Unknown weapon type to load: " + subId);
+            var weaponConfigs = WEAPON_CONFIGS;
+            var weaponConfigTypes = weaponConfigs.keySet();
+            for (var weaponType : weaponConfigTypes) {
+                var weaponCategory = weaponConfigs.get(weaponType);
+
+                for (var entry : weaponCategory.entrySet()) {
+                    WeaponConfigObj weaponConfig = entry.getValue();
+                    var weaponId = weaponConfig.getConfigObjId();
+                    switch (weaponType) {
+
+                        case GREATSWORD -> {
+                            ITEMS.register(weaponId, () -> new GreatswordItem(weaponConfig));
+                        }
+                        case HALBERD -> {
+                            ITEMS.register(weaponId, () -> new HalberdItem(weaponConfig));
+                        }
+                        case HAMMER -> {
+                            ITEMS.register(weaponId, () -> new HammerItem(weaponConfig));
+                        }
+                        case KATANA -> {
+                            ITEMS.register(weaponId, () -> new KatanaItem(weaponConfig));
+                        }
+                        case RAPIER -> {
+                            ITEMS.register(weaponId, () -> new RapierItem(weaponConfig));
+                        }
+                        case SCYTHE -> {
+                            ITEMS.register(weaponId, () -> new ScytheItem(weaponConfig));
+                        }
+                        case WARGLAIVE -> {
+                            ITEMS.register(weaponId, () -> new WarglaiveItem(weaponConfig));
+                        }
+                        default -> throw new Exception("Unknown weapon type to load: " + weaponId);
+                    }
                 }
             }
         }

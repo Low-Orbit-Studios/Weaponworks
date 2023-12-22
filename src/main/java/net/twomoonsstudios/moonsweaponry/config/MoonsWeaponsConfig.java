@@ -1,6 +1,8 @@
 package net.twomoonsstudios.moonsweaponry.config;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.gson.Gson;
+import com.ibm.icu.impl.number.MutablePatternModifier;
 import io.github.hornster.itemfig.api.serialization.ItemFigApi;
 import io.github.hornster.itemfig.api.serialization.config.ConfigObj;
 import io.github.hornster.itemfig.api.serialization.config.ConfigObjAdapterConfig;
@@ -11,6 +13,7 @@ import net.twomoonsstudios.moonsweaponry.config.deprecated.ConfigEntry;
 import net.twomoonsstudios.moonsweaponry.config.helpers.ConfigHelper;
 import net.twomoonsstudios.moonsweaponry.config.objectAdaptersConfigs.ObjectAdaptersConfigsFactory;
 import net.twomoonsstudios.moonsweaponry.config.objects.ConfigObjectFactory;
+import net.twomoonsstudios.moonsweaponry.config.objects.WeaponConfigObj;
 import net.twomoonsstudios.moonsweaponry.constants.CommonConstants;
 import net.twomoonsstudios.moonsweaponry.enums.WeaponTypesEnum;
 import org.apache.commons.io.FileUtils;
@@ -31,7 +34,9 @@ public class MoonsWeaponsConfig {
     public static final ConfigEntry<Double> VERSION = new ConfigEntry<>("TECHNICAL.VERSION_DO_NOT_EDIT", 0d);
     public static final ConfigEntry<Boolean> RELOAD = new ConfigEntry<>("TECHNICAL.FORCE_RESET", false);
 
-    public static Map<String, WeaponInfo> WEAPONS = new HashMap<>();
+    /**Deprecated. Used only for converting old config type.*/
+    protected static Map<String, WeaponInfo> WEAPONS = new HashMap<>();
+    public static Map<WeaponTypesEnum, Map<Tiers, WeaponConfigObj>> WEAPON_CONFIGS;
 
     public static final Map<String, Float> WEAPON_SPEEDS = Map.of(
             CommonConstants.HALBERD_BASE_ID, HALBERD_DEFAULT_ATK_SPD,
@@ -407,6 +412,28 @@ public class MoonsWeaponsConfig {
             }
         }
     }
+    private static Map<WeaponTypesEnum, Map<Tiers, WeaponConfigObj>> getAllElements(){
+        var weaponTypes = WeaponTypesEnum.values();
+        var tiers = Tiers.values();
+
+        //Linked hash maps preserve order
+        var result = new LinkedHashMap<WeaponTypesEnum, Map<Tiers, WeaponConfigObj>>();
+
+        for(var weaponType : weaponTypes){
+            var weaponConfigsByTier = new LinkedHashMap<Tiers, WeaponConfigObj>();
+            for(var tier : tiers){
+                var weaponId = ConfigHelper.getWeaponId(weaponType, tier);
+                var config = (WeaponConfigObj)ItemFigApi.getItemConfig(weaponId);
+
+                if(config != null){
+                    weaponConfigsByTier.put(tier, config);
+                }
+            }
+            result.put(weaponType, weaponConfigsByTier);
+        }
+
+        return result;
+    }
     public static void register(boolean force) {
         String oldConfigPath = System.getProperty("user.dir") + File.separator +
                 "config" + File.separator + MoonsWeaponry.MOD_ID + "-common.json";
@@ -425,6 +452,10 @@ public class MoonsWeaponsConfig {
         }else{
             registerItemsConfigs(false);
         }
+
+        ItemFigApi.readConfig();
+
+        WEAPON_CONFIGS = getAllElements();
 
         //TODO: call readConfig on itemfig
         //TODO: add read values to dict of dicts. First level weapontype, second tier
