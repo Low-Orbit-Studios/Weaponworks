@@ -168,8 +168,9 @@ dependencies {
     runtimeOnly fg.deobf('maven.modrinth:better-combat:1.7.1+1.19-forge')
     runtimeOnly fg.deobf("me.shedaniel.cloth:cloth-config-forge:8.0.75")
 
-    compileOnly fg.deobf("io.github.hornster.itemfig:itemfig:${itemfigver}:api")
-    runtimeOnly fg.deobf("io.github.hornster.itemfig:itemfig:${itemfigver}")
+    compileOnly "io.github.hornster.itemfig:itemfig:${itemfigver}:api"
+    runtimeOnly "io.github.hornster.itemfig:itemfig:${itemfigver}"
+    implementation "com.google.code.gson:gson:${gson_ver}"
     //BetterCombat/
 
     // Examples using mod jars from ./libs
@@ -202,6 +203,14 @@ jar {
 jar.finalizedBy('reobfJar')
 // However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing
 // publish.dependsOn('reobfJar')
+
+
+configurations.all {
+    resolutionStrategy.capabilitiesResolution.withCapability('com.google.code.gson:gson') {
+        selectHighestVersion()
+    }
+}
+
 
 publishing {
     publications {

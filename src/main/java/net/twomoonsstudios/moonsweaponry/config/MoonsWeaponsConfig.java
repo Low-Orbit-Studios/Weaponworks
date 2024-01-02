@@ -1,7 +1,7 @@
 package net.twomoonsstudios.moonsweaponry.config;
 
 import com.google.common.collect.ImmutableMap;
-import com.google.gson.Gson;
+import com.google.gson.*;
 import com.ibm.icu.impl.number.MutablePatternModifier;
 import io.github.hornster.itemfig.api.serialization.ItemFigApi;
 import io.github.hornster.itemfig.api.serialization.config.ConfigObj;
