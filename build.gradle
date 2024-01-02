@@ -170,7 +170,6 @@ dependencies {
 
     compileOnly "io.github.hornster.itemfig:itemfig:${itemfigver}:api"
     runtimeOnly "io.github.hornster.itemfig:itemfig:${itemfigver}"
-    implementation "com.google.code.gson:gson:${gson_ver}"
     //BetterCombat/
 
     // Examples using mod jars from ./libs
