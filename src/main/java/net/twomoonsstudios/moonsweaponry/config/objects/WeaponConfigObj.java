@@ -8,6 +8,8 @@ import net.twomoonsstudios.moonsweaponry.config.helpers.ConfigHelper;
 
 import java.lang.reflect.Type;
 
+import static net.twomoonsstudios.moonsweaponry.constants.WeaponDataConstants.DEFAULT_ATTACK_SPEED;
+
 public abstract class WeaponConfigObj extends ConfigObj {
     public String tier;
     public Integer damage;
@@ -27,7 +29,7 @@ public abstract class WeaponConfigObj extends ConfigObj {
         super(myType, myID);
         tier = configData.tier.toString();
         damage = configData.damage;
-        speed = configData.speed;
+        speed = DEFAULT_ATTACK_SPEED + configData.speed;//
         fire_resistant = configData.fireRes;
         durability = configData.durability;
     }
@@ -53,6 +55,11 @@ public abstract class WeaponConfigObj extends ConfigObj {
 
     public Tier getTier(){
         return Tiers.valueOf(tier);
+    }
+    /**
+     * Returns the attack speed in format understood by Minecraft.*/
+    public Float getMcAttackSpeed(){
+        return -DEFAULT_ATTACK_SPEED + speed;
     }
 
     protected abstract String getDefaultTier();

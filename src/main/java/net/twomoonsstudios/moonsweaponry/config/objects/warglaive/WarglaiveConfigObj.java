@@ -4,6 +4,7 @@ import net.twomoonsstudios.moonsweaponry.config.objects.WeaponConfigObj;
 
 import java.lang.reflect.Type;
 
+import static net.twomoonsstudios.moonsweaponry.constants.WeaponDataConstants.DEFAULT_ATTACK_SPEED;
 import static net.twomoonsstudios.moonsweaponry.constants.WeaponDataConstants.WARGLAIVE_DEFAULT_ATK_SPD;
 
 public abstract class WarglaiveConfigObj extends WeaponConfigObj {
@@ -17,7 +18,7 @@ public abstract class WarglaiveConfigObj extends WeaponConfigObj {
     }
     @Override
     public Float getDefaultAttackSpeed(){
-        return WARGLAIVE_DEFAULT_ATK_SPD;
+        return DEFAULT_ATTACK_SPEED - WARGLAIVE_DEFAULT_ATK_SPD;
     }
 
     @Override

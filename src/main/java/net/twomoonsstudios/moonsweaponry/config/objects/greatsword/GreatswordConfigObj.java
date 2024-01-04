@@ -11,6 +11,7 @@ import org.apache.commons.lang3.tuple.Triple;
 import java.lang.reflect.Type;
 import java.util.Locale;
 
+import static net.twomoonsstudios.moonsweaponry.constants.WeaponDataConstants.DEFAULT_ATTACK_SPEED;
 import static net.twomoonsstudios.moonsweaponry.constants.WeaponDataConstants.GREATSWORD_DEFAULT_ATK_SPD;
 
 public abstract class GreatswordConfigObj extends WeaponConfigObj {
@@ -29,7 +30,7 @@ public abstract class GreatswordConfigObj extends WeaponConfigObj {
 
     @Override
     public Float getDefaultAttackSpeed(){
-        return GREATSWORD_DEFAULT_ATK_SPD;
+        return DEFAULT_ATTACK_SPEED - GREATSWORD_DEFAULT_ATK_SPD;
     }
 
     @Override

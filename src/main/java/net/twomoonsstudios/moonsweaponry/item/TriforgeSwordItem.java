@@ -24,7 +24,7 @@ public class TriforgeSwordItem extends SwordItem {
     }
 
     public TriforgeSwordItem(WeaponConfigObj stats) {
-        this(stats.getTier(), CorrectDamage(stats.getTier(), stats.damage), stats.speed, stats.fire_resistant
+        this(stats.getTier(), CorrectDamage(stats.getTier(), stats.damage), stats.getMcAttackSpeed(), stats.fire_resistant
                 ? new Properties().tab(CreativeModeTab.TAB_COMBAT)
                 .defaultDurability(stats.durability).fireResistant()
                 : new Properties().tab(CreativeModeTab.TAB_COMBAT)

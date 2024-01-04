@@ -4,6 +4,7 @@ import net.twomoonsstudios.moonsweaponry.config.objects.WeaponConfigObj;
 
 import java.lang.reflect.Type;
 
+import static net.twomoonsstudios.moonsweaponry.constants.WeaponDataConstants.DEFAULT_ATTACK_SPEED;
 import static net.twomoonsstudios.moonsweaponry.constants.WeaponDataConstants.SCYTHE_DEFAULT_ATK_SPD;
 
 public abstract class ScytheConfigObj extends WeaponConfigObj {
@@ -17,7 +18,7 @@ public abstract class ScytheConfigObj extends WeaponConfigObj {
     }
     @Override
     public Float getDefaultAttackSpeed(){
-        return SCYTHE_DEFAULT_ATK_SPD;
+        return DEFAULT_ATTACK_SPEED - SCYTHE_DEFAULT_ATK_SPD;
     }
 
     @Override
