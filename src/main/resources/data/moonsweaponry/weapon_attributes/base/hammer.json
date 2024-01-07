@@ -6,7 +6,7 @@
       {
         "hitbox": "HORIZONTAL_PLANE",
         "damage_multiplier": 1,
-        "animation": "bettercombat:one_handed_slash_horizontal_right",
+        "animation": "bettercombat:two_handed_slash_horizontal_right",
         "swing_sound":
         {
           "id": "bettercombat:mace_slash"
@@ -14,13 +14,22 @@
       },
       {
         "hitbox": "VERTICAL_PLANE",
-        "animation": "bettercombat:one_handed_slam",
+        "animation": "bettercombat:two_handed_slam",
         "damage_multiplier": 1,
         "angle": 90,
         "upswing": 0.5,
         "swing_sound":
         {
           "id": "bettercombat:mace_slam"
+        }
+      },
+      {
+        "hitbox": "HORIZONTAL_PLANE",
+        "damage_multiplier": 1,
+        "animation": "bettercombat:two_handed_slash_horizontal_left",
+        "swing_sound":
+        {
+          "id": "bettercombat:mace_slash"
         }
       }
     ]

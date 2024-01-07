@@ -1,6 +1,7 @@
 package net.twomoonsstudios.moonsweaponry.config.objects.scythe;
 
 import net.minecraft.world.item.Tiers;
+import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 
 import java.lang.reflect.Type;
 
@@ -18,6 +19,10 @@ public class GoldenScytheConfigObj extends ScytheConfigObj {
     }
     public GoldenScytheConfigObj(String myId){
         super(GoldenScytheConfigObj.class, myId);
+    }
+
+    public GoldenScytheConfigObj(String weaponId, MoonsWeaponsConfig.WeaponInfo objData) {
+        super(GoldenScytheConfigObj.class, weaponId, objData);
     }
 
     @Override

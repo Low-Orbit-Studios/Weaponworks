@@ -1,6 +1,8 @@
 package net.twomoonsstudios.moonsweaponry.config.objects.hammer;
 
 import net.minecraft.world.item.Tiers;
+import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
+import net.twomoonsstudios.moonsweaponry.config.objects.halberd.NetheriteHalberdConfigObj;
 
 import java.lang.reflect.Type;
 
@@ -18,6 +20,11 @@ public class NetheriteHammerConfigObj extends HammerConfigObj {
     public NetheriteHammerConfigObj(String myId){
         super(NetheriteHammerConfigObj.class, myId);
     }
+
+    public NetheriteHammerConfigObj(String weaponId, MoonsWeaponsConfig.WeaponInfo objData) {
+        super(NetheriteHalberdConfigObj.class, weaponId, objData);
+    }
+
     @Override
     protected String getDefaultTier() {
         return NETHERITE_HAMMER_DEFAULT_TIER_NAME;

@@ -1,6 +1,7 @@
 package net.twomoonsstudios.moonsweaponry.config.objects.katana;
 
 import net.minecraft.world.item.Tiers;
+import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 
 import java.lang.reflect.Type;
 
@@ -19,6 +20,11 @@ public class GoldenKatanaConfigObj extends KatanaConfigObj {
     public GoldenKatanaConfigObj(String myId){
         super(GoldenKatanaConfigObj.class, myId);
     }
+
+    public GoldenKatanaConfigObj(String weaponId, MoonsWeaponsConfig.WeaponInfo objData) {
+        super(GoldenKatanaConfigObj.class, weaponId, objData);
+    }
+
     @Override
     protected String getDefaultTier() {
         return GOLDEN_KATANA_DEFAULT_TIER_NAME;

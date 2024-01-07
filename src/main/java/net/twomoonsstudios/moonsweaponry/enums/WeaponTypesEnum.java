@@ -9,7 +9,8 @@ public enum WeaponTypesEnum {
     KATANA(KATANA_BASE_ID),
     RAPIER(RAPIER_BASE_ID),
     SCYTHE(SCYTHE_BASE_ID),
-    WARGLAIVE(WARGLAIVE_BASE_ID);
+    WARGLAIVE(WARGLAIVE_BASE_ID),
+    MACE(MACE_BASE_ID), SPEAR(SPEAR_BASE_ID);
 
     private String baseId;
     private WeaponTypesEnum(String baseId){

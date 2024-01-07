@@ -1,6 +1,7 @@
 package net.twomoonsstudios.moonsweaponry.config.objects.scythe;
 
 import net.minecraft.world.item.Tiers;
+import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 
 import java.lang.reflect.Type;
 
@@ -19,6 +20,11 @@ public class StoneScytheConfigObj extends ScytheConfigObj {
     public StoneScytheConfigObj(String myId){
         super(StoneScytheConfigObj.class, myId);
     }
+
+    public StoneScytheConfigObj(String weaponId, MoonsWeaponsConfig.WeaponInfo objData) {
+        super(StoneScytheConfigObj.class, weaponId, objData);
+    }
+
     @Override
     protected String getDefaultTier() {
         return STONE_SCYTHE_DEFAULT_TIER_NAME;

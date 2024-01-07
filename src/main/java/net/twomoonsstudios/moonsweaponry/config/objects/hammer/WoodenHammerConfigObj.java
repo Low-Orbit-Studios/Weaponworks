@@ -1,6 +1,8 @@
 package net.twomoonsstudios.moonsweaponry.config.objects.hammer;
 
 import net.minecraft.world.item.Tiers;
+import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
+import net.twomoonsstudios.moonsweaponry.config.objects.halberd.WoodenHalberdConfigObj;
 
 import java.lang.reflect.Type;
 
@@ -19,6 +21,11 @@ public class WoodenHammerConfigObj extends HammerConfigObj {
     public WoodenHammerConfigObj(String myId){
         super(WoodenHammerConfigObj.class, myId);
     }
+
+    public WoodenHammerConfigObj(String weaponId, MoonsWeaponsConfig.WeaponInfo objData) {
+        super(WoodenHalberdConfigObj.class, weaponId, objData);
+    }
+
     @Override
     protected String getDefaultTier() {
         return WOODEN_HAMMER_DEFAULT_TIER_NAME;

@@ -1,6 +1,7 @@
 package net.twomoonsstudios.moonsweaponry.config.objects.hammer;
 
 import net.minecraft.world.item.Tiers;
+import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 
 import java.lang.reflect.Type;
 
@@ -19,6 +20,11 @@ public class DiamondHammerConfigObj extends HammerConfigObj {
     public DiamondHammerConfigObj(String myId){
         super(DiamondHammerConfigObj.class, myId);
     }
+
+    public DiamondHammerConfigObj(String weaponId, MoonsWeaponsConfig.WeaponInfo objData) {
+        super(DiamondHammerConfigObj.class, weaponId, objData);
+    }
+
     @Override
     protected String getDefaultTier() {
         return DIAMOND_HAMMER_DEFAULT_TIER_NAME;

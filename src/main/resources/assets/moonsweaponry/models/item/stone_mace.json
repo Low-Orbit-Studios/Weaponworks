@@ -1,0 +1,18 @@
+{
+  "parent": "minecraft:item/handheld",
+  "loader": "forge:separate_transforms",
+  "textures": {
+    "layer0": "moonsweaponry:item/stone_mace_gui"
+  },
+  "base": {
+    "parent": "moonsweaponry:item/stone_mace_handheld"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "moonsweaponry:item/stone_mace_gui"
+    },
+    "fixed": {
+      "parent": "moonsweaponry:item/stone_mace_gui"
+    }
+  }
+}

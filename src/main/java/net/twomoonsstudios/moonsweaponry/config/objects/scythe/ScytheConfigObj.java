@@ -1,5 +1,6 @@
 package net.twomoonsstudios.moonsweaponry.config.objects.scythe;
 
+import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 import net.twomoonsstudios.moonsweaponry.config.objects.WeaponConfigObj;
 
 import java.lang.reflect.Type;
@@ -16,6 +17,11 @@ public abstract class ScytheConfigObj extends WeaponConfigObj {
     public ScytheConfigObj(Type myType, String myID) {
         super(myType, myID);
     }
+
+    public ScytheConfigObj(Type myType, String weaponId, MoonsWeaponsConfig.WeaponInfo objData) {
+        super(myType, weaponId, objData);
+    }
+
     @Override
     public Float getDefaultAttackSpeed(){
         return DEFAULT_ATTACK_SPEED - SCYTHE_DEFAULT_ATK_SPD;

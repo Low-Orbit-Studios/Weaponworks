@@ -1,5 +1,6 @@
 package net.twomoonsstudios.moonsweaponry.config.objects.katana;
 
+import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 import net.twomoonsstudios.moonsweaponry.config.objects.WeaponConfigObj;
 
 import java.lang.reflect.Type;
@@ -16,6 +17,11 @@ public abstract class KatanaConfigObj extends WeaponConfigObj {
     public KatanaConfigObj(Type myType, String myID) {
         super(myType, myID);
     }
+
+    public KatanaConfigObj(Type myType, String myID, MoonsWeaponsConfig.WeaponInfo configData) {
+        super(myType, myID, configData);
+    }
+
     @Override
     public Float getDefaultAttackSpeed(){
         return DEFAULT_ATTACK_SPEED - KATANA_DEFAULT_ATK_SPD;

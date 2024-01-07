@@ -1,6 +1,7 @@
 package net.twomoonsstudios.moonsweaponry.config.objects.rapier;
 
 import net.minecraft.world.item.Tiers;
+import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 
 import java.lang.reflect.Type;
 
@@ -18,6 +19,11 @@ public class NetheriteRapierConfigObj extends RapierConfigObj {
     public NetheriteRapierConfigObj(String myId){
         super(NetheriteRapierConfigObj.class, myId);
     }
+
+    public NetheriteRapierConfigObj(String weaponId, MoonsWeaponsConfig.WeaponInfo objData) {
+        super(NetheriteRapierConfigObj.class, weaponId, objData);
+    }
+
     @Override
     protected String getDefaultTier() {
         return NETHERITE_RAPIER_DEFAULT_TIER_NAME;

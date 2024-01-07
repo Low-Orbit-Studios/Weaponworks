@@ -1,5 +1,6 @@
 package net.twomoonsstudios.moonsweaponry.config.objects.halberd;
 
+import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 import net.twomoonsstudios.moonsweaponry.config.objects.WeaponConfigObj;
 
 import java.lang.reflect.Type;
@@ -16,6 +17,11 @@ public abstract class HalberdConfigObj extends WeaponConfigObj {
     public HalberdConfigObj(Type myType, String myID) {
         super(myType, myID);
     }
+
+    public HalberdConfigObj(Type myType, String myID, MoonsWeaponsConfig.WeaponInfo configData) {
+        super(myType, myID, configData);
+    }
+
     @Override
     public Float getDefaultAttackSpeed(){
         return DEFAULT_ATTACK_SPEED - HALBERD_DEFAULT_ATK_SPD;

@@ -1,6 +1,7 @@
 package net.twomoonsstudios.moonsweaponry.config.objects.halberd;
 
 import net.minecraft.world.item.Tiers;
+import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 
 import java.lang.reflect.Type;
 
@@ -18,6 +19,11 @@ public class NetheriteHalberdConfigObj extends HalberdConfigObj {
     public NetheriteHalberdConfigObj(String myId){
         super(NetheriteHalberdConfigObj.class, myId);
     }
+
+    public NetheriteHalberdConfigObj(String weaponId, MoonsWeaponsConfig.WeaponInfo objData) {
+        super(NetheriteHalberdConfigObj.class, weaponId, objData);
+    }
+
     @Override
     protected String getDefaultTier() {
         return NETHERITE_HALBERD_DEFAULT_TIER_NAME;

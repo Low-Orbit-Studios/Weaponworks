@@ -1,6 +1,7 @@
 package net.twomoonsstudios.moonsweaponry.config.objects.rapier;
 
 import net.minecraft.world.item.Tiers;
+import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 
 import java.lang.reflect.Type;
 
@@ -19,6 +20,11 @@ public class StoneRapierConfigObj extends RapierConfigObj {
     public StoneRapierConfigObj(String myId){
         super(StoneRapierConfigObj.class, myId);
     }
+
+    public StoneRapierConfigObj(String weaponId, MoonsWeaponsConfig.WeaponInfo objData) {
+        super(StoneRapierConfigObj.class, weaponId, objData);
+    }
+
     @Override
     protected String getDefaultTier() {
         return STONE_RAPIER_DEFAULT_TIER_NAME;

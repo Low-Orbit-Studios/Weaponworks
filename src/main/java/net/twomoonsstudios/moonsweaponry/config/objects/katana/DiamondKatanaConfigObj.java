@@ -1,6 +1,7 @@
 package net.twomoonsstudios.moonsweaponry.config.objects.katana;
 
 import net.minecraft.world.item.Tiers;
+import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 
 import java.lang.reflect.Type;
 
@@ -19,6 +20,11 @@ public class DiamondKatanaConfigObj extends KatanaConfigObj {
     public DiamondKatanaConfigObj(String myId){
         super(DiamondKatanaConfigObj.class, myId);
     }
+
+    public DiamondKatanaConfigObj(String weaponId, MoonsWeaponsConfig.WeaponInfo objData) {
+        super(DiamondKatanaConfigObj.class, weaponId, objData);
+    }
+
     @Override
     protected String getDefaultTier() {
         return DIAMOND_KATANA_DEFAULT_TIER_NAME;

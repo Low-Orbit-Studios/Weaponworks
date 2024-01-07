@@ -1,6 +1,7 @@
 package net.twomoonsstudios.moonsweaponry.config.objects.warglaive;
 
 import net.minecraft.world.item.Tiers;
+import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 
 import java.lang.reflect.Type;
 
@@ -19,6 +20,11 @@ public class DiamondWarglaiveConfigObj extends WarglaiveConfigObj {
     public DiamondWarglaiveConfigObj(String myId){
         super(DiamondWarglaiveConfigObj.class, myId);
     }
+
+    public DiamondWarglaiveConfigObj(String weaponId, MoonsWeaponsConfig.WeaponInfo objData) {
+        super(DiamondWarglaiveConfigObj.class, weaponId, objData);
+    }
+
     @Override
     protected String getDefaultTier() {
         return DIAMOND_WARGLAIVE_DEFAULT_TIER_NAME;

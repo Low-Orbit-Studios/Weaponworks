@@ -1,5 +1,6 @@
 package net.twomoonsstudios.moonsweaponry.config.objects.rapier;
 
+import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 import net.twomoonsstudios.moonsweaponry.config.objects.WeaponConfigObj;
 
 import java.lang.reflect.Type;
@@ -16,6 +17,11 @@ public abstract class RapierConfigObj extends WeaponConfigObj {
     public RapierConfigObj(Type myType, String myID) {
         super(myType, myID);
     }
+
+    public RapierConfigObj(Type myType, String weaponId, MoonsWeaponsConfig.WeaponInfo objData) {
+        super(myType, weaponId, objData);
+    }
+
     @Override
     public Float getDefaultAttackSpeed(){
         return DEFAULT_ATTACK_SPEED - RAPIER_DEFAULT_ATK_SPD;

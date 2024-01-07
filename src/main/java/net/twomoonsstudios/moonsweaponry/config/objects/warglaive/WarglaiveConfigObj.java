@@ -1,5 +1,6 @@
 package net.twomoonsstudios.moonsweaponry.config.objects.warglaive;
 
+import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 import net.twomoonsstudios.moonsweaponry.config.objects.WeaponConfigObj;
 
 import java.lang.reflect.Type;
@@ -16,6 +17,11 @@ public abstract class WarglaiveConfigObj extends WeaponConfigObj {
     public WarglaiveConfigObj(Type myType, String myID) {
         super(myType, myID);
     }
+
+    public WarglaiveConfigObj(Type myType, String weaponId, MoonsWeaponsConfig.WeaponInfo objData) {
+        super(myType, weaponId, objData);
+    }
+
     @Override
     public Float getDefaultAttackSpeed(){
         return DEFAULT_ATTACK_SPEED - WARGLAIVE_DEFAULT_ATK_SPD;

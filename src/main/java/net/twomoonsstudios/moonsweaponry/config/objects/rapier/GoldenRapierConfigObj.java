@@ -1,6 +1,7 @@
 package net.twomoonsstudios.moonsweaponry.config.objects.rapier;
 
 import net.minecraft.world.item.Tiers;
+import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 
 import java.lang.reflect.Type;
 
@@ -19,6 +20,11 @@ public class GoldenRapierConfigObj extends RapierConfigObj {
     public GoldenRapierConfigObj(String myId){
         super(GoldenRapierConfigObj.class, myId);
     }
+
+    public GoldenRapierConfigObj(String weaponId, MoonsWeaponsConfig.WeaponInfo objData) {
+        super(GoldenRapierConfigObj.class, weaponId, objData);
+    }
+
     @Override
     protected String getDefaultTier() {
         return GOLDEN_RAPIER_DEFAULT_TIER_NAME;

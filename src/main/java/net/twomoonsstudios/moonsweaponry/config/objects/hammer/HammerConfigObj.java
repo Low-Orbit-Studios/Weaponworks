@@ -1,6 +1,8 @@
 package net.twomoonsstudios.moonsweaponry.config.objects.hammer;
 
+import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 import net.twomoonsstudios.moonsweaponry.config.objects.WeaponConfigObj;
+import net.twomoonsstudios.moonsweaponry.config.objects.halberd.WoodenHalberdConfigObj;
 
 import java.lang.reflect.Type;
 
@@ -16,6 +18,11 @@ public abstract class HammerConfigObj extends WeaponConfigObj {
     public HammerConfigObj(Type myType, String myID) {
         super(myType, myID);
     }
+
+    public HammerConfigObj(Type myType, String weaponId, MoonsWeaponsConfig.WeaponInfo objData) {
+        super(myType, weaponId, objData);
+    }
+
     @Override
     public Float getDefaultAttackSpeed(){
         return DEFAULT_ATTACK_SPEED - HAMMER_DEFAULT_ATK_SPD;
