@@ -23,7 +23,7 @@ public class WoodenHammerConfigObj extends HammerConfigObj {
     }
 
     public WoodenHammerConfigObj(String weaponId, MoonsWeaponsConfig.WeaponInfo objData) {
-        super(WoodenHalberdConfigObj.class, weaponId, objData);
+        super(WoodenHammerConfigObj.class, weaponId, objData);
     }
 
     @Override

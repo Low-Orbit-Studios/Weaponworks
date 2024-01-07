@@ -150,6 +150,8 @@ repositories {
 }
 
 dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+
     // Specify the version of Minecraft to use. If this is any group other than 'net.minecraft', it is assumed
     // that the dep is a ForgeGradle 'patcher' dependency, and its patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
@@ -170,6 +172,12 @@ dependencies {
 
     compileOnly "io.github.hornster.itemfig:itemfig:${itemfigver}:api"
     runtimeOnly "io.github.hornster.itemfig:itemfig:${itemfigver}"
+
+
+    testCompileOnly "io.github.hornster.itemfig:itemfig:${itemfigver}:api"
+    testRuntimeOnly "io.github.hornster.itemfig:itemfig:${itemfigver}"
+
+    testImplementation  'org.junit.jupiter:junit-jupiter:5.8.1'
     //BetterCombat/
 
     // Examples using mod jars from ./libs
@@ -226,4 +234,8 @@ publishing {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
+
+test {
+    useJUnitPlatform()
 }

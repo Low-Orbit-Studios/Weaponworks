@@ -44,9 +44,8 @@ public class MoonsWeaponsConfig {
             CommonConstants.WARGLAIVE_BASE_ID, WARGLAIVE_DEFAULT_ATK_SPD,
             CommonConstants.SCYTHE_BASE_ID, SCYTHE_DEFAULT_ATK_SPD,
             CommonConstants.GREATSWORD_BASE_ID, GREATSWORD_DEFAULT_ATK_SPD,
-            CommonConstants.HAMMER_BASE_ID, HAMMER_DEFAULT_ATK_SPD,
-            CommonConstants.RAPIER_BASE_ID, RAPIER_DEFAULT_ATK_SPD,
-            CommonConstants.KATANA_BASE_ID, KATANA_DEFAULT_ATK_SPD
+            CommonConstants.HAMMER_BASE_ID, HAMMER_DEFAULT_ATK_SPD
+            //No need to add more here. Only these 5 were in legacy version of config.
     );
     public static final String DEFAULT_CONFIG = """
 {

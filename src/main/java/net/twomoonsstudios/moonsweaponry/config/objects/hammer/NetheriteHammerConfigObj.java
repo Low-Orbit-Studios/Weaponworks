@@ -22,7 +22,7 @@ public class NetheriteHammerConfigObj extends HammerConfigObj {
     }
 
     public NetheriteHammerConfigObj(String weaponId, MoonsWeaponsConfig.WeaponInfo objData) {
-        super(NetheriteHalberdConfigObj.class, weaponId, objData);
+        super(NetheriteHammerConfigObj.class, weaponId, objData);
     }
 
     @Override

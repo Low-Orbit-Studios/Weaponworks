@@ -30,7 +30,7 @@ public abstract class GreatswordConfigObj extends WeaponConfigObj {
 
     @Override
     public Float getDefaultAttackSpeed(){
-        return DEFAULT_ATTACK_SPEED - GREATSWORD_DEFAULT_ATK_SPD;
+        return DEFAULT_ATTACK_SPEED + GREATSWORD_DEFAULT_ATK_SPD;
     }
 
     @Override

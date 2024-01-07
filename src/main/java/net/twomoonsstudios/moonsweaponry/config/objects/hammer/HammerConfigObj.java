@@ -25,7 +25,7 @@ public abstract class HammerConfigObj extends WeaponConfigObj {
 
     @Override
     public Float getDefaultAttackSpeed(){
-        return DEFAULT_ATTACK_SPEED - HAMMER_DEFAULT_ATK_SPD;
+        return DEFAULT_ATTACK_SPEED + HAMMER_DEFAULT_ATK_SPD;
     }
 
     @Override

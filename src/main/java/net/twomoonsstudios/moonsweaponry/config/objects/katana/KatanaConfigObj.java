@@ -24,7 +24,7 @@ public abstract class KatanaConfigObj extends WeaponConfigObj {
 
     @Override
     public Float getDefaultAttackSpeed(){
-        return DEFAULT_ATTACK_SPEED - KATANA_DEFAULT_ATK_SPD;
+        return DEFAULT_ATTACK_SPEED + KATANA_DEFAULT_ATK_SPD;
     }
 
     @Override

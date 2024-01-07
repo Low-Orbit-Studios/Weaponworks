@@ -24,7 +24,7 @@ public abstract class ScytheConfigObj extends WeaponConfigObj {
 
     @Override
     public Float getDefaultAttackSpeed(){
-        return DEFAULT_ATTACK_SPEED - SCYTHE_DEFAULT_ATK_SPD;
+        return DEFAULT_ATTACK_SPEED + SCYTHE_DEFAULT_ATK_SPD;
     }
 
     @Override

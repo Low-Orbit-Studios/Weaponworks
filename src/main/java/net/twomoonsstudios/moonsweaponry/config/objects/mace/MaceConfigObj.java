@@ -18,7 +18,7 @@ public abstract class MaceConfigObj extends WeaponConfigObj {
 
     @Override
     protected Float getDefaultAttackSpeed() {
-        return DEFAULT_ATTACK_SPEED - MACE_DEFAULT_ATK_SPD;
+        return DEFAULT_ATTACK_SPEED + MACE_DEFAULT_ATK_SPD;
     }
 
     @Override

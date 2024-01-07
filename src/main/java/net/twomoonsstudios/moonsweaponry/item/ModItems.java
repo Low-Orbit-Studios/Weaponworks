@@ -73,6 +73,12 @@ public class ModItems {
                         case WARGLAIVE -> {
                             ITEMS.register(weaponId, () -> new WarglaiveItem(weaponConfig));
                         }
+                        case SPEAR -> {
+                            ITEMS.register(weaponId, () -> new SpearItem(weaponConfig));
+                        }
+                        case MACE -> {
+                            ITEMS.register(weaponId, () -> new MaceItem(weaponConfig));
+                        }
                         default -> throw new Exception("Unknown weapon type to load: " + weaponId);
                     }
                 }
