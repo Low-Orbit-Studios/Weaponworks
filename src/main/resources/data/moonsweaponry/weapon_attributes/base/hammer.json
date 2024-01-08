@@ -5,6 +5,7 @@
     "attacks": [
       {
         "hitbox": "HORIZONTAL_PLANE",
+        "upswing": 0.5,
         "damage_multiplier": 1,
         "animation": "bettercombat:two_handed_slash_horizontal_right",
         "swing_sound":
@@ -25,6 +26,7 @@
       },
       {
         "hitbox": "HORIZONTAL_PLANE",
+        "upswing": 0.5,
         "damage_multiplier": 1,
         "animation": "bettercombat:two_handed_slash_horizontal_left",
         "swing_sound":
