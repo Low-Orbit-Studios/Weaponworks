@@ -24,20 +24,20 @@ public class WeaponDataConstants {
 
 
     //Hammers, as in one-handed maces.
-    public static final float HAMMER_DEFAULT_ATK_SPD = -(DEFAULT_ATTACK_SPEED - 1f);
+    public static final float HAMMER_DEFAULT_ATK_SPD = -(DEFAULT_ATTACK_SPEED - 1.2f);
     public static final String WOODEN_HAMMER_DEFAULT_TIER_NAME = "WOOD";
-    public static final int WOODEN_HAMMER_DEFAULT_DMG = 4;
+    public static final int WOODEN_HAMMER_DEFAULT_DMG = 6;
     public static final int WOODEN_HAMMER_DEFAULT_DURABILTY = 59;
     public static final String STONE_HAMMER_DEFAULT_TIER_NAME = "STONE";
-    public static final int STONE_HAMMER_DEFAULT_DMG = 4;
+    public static final int STONE_HAMMER_DEFAULT_DMG = 6;
     public static final String IRON_HAMMER_DEFAULT_TIER_NAME = "IRON";
-    public static final int IRON_HAMMER_DEFAULT_DMG = 5;
+    public static final int IRON_HAMMER_DEFAULT_DMG = 7;
     public static final String GOLDEN_HAMMER_DEFAULT_TIER_NAME = "GOLD";
-    public static final int GOLDEN_HAMMER_DEFAULT_DMG = 6;
+    public static final int GOLDEN_HAMMER_DEFAULT_DMG = 8;
     public static final String DIAMOND_HAMMER_DEFAULT_TIER_NAME = "DIAMOND";
-    public static final int DIAMOND_HAMMER_DEFAULT_DMG = 6;
+    public static final int DIAMOND_HAMMER_DEFAULT_DMG = 8;
     public static final String NETHERITE_HAMMER_DEFAULT_TIER_NAME = "NETHERITE";
-    public static final int NETHERITE_HAMMER_DEFAULT_DMG = 7;
+    public static final int NETHERITE_HAMMER_DEFAULT_DMG = 9;
     public static final boolean NETHERITE_HAMMER_DEFAULT_FIRE_RESISTANCE = true;
 
     //Scythes

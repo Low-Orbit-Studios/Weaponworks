@@ -1,7 +1,7 @@
 {
   "parent": "bettercombat:hammer",
   "attributes": {
-    "attack_range": 2.5,
+    "attack_range": 3,
     "attacks": [
       {
         "hitbox": "HORIZONTAL_PLANE",
