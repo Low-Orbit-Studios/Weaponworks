@@ -13,6 +13,9 @@
     },
     "fixed": {
       "parent": "moonsweaponry:item/stone_rapier_gui"
+    },
+    "ground": {
+      "parent": "moonsweaponry:item/stone_rapier_gui"
     }
   }
 }

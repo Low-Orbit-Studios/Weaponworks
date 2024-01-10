@@ -13,6 +13,9 @@
     },
     "fixed": {
       "parent": "moonsweaponry:item/iron_mace_gui"
+    },
+    "ground": {
+      "parent": "moonsweaponry:item/iron_mace_gui"
     }
   }
 }

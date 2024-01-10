@@ -13,6 +13,9 @@
     },
     "fixed": {
       "parent": "moonsweaponry:item/golden_mace_gui"
+    },
+    "ground": {
+      "parent": "moonsweaponry:item/golden_mace_gui"
     }
   }
 }

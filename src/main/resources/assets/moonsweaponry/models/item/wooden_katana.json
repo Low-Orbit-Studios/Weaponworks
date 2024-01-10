@@ -13,6 +13,9 @@
     },
     "fixed": {
       "parent": "moonsweaponry:item/wooden_katana_gui"
+    },
+    "ground": {
+      "parent": "moonsweaponry:item/wooden_katana_gui"
     }
   }
 }
