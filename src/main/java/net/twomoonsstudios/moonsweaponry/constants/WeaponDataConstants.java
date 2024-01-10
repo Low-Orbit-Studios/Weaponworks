@@ -88,19 +88,19 @@ public class WeaponDataConstants {
     public static final int NETHERITE_HALBERD_DEFAULT_DMG = 10;
     public static final boolean NETHERITE_HALBERD_DEFAULT_FIRE_RESISTANCE = true;
     //Rapiers
-    public static final float RAPIER_DEFAULT_ATK_SPD = -(DEFAULT_ATTACK_SPEED - 1.6f);
+    public static final float RAPIER_DEFAULT_ATK_SPD = -(DEFAULT_ATTACK_SPEED - 1.9f);
     public static final String WOODEN_RAPIER_DEFAULT_TIER_NAME = "WOOD";
-    public static final int WOODEN_RAPIER_DEFAULT_DMG = 4;
+    public static final int WOODEN_RAPIER_DEFAULT_DMG = 3;
     public static final String STONE_RAPIER_DEFAULT_TIER_NAME = "STONE";
-    public static final int STONE_RAPIER_DEFAULT_DMG = 4;
+    public static final int STONE_RAPIER_DEFAULT_DMG = 3;
     public static final String IRON_RAPIER_DEFAULT_TIER_NAME = "IRON";
-    public static final int IRON_RAPIER_DEFAULT_DMG = 5;
+    public static final int IRON_RAPIER_DEFAULT_DMG = 4;
     public static final String GOLDEN_RAPIER_DEFAULT_TIER_NAME = "GOLD";
-    public static final int GOLDEN_RAPIER_DEFAULT_DMG = 6;
+    public static final int GOLDEN_RAPIER_DEFAULT_DMG = 5;
     public static final String DIAMOND_RAPIER_DEFAULT_TIER_NAME = "DIAMOND";
-    public static final int DIAMOND_RAPIER_DEFAULT_DMG = 6;
+    public static final int DIAMOND_RAPIER_DEFAULT_DMG = 5;
     public static final String NETHERITE_RAPIER_DEFAULT_TIER_NAME = "NETHERITE";
-    public static final int NETHERITE_RAPIER_DEFAULT_DMG = 7;
+    public static final int NETHERITE_RAPIER_DEFAULT_DMG = 6;
     public static final boolean NETHERITE_RAPIER_DEFAULT_FIRE_RESISTANCE = true;
     //Katana
     public static final float KATANA_DEFAULT_ATK_SPD = -(DEFAULT_ATTACK_SPEED - 1.8f);
