@@ -6,8 +6,7 @@ import net.twomoonsstudios.moonsweaponry.config.objects.mace.MaceConfigObj;
 
 import java.lang.reflect.Type;
 
-import static net.twomoonsstudios.moonsweaponry.constants.WeaponDataConstants.GOLDEN_MACE_DEFAULT_DMG;
-import static net.twomoonsstudios.moonsweaponry.constants.WeaponDataConstants.GOLDEN_MACE_DEFAULT_TIER_NAME;
+import static net.twomoonsstudios.moonsweaponry.constants.WeaponDataConstants.*;
 
 public class GoldenMaceConfigObj extends MaceConfigObj {
     /**
@@ -42,6 +41,6 @@ public class GoldenMaceConfigObj extends MaceConfigObj {
 
     @Override
     protected Integer getDefaultDurability() {
-        return Tiers.GOLD.getUses();
+        return GOLDEN_ITEMS_DURABILITY;
     }
 }

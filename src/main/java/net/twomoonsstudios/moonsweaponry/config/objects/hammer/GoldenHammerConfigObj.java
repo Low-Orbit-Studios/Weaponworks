@@ -6,8 +6,7 @@ import net.twomoonsstudios.moonsweaponry.config.objects.halberd.GoldenHalberdCon
 
 import java.lang.reflect.Type;
 
-import static net.twomoonsstudios.moonsweaponry.constants.WeaponDataConstants.GOLDEN_HAMMER_DEFAULT_DMG;
-import static net.twomoonsstudios.moonsweaponry.constants.WeaponDataConstants.GOLDEN_HAMMER_DEFAULT_TIER_NAME;
+import static net.twomoonsstudios.moonsweaponry.constants.WeaponDataConstants.*;
 
 public class GoldenHammerConfigObj extends HammerConfigObj {
     /**
@@ -38,6 +37,6 @@ public class GoldenHammerConfigObj extends HammerConfigObj {
 
     @Override
     protected Integer getDefaultDurability() {
-        return Tiers.GOLD.getUses();
+        return GOLDEN_ITEMS_DURABILITY;
     }
 }

@@ -6,6 +6,7 @@ public class WeaponDataConstants {
     //we receive the desired speed in the game.
     public static final float DEFAULT_ATTACK_SPEED = 4f;
 
+    public static final int GOLDEN_ITEMS_DURABILITY = 128;
     //Greatswords
     public static final float GREATSWORD_DEFAULT_ATK_SPD = -(DEFAULT_ATTACK_SPEED - 0.8f);
     public static final String WOODEN_GREATSWORD_DEFAULT_TIER_NAME = "WOOD";
@@ -23,11 +24,10 @@ public class WeaponDataConstants {
     public static final boolean NETHERITE_GREATSWORD_DEFAULT_FIRE_RESISTANCE = true;
 
 
-    //Hammers, as in one-handed maces.
+    //Hammers.
     public static final float HAMMER_DEFAULT_ATK_SPD = -(DEFAULT_ATTACK_SPEED - 1.2f);
     public static final String WOODEN_HAMMER_DEFAULT_TIER_NAME = "WOOD";
     public static final int WOODEN_HAMMER_DEFAULT_DMG = 6;
-    public static final int WOODEN_HAMMER_DEFAULT_DURABILTY = 59;
     public static final String STONE_HAMMER_DEFAULT_TIER_NAME = "STONE";
     public static final int STONE_HAMMER_DEFAULT_DMG = 6;
     public static final String IRON_HAMMER_DEFAULT_TIER_NAME = "IRON";
@@ -118,19 +118,19 @@ public class WeaponDataConstants {
     public static final int NETHERITE_KATANA_DEFAULT_DMG = 7;
     public static final boolean NETHERITE_KATANA_DEFAULT_FIRE_RESISTANCE = true;
     //Mace
-    public static final float MACE_DEFAULT_ATK_SPD = -(DEFAULT_ATTACK_SPEED - 1f);
+    public static final float MACE_DEFAULT_ATK_SPD = -(DEFAULT_ATTACK_SPEED - 1.2f);
     public static final String WOODEN_MACE_DEFAULT_TIER_NAME = "WOOD";
-    public static final int WOODEN_MACE_DEFAULT_DMG = 4;
+    public static final int WOODEN_MACE_DEFAULT_DMG = 5;
     public static final String STONE_MACE_DEFAULT_TIER_NAME = "STONE";
-    public static final int STONE_MACE_DEFAULT_DMG = 4;
+    public static final int STONE_MACE_DEFAULT_DMG = 5;
     public static final String IRON_MACE_DEFAULT_TIER_NAME = "IRON";
-    public static final int IRON_MACE_DEFAULT_DMG = 5;
+    public static final int IRON_MACE_DEFAULT_DMG = 7;
     public static final String GOLDEN_MACE_DEFAULT_TIER_NAME = "GOLD";
-    public static final int GOLDEN_MACE_DEFAULT_DMG = 6;
+    public static final int GOLDEN_MACE_DEFAULT_DMG = 8;
     public static final String DIAMOND_MACE_DEFAULT_TIER_NAME = "DIAMOND";
-    public static final int DIAMOND_MACE_DEFAULT_DMG = 6;
+    public static final int DIAMOND_MACE_DEFAULT_DMG = 8;
     public static final String NETHERITE_MACE_DEFAULT_TIER_NAME = "NETHERITE";
-    public static final int NETHERITE_MACE_DEFAULT_DMG = 7;
+    public static final int NETHERITE_MACE_DEFAULT_DMG = 9;
     public static final boolean NETHERITE_MACE_DEFAULT_FIRE_RESISTANCE = true;
     //Spears
     public static final float SPEAR_DEFAULT_ATK_SPD = -(DEFAULT_ATTACK_SPEED - 1.6f);

@@ -27,6 +27,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 
+import static net.twomoonsstudios.moonsweaponry.constants.CommonConstants.CONFIG_FILE_NAME;
 import static net.twomoonsstudios.moonsweaponry.constants.CommonConstants.CONFIG_FILE_NAME_SUFFIX;
 import static net.twomoonsstudios.moonsweaponry.constants.WeaponDataConstants.*;
 
@@ -435,7 +436,7 @@ public class MoonsWeaponsConfig {
         return result;
     }
     public static void register(boolean force) {
-        ItemFigApi.setConfigFileName(MoonsWeaponry.MOD_ID + CONFIG_FILE_NAME_SUFFIX);
+        ItemFigApi.setConfigFileName(CONFIG_FILE_NAME + CONFIG_FILE_NAME_SUFFIX);
         String oldConfigPath = System.getProperty("user.dir") + File.separator +
                 "config" + File.separator + MoonsWeaponry.MOD_ID + "-common.json";
 

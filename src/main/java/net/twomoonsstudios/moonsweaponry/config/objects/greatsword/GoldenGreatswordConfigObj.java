@@ -40,6 +40,6 @@ public class GoldenGreatswordConfigObj extends GreatswordConfigObj {
 
     @Override
     protected Integer getDefaultDurability() {
-        return Tiers.GOLD.getUses();
+        return GOLDEN_ITEMS_DURABILITY;
     }
 }

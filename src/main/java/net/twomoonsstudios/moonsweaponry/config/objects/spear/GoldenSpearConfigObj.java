@@ -6,8 +6,7 @@ import net.twomoonsstudios.moonsweaponry.config.objects.spear.SpearConfigObj;
 
 import java.lang.reflect.Type;
 
-import static net.twomoonsstudios.moonsweaponry.constants.WeaponDataConstants.GOLDEN_SPEAR_DEFAULT_DMG;
-import static net.twomoonsstudios.moonsweaponry.constants.WeaponDataConstants.GOLDEN_SPEAR_DEFAULT_TIER_NAME;
+import static net.twomoonsstudios.moonsweaponry.constants.WeaponDataConstants.*;
 
 public class GoldenSpearConfigObj extends SpearConfigObj {
     /**
@@ -42,6 +41,6 @@ public class GoldenSpearConfigObj extends SpearConfigObj {
 
     @Override
     protected Integer getDefaultDurability() {
-        return Tiers.GOLD.getUses();
+        return GOLDEN_ITEMS_DURABILITY;
     }
 }

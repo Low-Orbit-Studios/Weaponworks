@@ -5,8 +5,7 @@ import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 
 import java.lang.reflect.Type;
 
-import static net.twomoonsstudios.moonsweaponry.constants.WeaponDataConstants.GOLDEN_WARGLAIVE_DEFAULT_DMG;
-import static net.twomoonsstudios.moonsweaponry.constants.WeaponDataConstants.GOLDEN_WARGLAIVE_DEFAULT_TIER_NAME;
+import static net.twomoonsstudios.moonsweaponry.constants.WeaponDataConstants.*;
 
 public class GoldenWarglaiveConfigObj extends WarglaiveConfigObj {
     /**
@@ -37,6 +36,6 @@ public class GoldenWarglaiveConfigObj extends WarglaiveConfigObj {
 
     @Override
     protected Integer getDefaultDurability() {
-        return Tiers.GOLD.getUses();
+        return GOLDEN_ITEMS_DURABILITY;
     }
 }

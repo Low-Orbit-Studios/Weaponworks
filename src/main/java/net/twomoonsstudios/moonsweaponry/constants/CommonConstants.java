@@ -25,4 +25,5 @@ public class CommonConstants {
     public static final String SPEAR_BASE_ID = "spear";
     /**if - from ItemFig*/
     public static final String CONFIG_FILE_NAME_SUFFIX = "-if-common.json";
+    public static final String CONFIG_FILE_NAME = "weaponworks";
 }
