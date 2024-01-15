@@ -3,7 +3,6 @@ package net.twomoonsstudios.moonsweaponry.config.objects.greatsword;
 import io.github.hornster.itemfig.api.serialization.config.ConfigObj;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.item.Tiers;
-import net.minecraft.world.level.material.Material;
 import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 import net.twomoonsstudios.moonsweaponry.config.objects.WeaponConfigObj;
 import org.apache.commons.lang3.tuple.Triple;
