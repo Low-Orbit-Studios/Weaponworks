@@ -13,6 +13,9 @@
     },
     "fixed": {
       "parent": "moonsweaponry:item/wooden_halberd_gui"
+    },
+    "ground": {
+      "parent": "moonsweaponry:item/wooden_halberd_gui"
     }
   }
 }

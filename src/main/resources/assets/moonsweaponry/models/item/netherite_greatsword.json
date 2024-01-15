@@ -13,6 +13,9 @@
     },
     "fixed": {
       "parent": "moonsweaponry:item/netherite_greatsword_gui"
+    },
+    "ground": {
+      "parent": "moonsweaponry:item/netherite_greatsword_gui"
     }
   }
 }

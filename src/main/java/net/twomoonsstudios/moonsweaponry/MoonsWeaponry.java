@@ -1,6 +1,7 @@
 package net.twomoonsstudios.moonsweaponry;
 
 import com.mojang.logging.LogUtils;
+import io.github.hornster.itemfig.api.serialization.ItemFigApi;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Blocks;
@@ -36,7 +37,6 @@ public class MoonsWeaponry
     public MoonsWeaponry(){
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         MoonsWeaponsConfig.register();
-
         ModItems.register(modEventBus);
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
@@ -49,8 +49,7 @@ public class MoonsWeaponry
     private void commonSetup(final FMLCommonSetupEvent event)
     {
         // Some common setup code
-        LOGGER.info("HELLO FROM COMMON SETUP");
-        LOGGER.info("DIRT BLOCK >> {}", ForgeRegistries.BLOCKS.getKey(Blocks.DIRT));
+        LOGGER.info("GREMLINS OF ALL KINDS ARISE!!! Weaponworks setting up!");
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event){
@@ -70,8 +69,6 @@ public class MoonsWeaponry
         public static void onClientSetup(FMLClientSetupEvent event)
         {
             // Some client setup code
-            LOGGER.info("HELLO FROM CLIENT SETUP");
-            LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
         }
     }
 }

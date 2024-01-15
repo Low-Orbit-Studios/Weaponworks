@@ -1,0 +1,21 @@
+{
+  "parent": "minecraft:item/handheld",
+  "loader": "forge:separate_transforms",
+  "textures": {
+    "layer0": "moonsweaponry:item/diamond_katana_gui"
+  },
+  "base": {
+    "parent": "moonsweaponry:item/diamond_katana_handheld"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "moonsweaponry:item/diamond_katana_gui"
+    },
+    "fixed": {
+      "parent": "moonsweaponry:item/diamond_katana_gui"
+    },
+    "ground": {
+      "parent": "moonsweaponry:item/diamond_katana_gui"
+    }
+  }
+}

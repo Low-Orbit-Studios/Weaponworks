@@ -13,6 +13,9 @@
     },
     "fixed": {
       "parent": "moonsweaponry:item/diamond_scythe_gui"
+    },
+    "ground": {
+      "parent": "moonsweaponry:item/diamond_scythe_gui"
     }
   }
 }

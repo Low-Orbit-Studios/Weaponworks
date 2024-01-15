@@ -13,6 +13,9 @@
     },
     "fixed": {
       "parent": "moonsweaponry:item/iron_hammer_gui"
+    },
+    "ground": {
+      "parent": "moonsweaponry:item/iron_hammer_gui"
     }
   }
 }

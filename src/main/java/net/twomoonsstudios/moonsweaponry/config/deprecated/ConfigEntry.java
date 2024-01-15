@@ -1,5 +1,6 @@
-package net.twomoonsstudios.moonsweaponry.config;
+package net.twomoonsstudios.moonsweaponry.config.deprecated;
 
+import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;

@@ -13,6 +13,9 @@
     },
     "fixed": {
       "parent": "moonsweaponry:item/wooden_warglaive_gui"
+    },
+    "ground": {
+      "parent": "moonsweaponry:item/wooden_warglaive_gui"
     }
   }
 }
