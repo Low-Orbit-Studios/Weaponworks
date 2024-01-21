@@ -1,0 +1,42 @@
+{
+	"schemaVersion": 1,
+	"id": "weaponworks",
+	"version": "${version}",
+	"name": "weaponworks",
+	"description": "Adds custom vanilla-styled weapons to the game.",
+	"authors": [
+		"CrazedAerialCable",
+		"Cakeman",
+		"Strgnv"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "All rights reserved",
+	"icon": "assets/weaponworks/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.crazedaerialcable.weaponworks.Weaponworks"
+		],
+		"client": [
+			"net.crazedaerialcable.weaponworks.WeaponworksClient"
+		],
+		"fabric-datagen": [
+			"net.crazedaerialcable.weaponworks.WeaponworksDataGenerator"
+		]
+	},
+	"mixins": [
+		"weaponworks.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.6",
+		"minecraft": "~1.20.2",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
