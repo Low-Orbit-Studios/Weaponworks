@@ -1,0 +1,436 @@
+{
+  "registeredObjects": {
+    "wooden_greatsword": {
+      "_myID": "wooden_greatsword",
+      "tier": "WOOD",
+      "damage": 8,
+      "speed": 0.79999995,
+      "fire_resistant": false,
+      "durability": 59
+    },
+    "stone_greatsword": {
+      "_myID": "stone_greatsword",
+      "tier": "STONE",
+      "damage": 8,
+      "speed": 0.79999995,
+      "fire_resistant": false,
+      "durability": 131
+    },
+    "iron_greatsword": {
+      "_myID": "iron_greatsword",
+      "tier": "IRON",
+      "damage": 10,
+      "speed": 0.79999995,
+      "fire_resistant": false,
+      "durability": 250
+    },
+    "diamond_greatsword": {
+      "_myID": "diamond_greatsword",
+      "tier": "DIAMOND",
+      "damage": 12,
+      "speed": 0.79999995,
+      "fire_resistant": false,
+      "durability": 1561
+    },
+    "golden_greatsword": {
+      "_myID": "golden_greatsword",
+      "tier": "GOLD",
+      "damage": 12,
+      "speed": 0.79999995,
+      "fire_resistant": false,
+      "durability": 128
+    },
+    "netherite_greatsword": {
+      "_myID": "netherite_greatsword",
+      "tier": "NETHERITE",
+      "damage": 14,
+      "speed": 0.79999995,
+      "fire_resistant": true,
+      "durability": 2031
+    },
+    "wooden_halberd": {
+      "_myID": "wooden_halberd",
+      "tier": "WOOD",
+      "damage": 4,
+      "speed": 1.4000001,
+      "fire_resistant": false,
+      "durability": 59
+    },
+    "stone_halberd": {
+      "_myID": "stone_halberd",
+      "tier": "STONE",
+      "damage": 4,
+      "speed": 1.4000001,
+      "fire_resistant": false,
+      "durability": 131
+    },
+    "iron_halberd": {
+      "_myID": "iron_halberd",
+      "tier": "IRON",
+      "damage": 5,
+      "speed": 1.4000001,
+      "fire_resistant": false,
+      "durability": 250
+    },
+    "diamond_halberd": {
+      "_myID": "diamond_halberd",
+      "tier": "DIAMOND",
+      "damage": 6,
+      "speed": 1.4000001,
+      "fire_resistant": false,
+      "durability": 1561
+    },
+    "golden_halberd": {
+      "_myID": "golden_halberd",
+      "tier": "GOLD",
+      "damage": 6,
+      "speed": 1.4000001,
+      "fire_resistant": false,
+      "durability": 128
+    },
+    "netherite_halberd": {
+      "_myID": "netherite_halberd",
+      "tier": "NETHERITE",
+      "damage": 7,
+      "speed": 1.4000001,
+      "fire_resistant": true,
+      "durability": 2031
+    },
+    "wooden_hammer": {
+      "_myID": "wooden_hammer",
+      "tier": "WOOD",
+      "damage": 7,
+      "speed": 1.0999999,
+      "fire_resistant": false,
+      "durability": 59
+    },
+    "stone_hammer": {
+      "_myID": "stone_hammer",
+      "tier": "STONE",
+      "damage": 7,
+      "speed": 1.0999999,
+      "fire_resistant": false,
+      "durability": 131
+    },
+    "iron_hammer": {
+      "_myID": "iron_hammer",
+      "tier": "IRON",
+      "damage": 8,
+      "speed": 1.0999999,
+      "fire_resistant": false,
+      "durability": 250
+    },
+    "diamond_hammer": {
+      "_myID": "diamond_hammer",
+      "tier": "DIAMOND",
+      "damage": 9,
+      "speed": 1.0999999,
+      "fire_resistant": false,
+      "durability": 1561
+    },
+    "golden_hammer": {
+      "_myID": "golden_hammer",
+      "tier": "GOLD",
+      "damage": 9,
+      "speed": 1.0999999,
+      "fire_resistant": false,
+      "durability": 128
+    },
+    "netherite_hammer": {
+      "_myID": "netherite_hammer",
+      "tier": "NETHERITE",
+      "damage": 10,
+      "speed": 1.0999999,
+      "fire_resistant": true,
+      "durability": 2031
+    },
+    "wooden_katana": {
+      "_myID": "wooden_katana",
+      "tier": "WOOD",
+      "damage": 3,
+      "speed": 1.8,
+      "fire_resistant": false,
+      "durability": 59
+    },
+    "stone_katana": {
+      "_myID": "stone_katana",
+      "tier": "STONE",
+      "damage": 3,
+      "speed": 1.8,
+      "fire_resistant": false,
+      "durability": 131
+    },
+    "iron_katana": {
+      "_myID": "iron_katana",
+      "tier": "IRON",
+      "damage": 4,
+      "speed": 1.8,
+      "fire_resistant": false,
+      "durability": 250
+    },
+    "diamond_katana": {
+      "_myID": "diamond_katana",
+      "tier": "DIAMOND",
+      "damage": 5,
+      "speed": 1.8,
+      "fire_resistant": false,
+      "durability": 1561
+    },
+    "golden_katana": {
+      "_myID": "golden_katana",
+      "tier": "GOLD",
+      "damage": 5,
+      "speed": 1.8,
+      "fire_resistant": false,
+      "durability": 128
+    },
+    "netherite_katana": {
+      "_myID": "netherite_katana",
+      "tier": "NETHERITE",
+      "damage": 6,
+      "speed": 1.8,
+      "fire_resistant": true,
+      "durability": 2031
+    },
+    "wooden_rapier": {
+      "_myID": "wooden_rapier",
+      "tier": "WOOD",
+      "damage": 2,
+      "speed": 1.9000001,
+      "fire_resistant": false,
+      "durability": 59
+    },
+    "stone_rapier": {
+      "_myID": "stone_rapier",
+      "tier": "STONE",
+      "damage": 2,
+      "speed": 1.9000001,
+      "fire_resistant": false,
+      "durability": 131
+    },
+    "iron_rapier": {
+      "_myID": "iron_rapier",
+      "tier": "IRON",
+      "damage": 3,
+      "speed": 1.9000001,
+      "fire_resistant": false,
+      "durability": 250
+    },
+    "diamond_rapier": {
+      "_myID": "diamond_rapier",
+      "tier": "DIAMOND",
+      "damage": 4,
+      "speed": 1.9000001,
+      "fire_resistant": false,
+      "durability": 1561
+    },
+    "golden_rapier": {
+      "_myID": "golden_rapier",
+      "tier": "GOLD",
+      "damage": 4,
+      "speed": 1.9000001,
+      "fire_resistant": false,
+      "durability": 128
+    },
+    "netherite_rapier": {
+      "_myID": "netherite_rapier",
+      "tier": "NETHERITE",
+      "damage": 5,
+      "speed": 1.9000001,
+      "fire_resistant": true,
+      "durability": 2031
+    },
+    "wooden_scythe": {
+      "_myID": "wooden_scythe",
+      "tier": "WOOD",
+      "damage": 6,
+      "speed": 1.2,
+      "fire_resistant": false,
+      "durability": 59
+    },
+    "stone_scythe": {
+      "_myID": "stone_scythe",
+      "tier": "STONE",
+      "damage": 6,
+      "speed": 1.2,
+      "fire_resistant": false,
+      "durability": 131
+    },
+    "iron_scythe": {
+      "_myID": "iron_scythe",
+      "tier": "IRON",
+      "damage": 7,
+      "speed": 1.2,
+      "fire_resistant": false,
+      "durability": 250
+    },
+    "diamond_scythe": {
+      "_myID": "diamond_scythe",
+      "tier": "DIAMOND",
+      "damage": 8,
+      "speed": 1.2,
+      "fire_resistant": false,
+      "durability": 1561
+    },
+    "golden_scythe": {
+      "_myID": "golden_scythe",
+      "tier": "GOLD",
+      "damage": 8,
+      "speed": 1.2,
+      "fire_resistant": false,
+      "durability": 128
+    },
+    "netherite_scythe": {
+      "_myID": "netherite_scythe",
+      "tier": "NETHERITE",
+      "damage": 9,
+      "speed": 1.2,
+      "fire_resistant": true,
+      "durability": 2031
+    },
+    "wooden_warglaive": {
+      "_myID": "wooden_warglaive",
+      "tier": "WOOD",
+      "damage": 2,
+      "speed": 2.1,
+      "fire_resistant": false,
+      "durability": 59
+    },
+    "stone_warglaive": {
+      "_myID": "stone_warglaive",
+      "tier": "STONE",
+      "damage": 2,
+      "speed": 2.1,
+      "fire_resistant": false,
+      "durability": 131
+    },
+    "iron_warglaive": {
+      "_myID": "iron_warglaive",
+      "tier": "IRON",
+      "damage": 3,
+      "speed": 2.1,
+      "fire_resistant": false,
+      "durability": 250
+    },
+    "diamond_warglaive": {
+      "_myID": "diamond_warglaive",
+      "tier": "DIAMOND",
+      "damage": 4,
+      "speed": 2.1,
+      "fire_resistant": false,
+      "durability": 1561
+    },
+    "golden_warglaive": {
+      "_myID": "golden_warglaive",
+      "tier": "GOLD",
+      "damage": 4,
+      "speed": 2.1,
+      "fire_resistant": false,
+      "durability": 128
+    },
+    "netherite_warglaive": {
+      "_myID": "netherite_warglaive",
+      "tier": "NETHERITE",
+      "damage": 5,
+      "speed": 2.1,
+      "fire_resistant": true,
+      "durability": 2031
+    },
+    "wooden_mace": {
+      "_myID": "wooden_mace",
+      "tier": "WOOD",
+      "damage": 4,
+      "speed": 1.2,
+      "fire_resistant": false,
+      "durability": 59
+    },
+    "stone_mace": {
+      "_myID": "stone_mace",
+      "tier": "STONE",
+      "damage": 4,
+      "speed": 1.2,
+      "fire_resistant": false,
+      "durability": 131
+    },
+    "iron_mace": {
+      "_myID": "iron_mace",
+      "tier": "IRON",
+      "damage": 5,
+      "speed": 1.2,
+      "fire_resistant": false,
+      "durability": 250
+    },
+    "diamond_mace": {
+      "_myID": "diamond_mace",
+      "tier": "DIAMOND",
+      "damage": 7,
+      "speed": 1.2,
+      "fire_resistant": false,
+      "durability": 1561
+    },
+    "golden_mace": {
+      "_myID": "golden_mace",
+      "tier": "GOLD",
+      "damage": 7,
+      "speed": 1.2,
+      "fire_resistant": false,
+      "durability": 128
+    },
+    "netherite_mace": {
+      "_myID": "netherite_mace",
+      "tier": "NETHERITE",
+      "damage": 8,
+      "speed": 1.2,
+      "fire_resistant": true,
+      "durability": 2031
+    },
+    "wooden_spear": {
+      "_myID": "wooden_spear",
+      "tier": "WOOD",
+      "damage": 3,
+      "speed": 1.5999999,
+      "fire_resistant": false,
+      "durability": 59
+    },
+    "stone_spear": {
+      "_myID": "stone_spear",
+      "tier": "STONE",
+      "damage": 3,
+      "speed": 1.5999999,
+      "fire_resistant": false,
+      "durability": 131
+    },
+    "iron_spear": {
+      "_myID": "iron_spear",
+      "tier": "IRON",
+      "damage": 4,
+      "speed": 1.5999999,
+      "fire_resistant": false,
+      "durability": 250
+    },
+    "diamond_spear": {
+      "_myID": "diamond_spear",
+      "tier": "DIAMOND",
+      "damage": 5,
+      "speed": 1.5999999,
+      "fire_resistant": false,
+      "durability": 1561
+    },
+    "golden_spear": {
+      "_myID": "golden_spear",
+      "tier": "GOLD",
+      "damage": 5,
+      "speed": 1.5999999,
+      "fire_resistant": false,
+      "durability": 128
+    },
+    "netherite_spear": {
+      "_myID": "netherite_spear",
+      "tier": "NETHERITE",
+      "damage": 6,
+      "speed": 1.5999999,
+      "fire_resistant": true,
+      "durability": 2031
+    }
+  }
+}
