@@ -1,0 +1,21 @@
+{
+  "parent": "minecraft:item/handheld",
+  "loader": "forge:separate_transforms",
+  "textures": {
+    "layer0": "weaponworks:item/golden_greatsword_gui"
+  },
+  "base": {
+    "parent": "weaponworks:item/golden_greatsword_handheld"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "weaponworks:item/golden_greatsword_gui"
+    },
+    "fixed": {
+      "parent": "weaponworks:item/golden_greatsword_gui"
+    },
+    "ground": {
+      "parent": "weaponworks:item/golden_greatsword_gui"
+    }
+  }
+}

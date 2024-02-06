@@ -4,10 +4,10 @@
     "item": "minecraft:netherite_ingot"
   },
   "base": {
-    "item": "moonsweaponry:diamond_spear"
+    "item": "weaponworks:diamond_spear"
   },
   "result": {
-    "item": "moonsweaponry:netherite_spear"
+    "item": "weaponworks:netherite_spear"
   },
   "template": {
     "item": "minecraft:netherite_upgrade_smithing_template"

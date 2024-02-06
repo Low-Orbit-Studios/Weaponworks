@@ -1,12 +1,14 @@
 package net.crazedaerialcable.weaponworks;
 
+import net.crazedaerialcable.weaponworks.config.WeaponworksConfig;
+import net.crazedaerialcable.weaponworks.item.ModItems;
 import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Weaponworks implements ModInitializer {
-	public static final String MOD_ID = "weaponswork";
+	public static final String MOD_ID = "weaponworks";
 	// This logger is used to write text to the console and the log file.
 	// It is considered best practice to use your mod id as the logger's name.
 	// That way, it's clear which mod wrote info, warnings, and errors.
@@ -19,5 +21,7 @@ public class Weaponworks implements ModInitializer {
 		// Proceed with mild caution.
 
 		LOGGER.info("GREMLINS OF ALL KINDS ARISE!!! Weaponworks setting up!");
+		WeaponworksConfig.register();
+		ModItems.registerModItems();
 	}
 }

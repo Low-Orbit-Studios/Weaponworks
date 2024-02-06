@@ -4,10 +4,10 @@
     "item": "minecraft:netherite_ingot"
   },
   "base": {
-    "item": "moonsweaponry:diamond_rapier"
+    "item": "weaponworks:diamond_rapier"
   },
   "result": {
-    "item": "moonsweaponry:netherite_rapier"
+    "item": "weaponworks:netherite_rapier"
   },
   "template": {
     "item": "minecraft:netherite_upgrade_smithing_template"

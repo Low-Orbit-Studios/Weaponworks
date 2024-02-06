@@ -4,10 +4,10 @@
     "item": "minecraft:netherite_ingot"
   },
   "base": {
-    "item": "moonsweaponry:diamond_halberd"
+    "item": "weaponworks:diamond_halberd"
   },
   "result": {
-    "item": "moonsweaponry:netherite_halberd"
+    "item": "weaponworks:netherite_halberd"
   },
   "template": {
     "item": "minecraft:netherite_upgrade_smithing_template"

@@ -4,10 +4,10 @@
     "item": "minecraft:netherite_ingot"
   },
   "base": {
-    "item": "moonsweaponry:diamond_mace"
+    "item": "weaponworks:diamond_mace"
   },
   "result": {
-    "item": "moonsweaponry:netherite_mace"
+    "item": "weaponworks:netherite_mace"
   },
   "template": {
     "item": "minecraft:netherite_upgrade_smithing_template"

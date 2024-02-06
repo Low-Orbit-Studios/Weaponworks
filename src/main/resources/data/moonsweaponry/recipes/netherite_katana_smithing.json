@@ -4,10 +4,10 @@
     "item": "minecraft:netherite_ingot"
   },
   "base": {
-    "item": "moonsweaponry:diamond_katana"
+    "item": "weaponworks:diamond_katana"
   },
   "result": {
-    "item": "moonsweaponry:netherite_katana"
+    "item": "weaponworks:netherite_katana"
   },
   "template": {
     "item": "minecraft:netherite_upgrade_smithing_template"

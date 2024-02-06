@@ -1,26 +1,26 @@
 import io.github.hornster.itemfig.api.serialization.config.ConfigObjAdapterConfig;
-import net.minecraft.world.item.Tiers;
-import net.twomoonsstudios.moonsweaponry.config.objectAdaptersConfigs.ObjectAdaptersConfigsFactory;
-import net.twomoonsstudios.moonsweaponry.config.objectAdaptersConfigs.greatsword.*;
-import net.twomoonsstudios.moonsweaponry.config.objectAdaptersConfigs.halberd.*;
-import net.twomoonsstudios.moonsweaponry.config.objectAdaptersConfigs.hammer.*;
-import net.twomoonsstudios.moonsweaponry.config.objectAdaptersConfigs.katana.*;
-import net.twomoonsstudios.moonsweaponry.config.objectAdaptersConfigs.mace.*;
-import net.twomoonsstudios.moonsweaponry.config.objectAdaptersConfigs.rapier.*;
-import net.twomoonsstudios.moonsweaponry.config.objectAdaptersConfigs.scythe.*;
-import net.twomoonsstudios.moonsweaponry.config.objectAdaptersConfigs.spear.*;
-import net.twomoonsstudios.moonsweaponry.config.objectAdaptersConfigs.warglaive.*;
-import net.twomoonsstudios.moonsweaponry.config.objects.ConfigObjectFactory;
-import net.twomoonsstudios.moonsweaponry.config.objects.greatsword.*;
-import net.twomoonsstudios.moonsweaponry.config.objects.halberd.*;
-import net.twomoonsstudios.moonsweaponry.config.objects.hammer.*;
-import net.twomoonsstudios.moonsweaponry.config.objects.katana.*;
-import net.twomoonsstudios.moonsweaponry.config.objects.mace.*;
-import net.twomoonsstudios.moonsweaponry.config.objects.rapier.*;
-import net.twomoonsstudios.moonsweaponry.config.objects.scythe.*;
-import net.twomoonsstudios.moonsweaponry.config.objects.spear.*;
-import net.twomoonsstudios.moonsweaponry.config.objects.warglaive.*;
-import net.twomoonsstudios.moonsweaponry.enums.WeaponTypesEnum;
+import net.minecraft.world.item.ToolMaterials;
+import net.crazedaerialcable.weaponworks.config.objectAdaptersConfigs.ObjectAdaptersConfigsFactory;
+import net.crazedaerialcable.weaponworks.config.objectAdaptersConfigs.greatsword.*;
+import net.crazedaerialcable.weaponworks.config.objectAdaptersConfigs.halberd.*;
+import net.crazedaerialcable.weaponworks.config.objectAdaptersConfigs.hammer.*;
+import net.crazedaerialcable.weaponworks.config.objectAdaptersConfigs.katana.*;
+import net.crazedaerialcable.weaponworks.config.objectAdaptersConfigs.mace.*;
+import net.crazedaerialcable.weaponworks.config.objectAdaptersConfigs.rapier.*;
+import net.crazedaerialcable.weaponworks.config.objectAdaptersConfigs.scythe.*;
+import net.crazedaerialcable.weaponworks.config.objectAdaptersConfigs.spear.*;
+import net.crazedaerialcable.weaponworks.config.objectAdaptersConfigs.warglaive.*;
+import net.crazedaerialcable.weaponworks.config.objects.ConfigObjectFactory;
+import net.crazedaerialcable.weaponworks.config.objects.greatsword.*;
+import net.crazedaerialcable.weaponworks.config.objects.halberd.*;
+import net.crazedaerialcable.weaponworks.config.objects.hammer.*;
+import net.crazedaerialcable.weaponworks.config.objects.katana.*;
+import net.crazedaerialcable.weaponworks.config.objects.mace.*;
+import net.crazedaerialcable.weaponworks.config.objects.rapier.*;
+import net.crazedaerialcable.weaponworks.config.objects.scythe.*;
+import net.crazedaerialcable.weaponworks.config.objects.spear.*;
+import net.crazedaerialcable.weaponworks.config.objects.warglaive.*;
+import net.crazedaerialcable.weaponworks.enums.WeaponTypesEnum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -36,7 +36,7 @@ public class ConfigObjFactoryTest {
         factory = new ConfigObjectFactory();
         adapterFactory = new ObjectAdaptersConfigsFactory();
     }
-    private static Type getAdapterType(Tiers tier, WeaponTypesEnum weaponType) throws Exception {
+    private static Type getAdapterType(ToolMaterials tier, WeaponTypesEnum weaponType) throws Exception {
         switch (weaponType) {
             case GREATSWORD -> {
                 switch (tier) {
@@ -238,7 +238,7 @@ public class ConfigObjFactoryTest {
         }
         throw new Exception("Unknown type " + weaponType + " and " + tier);
     }
-    private static Type getConfigObjType(Tiers tier, WeaponTypesEnum weaponType) throws Exception {
+    private static Type getConfigObjType(ToolMaterials tier, WeaponTypesEnum weaponType) throws Exception {
         switch (weaponType) {
             case GREATSWORD -> {
                 switch (tier) {
@@ -442,11 +442,11 @@ public class ConfigObjFactoryTest {
     }
     @Test
     void configObjAdapterConfigTest(){
-        var tiers = Tiers.values();
+        var toolMaterials = ToolMaterials.values();
         var weaponTypes = WeaponTypesEnum.values();
 
         for(var type : weaponTypes){
-            for(var tier : tiers){
+            for(var tier : toolMaterials){
                 try{
                     var configObjAdapter = adapterFactory.createObjectAdapterConfig(type, tier);
                     assertEquals(configObjAdapter.getClass(), getAdapterType(tier, type));
@@ -460,11 +460,11 @@ public class ConfigObjFactoryTest {
 
     @Test
     void configObjTest(){
-        var tiers = Tiers.values();
+        var toolMaterials = ToolMaterials.values();
         var weaponTypes = WeaponTypesEnum.values();
 
         for(var type : weaponTypes){
-            for(var tier : tiers){
+            for(var tier : toolMaterials){
                 try{
                     var configObj = factory.createObjectConfig(type, tier);
                     var configObjLegacy = factory.createObjectConfig(type, tier, null);
@@ -479,11 +479,11 @@ public class ConfigObjFactoryTest {
     }
     @Test
     void configObjVsConfigAdapterTest(){
-        var tiers = Tiers.values();
+        var toolMaterials = ToolMaterials.values();
         var weaponTypes = WeaponTypesEnum.values();
 
         for(var type : weaponTypes){
-            for(var tier : tiers){
+            for(var tier : toolMaterials){
                 try{
                     var configObj = factory.createObjectConfig(type, tier);
                     var configObjLegacy = factory.createObjectConfig(type, tier, null);

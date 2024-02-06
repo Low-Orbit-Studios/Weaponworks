@@ -4,10 +4,10 @@
     "item": "minecraft:netherite_ingot"
   },
   "base": {
-    "item": "moonsweaponry:diamond_warglaive"
+    "item": "weaponworks:diamond_warglaive"
   },
   "result": {
-    "item": "moonsweaponry:netherite_warglaive"
+    "item": "weaponworks:netherite_warglaive"
   },
   "template": {
     "item": "minecraft:netherite_upgrade_smithing_template"

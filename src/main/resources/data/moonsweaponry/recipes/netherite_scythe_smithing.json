@@ -4,10 +4,10 @@
     "item": "minecraft:netherite_ingot"
   },
   "base": {
-    "item": "moonsweaponry:diamond_scythe"
+    "item": "weaponworks:diamond_scythe"
   },
   "result": {
-    "item": "moonsweaponry:netherite_scythe"
+    "item": "weaponworks:netherite_scythe"
   },
   "template": {
     "item": "minecraft:netherite_upgrade_smithing_template"

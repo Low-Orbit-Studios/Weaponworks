@@ -1,0 +1,21 @@
+{
+  "parent": "minecraft:item/handheld",
+  "loader": "forge:separate_transforms",
+  "textures": {
+    "layer0": "weaponworks:item/wooden_warglaive_gui"
+  },
+  "base": {
+    "parent": "weaponworks:item/wooden_warglaive_handheld"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "weaponworks:item/wooden_warglaive_gui"
+    },
+    "fixed": {
+      "parent": "weaponworks:item/wooden_warglaive_gui"
+    },
+    "ground": {
+      "parent": "weaponworks:item/wooden_warglaive_gui"
+    }
+  }
+}
