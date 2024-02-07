@@ -18,10 +18,6 @@ public abstract class RapierConfigObj extends WeaponConfigObj {
         super(myType, myID);
     }
 
-    public RapierConfigObj(Type myType, String weaponId, WeaponworksConfig.WeaponInfo objData) {
-        super(myType, weaponId, objData);
-    }
-
     @Override
     public Float getDefaultAttackSpeed(){
         return DEFAULT_ATTACK_SPEED + RAPIER_DEFAULT_ATK_SPD;

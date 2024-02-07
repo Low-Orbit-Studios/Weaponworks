@@ -18,9 +18,6 @@ public abstract class WarglaiveConfigObj extends WeaponConfigObj {
         super(myType, myID);
     }
 
-    public WarglaiveConfigObj(Type myType, String weaponId, WeaponworksConfig.WeaponInfo objData) {
-        super(myType, weaponId, objData);
-    }
 
     @Override
     public Float getDefaultAttackSpeed(){

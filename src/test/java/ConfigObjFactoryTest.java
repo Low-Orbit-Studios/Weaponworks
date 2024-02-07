@@ -1,5 +1,4 @@
 import io.github.hornster.itemfig.api.serialization.config.ConfigObjAdapterConfig;
-import net.minecraft.world.item.ToolMaterials;
 import net.crazedaerialcable.weaponworks.config.objectAdaptersConfigs.ObjectAdaptersConfigsFactory;
 import net.crazedaerialcable.weaponworks.config.objectAdaptersConfigs.greatsword.*;
 import net.crazedaerialcable.weaponworks.config.objectAdaptersConfigs.halberd.*;
@@ -21,6 +20,7 @@ import net.crazedaerialcable.weaponworks.config.objects.scythe.*;
 import net.crazedaerialcable.weaponworks.config.objects.spear.*;
 import net.crazedaerialcable.weaponworks.config.objects.warglaive.*;
 import net.crazedaerialcable.weaponworks.enums.WeaponTypesEnum;
+import net.minecraft.item.ToolMaterials;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -467,7 +467,7 @@ public class ConfigObjFactoryTest {
             for(var tier : toolMaterials){
                 try{
                     var configObj = factory.createObjectConfig(type, tier);
-                    var configObjLegacy = factory.createObjectConfig(type, tier, null);
+                    var configObjLegacy = factory.createObjectConfig(type, tier);
                     assertEquals(configObj.getClass(), getConfigObjType(tier, type));
                     assertEquals(configObjLegacy.getClass(), getConfigObjType(tier, type));
                 }
@@ -486,7 +486,7 @@ public class ConfigObjFactoryTest {
             for(var tier : toolMaterials){
                 try{
                     var configObj = factory.createObjectConfig(type, tier);
-                    var configObjLegacy = factory.createObjectConfig(type, tier, null);
+                    var configObjLegacy = factory.createObjectConfig(type, tier);
                     var configObjAdapter = adapterFactory.createObjectAdapterConfig(type, tier);
 
                     assertEquals(configObj.getClass(), configObjAdapter.getConfigObjClass());

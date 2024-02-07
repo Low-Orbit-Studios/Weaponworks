@@ -1,8 +1,5 @@
 package net.crazedaerialcable.weaponworks.config.objects.greatsword;
 
-import io.github.hornster.itemfig.api.serialization.config.ConfigObj;
-import net.minecraft.util.Tuple;
-import net.minecraft.item.ToolMaterials;
 import net.crazedaerialcable.weaponworks.config.objects.WeaponConfigObj;
 
 import java.lang.reflect.Type;

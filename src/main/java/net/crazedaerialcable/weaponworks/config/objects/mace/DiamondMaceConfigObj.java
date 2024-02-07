@@ -16,9 +16,6 @@ public class DiamondMaceConfigObj extends MaceConfigObj {
     public DiamondMaceConfigObj(Type myType, String myID) {
         super(myType, myID);
     }
-    public DiamondMaceConfigObj(Type myType, String myID, WeaponworksConfig.WeaponInfo configData){
-        super(myType, myID, configData);
-    }
 
     public DiamondMaceConfigObj(String myId){
         super(DiamondMaceConfigObj.class, myId);

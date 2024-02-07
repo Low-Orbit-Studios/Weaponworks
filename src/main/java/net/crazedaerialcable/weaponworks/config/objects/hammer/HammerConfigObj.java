@@ -18,9 +18,6 @@ public abstract class HammerConfigObj extends WeaponConfigObj {
         super(myType, myID);
     }
 
-    public HammerConfigObj(Type myType, String weaponId, WeaponworksConfig.WeaponInfo objData) {
-        super(myType, weaponId, objData);
-    }
 
     @Override
     public Float getDefaultAttackSpeed(){

@@ -18,10 +18,6 @@ public abstract class ScytheConfigObj extends WeaponConfigObj {
         super(myType, myID);
     }
 
-    public ScytheConfigObj(Type myType, String weaponId, WeaponworksConfig.WeaponInfo objData) {
-        super(myType, weaponId, objData);
-    }
-
     @Override
     public Float getDefaultAttackSpeed(){
         return DEFAULT_ATTACK_SPEED + SCYTHE_DEFAULT_ATK_SPD;

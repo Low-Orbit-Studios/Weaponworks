@@ -15,9 +15,7 @@ public class DiamondGreatswordConfigObj extends GreatswordConfigObj {
     public DiamondGreatswordConfigObj(Type myType, String myID) {
         super(myType, myID);
     }
-    public DiamondGreatswordConfigObj(Type myType, String myID, WeaponworksConfig.WeaponInfo configData){
-        super(myType, myID, configData);
-    }
+
 
     public DiamondGreatswordConfigObj(String myId){
         super(DiamondGreatswordConfigObj.class, myId);
