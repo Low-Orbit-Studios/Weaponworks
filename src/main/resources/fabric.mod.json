@@ -14,7 +14,7 @@
 		"sources": "https://github.com/FabricMC/fabric-example-mod"
 	},
 	"license": "All rights reserved",
-	"icon": "assets/weaponworks/logo.png",
+	"icon": "assets/weaponworks/weaponworksicon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
