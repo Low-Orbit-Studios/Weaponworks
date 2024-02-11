@@ -2,6 +2,9 @@ package net.crazedaerialcable.weaponworks.constants;
 
 public class CommonConstants {
     public static final int TICKS_PER_SECOND = 20;
+
+    public static final String HANDHELD_MODEL_SUFFIX = "_handheld";
+
     public static final String WOOD_MATERIAL_NAME = "wooden";
     public static final String GOLD_MATERIAL_NAME = "golden";
     /**Base ID for the halberd. For editor support and typo reduction.*/
