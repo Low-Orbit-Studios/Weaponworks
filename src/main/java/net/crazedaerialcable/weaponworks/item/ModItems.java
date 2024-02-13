@@ -13,15 +13,15 @@ import net.crazedaerialcable.weaponworks.config.objects.WeaponConfigObj;
 import net.crazedaerialcable.weaponworks.enums.WeaponTypesEnum;
 import net.crazedaerialcable.weaponworks.item.weapons.*;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static net.crazedaerialcable.weaponworks.config.WeaponworksConfig.*;
 
 public class ModItems {
     public static final List<Item> WEAPONS = new ArrayList<>();
+    /**An additional implementation allowing for retrieval of a weapon basing on its ID
+     * with constant time.*/
+    public static final HashMap<Identifier, Item> WEAPONS_MAP = new HashMap<>();
     /**
      * Sorts the items before they are registered in the game, making sure they are always
      * added in correct, default material minecraft order.
@@ -48,8 +48,11 @@ public class ModItems {
         }
     }
     private static Item registerItem(String name, Item item){
+        var itemIdentifier = new Identifier(Weaponworks.MOD_ID, name);
+
         WEAPONS.add(item);
-        return Registry.register(Registries.ITEM, new Identifier(Weaponworks.MOD_ID, name), item);
+        WEAPONS_MAP.put(itemIdentifier, item);
+        return Registry.register(Registries.ITEM, itemIdentifier, item);
     }
 
     public static void registerModItems(){

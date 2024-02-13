@@ -34,14 +34,14 @@ public class ItemRendererMixin {
            , int light
            , int overlay
            ){
-        var weapons = ModItems.WEAPONS;
 
-        for(var weapon : weapons){
-            if(stack.isOf(weapon)){
-                if(isHandheld(renderMode)){
-                    var weaponId = Registries.ITEM.getId(weapon).getPath();
-                    return ((ItemRendererAccessor) this).mccourse$getModels().getModelManager().getModel(new ModelIdentifier(Weaponworks.MOD_ID, weaponId + HANDHELD_MODEL_SUFFIX, "inventory"));
-                }
+        var stackIdentifier = Registries.ITEM.getId(stack.getItem());
+
+        var weapon = ModItems.WEAPONS_MAP.get(stackIdentifier);
+        if(weapon != null){
+            if(isHandheld(renderMode)){
+                var weaponId = stackIdentifier.getPath();
+                return ((ItemRendererAccessor) this).mccourse$getModels().getModelManager().getModel(new ModelIdentifier(Weaponworks.MOD_ID, weaponId + HANDHELD_MODEL_SUFFIX, "inventory"));
             }
         }
 
