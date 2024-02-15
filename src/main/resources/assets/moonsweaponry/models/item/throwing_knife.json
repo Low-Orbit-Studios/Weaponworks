@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "moonsweaponry:item/throwing_knife"
+  }
+}
