@@ -6,16 +6,13 @@ import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.render.model.BakedModel;
-import net.minecraft.client.render.model.json.ModelTransformationMode;
+import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.data.client.Model;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.DefaultedRegistry;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
+import net.minecraft.util.registry.Registry;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -27,7 +24,7 @@ public class ItemRendererMixin {
     @ModifyVariable(method = "renderItem", at = @At(value = "HEAD"), argsOnly = true)
     public BakedModel useCustomWeaponModel(BakedModel value
            , ItemStack stack
-           , ModelTransformationMode renderMode
+           , ModelTransformation.Mode renderMode
            , boolean leftHanded
            , MatrixStack matrices
            , VertexConsumerProvider vertexConsumers
@@ -35,7 +32,7 @@ public class ItemRendererMixin {
            , int overlay
            ){
 
-        var stackIdentifier = Registries.ITEM.getId(stack.getItem());
+        var stackIdentifier = Registry.ITEM.getId(stack.getItem());
 
         var weapon = ModItems.WEAPONS_MAP.get(stackIdentifier);
         if(weapon != null){
@@ -47,10 +44,10 @@ public class ItemRendererMixin {
 
         return value;
     }
-    private boolean isHandheld(ModelTransformationMode renderMode){
-        return renderMode == ModelTransformationMode.FIRST_PERSON_LEFT_HAND
-                || renderMode == ModelTransformationMode.FIRST_PERSON_RIGHT_HAND
-                || renderMode == ModelTransformationMode.THIRD_PERSON_LEFT_HAND
-                || renderMode == ModelTransformationMode.THIRD_PERSON_RIGHT_HAND;
+    private boolean isHandheld(ModelTransformation.Mode renderMode){
+        return renderMode == ModelTransformation.Mode.FIRST_PERSON_LEFT_HAND
+                || renderMode == ModelTransformation.Mode.FIRST_PERSON_RIGHT_HAND
+                || renderMode == ModelTransformation.Mode.THIRD_PERSON_LEFT_HAND
+                || renderMode == ModelTransformation.Mode.THIRD_PERSON_RIGHT_HAND;
     }
 }

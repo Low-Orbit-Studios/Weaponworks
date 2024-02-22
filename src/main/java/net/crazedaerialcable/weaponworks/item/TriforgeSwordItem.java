@@ -12,8 +12,8 @@ public class TriforgeSwordItem extends SwordItem {
 
     public TriforgeSwordItem(WeaponConfigObj stats) {
         this(stats.getTier(), CorrectDamage(stats.getTier(), stats.damage), stats.getMcAttackSpeed(), stats.fire_resistant
-                ? new FabricItemSettings().maxDamage(stats.durability).fireproof()
-                : new FabricItemSettings().maxDamage(stats.durability));
+                ? new FabricItemSettings().maxDamage(stats.durability).group(ItemGroup.COMBAT).fireproof()
+                : new FabricItemSettings().maxDamage(stats.durability).group(ItemGroup.COMBAT));
     }
 
     /**

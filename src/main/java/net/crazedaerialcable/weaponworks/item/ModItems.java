@@ -1,12 +1,8 @@
 package net.crazedaerialcable.weaponworks.item;
 
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroups;
 import net.minecraft.item.ToolMaterials;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.crazedaerialcable.weaponworks.Weaponworks;
 import net.crazedaerialcable.weaponworks.config.objects.WeaponConfigObj;
@@ -42,17 +38,12 @@ public class ModItems {
 
         return itemsToRegister;
     }
-    private static void addItemToCombatItemGroup(FabricItemGroupEntries entries){
-        for(var weapon : WEAPONS){
-            entries.add(weapon);
-        }
-    }
     private static Item registerItem(String name, Item item){
         var itemIdentifier = new Identifier(Weaponworks.MOD_ID, name);
 
         WEAPONS.add(item);
         WEAPONS_MAP.put(itemIdentifier, item);
-        return Registry.register(Registries.ITEM, itemIdentifier, item);
+        return Registry.register(Registry.ITEM, itemIdentifier, item);
     }
 
     public static void registerModItems(){
@@ -103,6 +94,6 @@ public class ModItems {
         catch(Exception ex){
             Weaponworks.LOGGER.error("Failed to load weapons: " + ex.getMessage());
         }
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(ModItems::addItemToCombatItemGroup);
+
     }
 }
