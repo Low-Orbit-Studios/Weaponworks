@@ -46,11 +46,11 @@ dependencies {
 ////	moduntimeOnly "maven.modrinth:better-combat:${better_combat_ver}-fabric"
 
 	modCompileOnly "io.github.hornster.itemfig:itemfig:${itemfigver}:api"
-	modImplementation "io.github.hornster.itemfig:itemfig:${itemfigver}"
+	modImplementation "io.github.hornster.itemfig:itemfig:${itemfigver}:dev"
 
 
 	testCompileOnly "io.github.hornster.itemfig:itemfig:${itemfigver}:api"
-	testRuntimeOnly "io.github.hornster.itemfig:itemfig:${itemfigver}"
+	testRuntimeOnly "io.github.hornster.itemfig:itemfig:${itemfigver}:dev"
 
 	testImplementation  'org.junit.jupiter:junit-jupiter:5.9.2'
 
