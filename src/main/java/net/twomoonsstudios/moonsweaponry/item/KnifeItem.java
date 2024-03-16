@@ -11,6 +11,8 @@ import net.minecraft.world.level.Level;
 import net.twomoonsstudios.moonsweaponry.entity.ThrownKnife;
 
 public class KnifeItem extends TieredItem {
+
+    // TODO: Make this into a basic ThrownWeaponItem class
     public KnifeItem(Tier tier, Item.Properties properties) {
         super(tier, properties);
     }

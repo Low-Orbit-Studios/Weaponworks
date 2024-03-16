@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class ThrownKnife extends AbstractArrow {
 
-    private ItemStack usedItem = new ItemStack(ModItems.THROWING_KNIFE.get());
+    public ItemStack usedItem = new ItemStack(ModItems.THROWING_KNIFE.get());
 
     public ThrownKnife(EntityType<? extends AbstractArrow> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -30,32 +30,38 @@ public class ThrownKnife extends AbstractArrow {
     public ItemStack getUsedItem() {
         return this.usedItem.copy();
     }
-    @Override
-    public void playerTouch(Player pEntity) {
-        if (this.onGround && matchingItem(pEntity, this.usedItem)) {
-            this.usedItem.setDamageValue(Math.max((this.getUsedItem().getDamageValue() + 1), this.getUsedItem().getMaxDamage()));
-            this.discard();
-        }
-        super.playerTouch(pEntity);
-    }
 
+    // Since there isn't a repair function, maybe negative hurting the item?
+    // Also, I don't think it recognizes the itemstack with a different durability, so perhaps we might need to try another way.
     @Override
     protected boolean tryPickup(Player pPlayer) {
-        return false;
+        switch (this.pickup) {
+            case ALLOWED:
+                return matchingItem(pPlayer,usedItem).hurt(-1, null, null);
+            case CREATIVE_ONLY:
+                return pPlayer.getAbilities().instabuild;
+            default:
+                return false;
+            }
     }
 
-    public boolean matchingItem(Player player, ItemStack itemStack) {
+    public ItemStack matchingItem(Player player, ItemStack itemStack) {
         NonNullList<ItemStack> inventory = player.getInventory().items;
-        return inventory.iterator().equals(itemStack);
+        for (int i = 0; i <= inventory.size(); i++) {
+            if (inventory.get(i) == itemStack) {
+                return inventory.get(i);
+            }
+        }
+        return null;
     }
 
+    // Use a separate variable for saving and rendering the item
     @Override
     protected @NotNull ItemStack getPickupItem() {
-        if (this.usedItem == null) {
-            return ItemStack.EMPTY;
-        } else return this.getUsedItem().copy();
+        return ItemStack.EMPTY;
     }
 
+    // TODO: The 4 here is going to be inherited from the itemstack in the future.
     @Override
     protected void onHitEntity(EntityHitResult pResult) {
         pResult.getEntity().hurt(DamageSource.mobAttack((LivingEntity) this.getOwner()), 4);
