@@ -18,7 +18,8 @@ import net.twomoonsstudios.moonsweaponry.item.weapons.*;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig.*;
+import static net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig.WEAPON_CONFIGS;
+
 
 public class ModItems {
 
