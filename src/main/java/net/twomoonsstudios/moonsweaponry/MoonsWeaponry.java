@@ -21,6 +21,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
 //import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
+import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 import net.twomoonsstudios.moonsweaponry.entity.ThrownKnifeRenderer;
 import net.twomoonsstudios.moonsweaponry.entity.WeaponworksEntities;
 import net.twomoonsstudios.moonsweaponry.item.ModItems;
@@ -41,7 +42,7 @@ public class MoonsWeaponry
 
     public MoonsWeaponry() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        //MoonsWeaponsConfig.register();
+        MoonsWeaponsConfig.register();
 
         WeaponworksEntities.register(modEventBus);
         ModItems.register(modEventBus);
