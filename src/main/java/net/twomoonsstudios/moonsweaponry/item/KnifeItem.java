@@ -1,5 +1,6 @@
 package net.twomoonsstudios.moonsweaponry.item;
 
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -21,17 +22,21 @@ public class KnifeItem extends TieredItem {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         float velocity = 1;
         ItemStack itemStack = player.getItemInHand(hand);
+        //for easier debugging.
+        var itemStackDmgVal = itemStack.getDamageValue();
+        var itemStackMaxDmg = itemStack.getMaxDamage();
         if (itemStack.getDamageValue() < itemStack.getMaxDamage()) {
             if (!level.isClientSide) {
+                ServerPlayer sPlayer =(ServerPlayer) player;
                 ThrownKnife thrownKnife = new ThrownKnife(level, player, itemStack);
                 thrownKnife.setOwner(player);
-                thrownKnife.shootFromRotation(player, player.getXRot(), player.getYRot(), 0, velocity, 0);
+                //for easier debugging.
+                var playerXRot = player.getXRot();
+                var playerYRot = player.getYRot();
+                thrownKnife.shootFromRotation(player, playerXRot, playerYRot, 0, velocity, 0);
                 level.addFreshEntity(thrownKnife);
                 player.getCooldowns().addCooldown(this, 20);
-                if (!itemStack.hurt(1, null, null)) {
-                    itemStack.hurt(1, null, null);
-                };
-
+                itemStack.hurt(1, null, null);
             }
         }
         return super.use(level, player, hand);

@@ -31,13 +31,25 @@ public class ThrownKnife extends AbstractArrow {
         return this.usedItem.copy();
     }
 
+    private boolean pickupItem(Player pPlayer) {
+        var matchingItem =  matchingItem(pPlayer,usedItem);
+        if(matchingItem != null){
+            matchingItem.hurt(-1, null, null);
+            //We can pick up the item (we have proper itemstack). Return true to pick
+            //the entity up.
+            return true;
+        }
+        //We do not seem to have proper itemstack to be able to pick up the item. Do not pick it up.
+        return false;
+    }
     // Since there isn't a repair function, maybe negative hurting the item?
     // Also, I don't think it recognizes the itemstack with a different durability, so perhaps we might need to try another way.
     @Override
     protected boolean tryPickup(Player pPlayer) {
+        //TODO: Make sure that the item is picked up only ONCE.
         switch (this.pickup) {
             case ALLOWED:
-                return matchingItem(pPlayer,usedItem).hurt(-1, null, null);
+                return pickupItem(pPlayer);
             case CREATIVE_ONLY:
                 return pPlayer.getAbilities().instabuild;
             default:
@@ -47,9 +59,9 @@ public class ThrownKnife extends AbstractArrow {
 
     public ItemStack matchingItem(Player player, ItemStack itemStack) {
         NonNullList<ItemStack> inventory = player.getInventory().items;
-        for (int i = 0; i <= inventory.size(); i++) {
-            if (inventory.get(i) == itemStack) {
-                return inventory.get(i);
+        for (var stack : inventory) {
+            if (stack.sameItem(itemStack)) {
+                return stack;
             }
         }
         return null;
