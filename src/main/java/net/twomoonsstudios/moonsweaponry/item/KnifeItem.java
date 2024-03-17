@@ -21,21 +21,19 @@ public class KnifeItem extends TieredItem {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         float velocity = 1;
+        int cooldownTicks = 10;
         ItemStack itemStack = player.getItemInHand(hand);
 
-        if (itemStack.getDamageValue() < itemStack.getMaxDamage()) {
-            if (!level.isClientSide) {
-                ServerPlayer sPlayer =(ServerPlayer) player;
-                ThrownKnife thrownKnife = new ThrownKnife(level, player, itemStack);
-                thrownKnife.setOwner(player);
-                //for easier debugging.
-                var playerXRot = player.getXRot();
-                var playerYRot = player.getYRot();
-                thrownKnife.shootFromRotation(player, playerXRot, playerYRot, 0, velocity, 0);
-                level.addFreshEntity(thrownKnife);
-                player.getCooldowns().addCooldown(this, 20);
-                itemStack.hurt(1, null, null);
-            }
+        if (itemStack.getDamageValue() < itemStack.getMaxDamage() && !level.isClientSide) {
+            itemStack.hurt(1, null, null);
+            ThrownKnife thrownKnife = new ThrownKnife(level, player, itemStack);
+            thrownKnife.setOwner(player);
+            //for easier debugging.
+            var playerXRot = player.getXRot();
+            var playerYRot = player.getYRot();
+            thrownKnife.shootFromRotation(player, playerXRot, playerYRot, 0, velocity, 0);
+            level.addFreshEntity(thrownKnife);
+            player.getCooldowns().addCooldown(this, cooldownTicks);
         }
         return super.use(level, player, hand);
     }

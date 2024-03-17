@@ -1,6 +1,7 @@
 package net.twomoonsstudios.moonsweaponry.entity;
 
 import net.minecraft.core.NonNullList;
+import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -32,11 +33,11 @@ public class ThrownKnife extends AbstractArrow {
     }
 
     private boolean pickupItem(Player pPlayer) {
-        var matchingItem =  matchingItem(pPlayer,usedItem);
+        var matchingItem = matchingItem(pPlayer, usedItem);
         if(matchingItem != null){
             matchingItem.hurt(-1, null, null);
-            //We can pick up the item (we have proper itemstack). Return true to pick
-            //the entity up.
+            // We can pick up the item (we have proper itemstack). Return true to pick
+            // the entity up.
             return true;
         }
         //We do not seem to have proper itemstack to be able to pick up the item. Do not pick it up.
@@ -59,7 +60,8 @@ public class ThrownKnife extends AbstractArrow {
     public ItemStack matchingItem(Player player, ItemStack itemStack) {
         NonNullList<ItemStack> inventory = player.getInventory().items;
         for (var stack : inventory) {
-            if (stack.sameItem(itemStack)) {
+            var Enchantments = stack.getAllEnchantments(); // for future use
+            if (stack.sameItem(itemStack) && stack.isDamaged()) {
                 return stack;
             }
         }
@@ -72,10 +74,20 @@ public class ThrownKnife extends AbstractArrow {
         return ItemStack.EMPTY;
     }
 
-    // TODO: The 4 here is going to be inherited from the itemstack in the future.
+    // TODO: The damage points should be referencing the entity velocity and doing min/max damage based on it.
+    // Please note: if you do the "super.onHitEntity(pResult)" at the end, the player will have an arrow stuck in them
+    // in the event they shoot themselves.
     @Override
     protected void onHitEntity(EntityHitResult pResult) {
-        pResult.getEntity().hurt(DamageSource.mobAttack((LivingEntity) this.getOwner()), 4);
-        super.onHitEntity(pResult);
+        double velocity = Mth.floor(this.getDeltaMovement().length());
+        double minDamageVelocity = 0.5;
+        double maxDamageVelocity = 1;
+        int damagePoints = 4;
+        pResult.getEntity().hurt(DamageSource.mobAttack((LivingEntity) this.getOwner()), damagePoints);
+
+        // this is the part of the vanilla code that defines normal behavior after hitting the entity.
+        this.setDeltaMovement(this.getDeltaMovement().scale(-0.1D));
+        this.setYRot(this.getYRot() + 180.0F);
+        this.yRotO += 180.0F;
     }
 }
