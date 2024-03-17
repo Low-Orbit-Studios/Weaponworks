@@ -13,6 +13,9 @@
     },
     "fixed": {
       "parent": "moonsweaponry:item/stone_greatsword_gui"
+    },
+    "ground": {
+      "parent": "moonsweaponry:item/stone_greatsword_gui"
     }
   }
 }

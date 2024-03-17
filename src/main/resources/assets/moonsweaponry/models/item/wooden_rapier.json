@@ -1,0 +1,21 @@
+{
+  "parent": "minecraft:item/handheld",
+  "loader": "forge:separate_transforms",
+  "textures": {
+    "layer0": "moonsweaponry:item/wooden_rapier_gui"
+  },
+  "base": {
+    "parent": "moonsweaponry:item/wooden_rapier_handheld"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "moonsweaponry:item/wooden_rapier_gui"
+    },
+    "fixed": {
+      "parent": "moonsweaponry:item/wooden_rapier_gui"
+    },
+    "ground": {
+      "parent": "moonsweaponry:item/wooden_rapier_gui"
+    }
+  }
+}
