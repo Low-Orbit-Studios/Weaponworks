@@ -43,8 +43,11 @@ public class ThrownKnife extends AbstractArrow {
         //We do not seem to have proper itemstack to be able to pick up the item. Do not pick it up.
         return false;
     }
-    // Since there isn't a repair function, maybe negative hurting the item?
-    // Also, I don't think it recognizes the itemstack with a different durability, so perhaps we might need to try another way.
+
+    // We want to not lose thrown projectiles, without this they'd disappear within about a minute.
+    @Override
+    protected void tickDespawn() {}
+
     @Override
     protected boolean tryPickup(Player pPlayer) {
         switch (this.pickup) {
@@ -58,10 +61,11 @@ public class ThrownKnife extends AbstractArrow {
     }
 
     public ItemStack matchingItem(Player player, ItemStack itemStack) {
+        var enchantments = itemStack.getAllEnchantments().toString();
         NonNullList<ItemStack> inventory = player.getInventory().items;
         for (var stack : inventory) {
-            var Enchantments = stack.getAllEnchantments(); // for future use
-            if (stack.sameItem(itemStack) && stack.isDamaged()) {
+            var testEnchantments = stack.getAllEnchantments().toString(); // for future use
+            if (stack.sameItem(itemStack) && stack.isDamaged() && testEnchantments == enchantments) {
                 return stack;
             }
         }
@@ -86,7 +90,7 @@ public class ThrownKnife extends AbstractArrow {
         pResult.getEntity().hurt(DamageSource.mobAttack((LivingEntity) this.getOwner()), damagePoints);
 
         // this is the part of the vanilla code that defines normal behavior after hitting the entity.
-        this.setDeltaMovement(this.getDeltaMovement().scale(-0.1D));
+        this.setDeltaMovement(this.getDeltaMovement().scale(-0.05D));
         this.setYRot(this.getYRot() + 180.0F);
         this.yRotO += 180.0F;
     }

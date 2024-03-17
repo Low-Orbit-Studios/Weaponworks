@@ -36,12 +36,11 @@ public class ThrownKnifeRenderer extends EntityRenderer<ThrownKnife> {
 
     public void tranformRendering(ThrownKnife pEntity, float partialTicks, PoseStack pPoseStack) {
 
-
-        // make it face like | instead of like [] if that makes any sense, it points away from the player now
+        // Points away from player
         float yRotModifier = 270.0F;
         pPoseStack.mulPose(Vector3f.YP.rotationDegrees(Mth.lerp(partialTicks, pEntity.getYRot(), pEntity.getYRot()) + yRotModifier));
 
-        // make the point go forward
+        // Make the point go forward
         float zRotModifier = 135.0F;
         pPoseStack.mulPose(Vector3f.ZP.rotationDegrees(Mth.lerp(partialTicks, pEntity.getXRot(), pEntity.getXRot()) + zRotModifier));
 

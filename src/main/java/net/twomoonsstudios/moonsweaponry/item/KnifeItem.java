@@ -20,8 +20,9 @@ public class KnifeItem extends TieredItem {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        float velocity = 1;
+        float velocity = 1.6f; // 1 is pretty low, 3 is really high.
         int cooldownTicks = 10;
+        float innacuracy = 0.1F;
         ItemStack itemStack = player.getItemInHand(hand);
 
         if (itemStack.getDamageValue() < itemStack.getMaxDamage() && !level.isClientSide) {
@@ -31,13 +32,14 @@ public class KnifeItem extends TieredItem {
             //for easier debugging.
             var playerXRot = player.getXRot();
             var playerYRot = player.getYRot();
-            thrownKnife.shootFromRotation(player, playerXRot, playerYRot, 0, velocity, 0);
+            thrownKnife.shootFromRotation(player, playerXRot, playerYRot, 0, velocity, innacuracy);
             level.addFreshEntity(thrownKnife);
             player.getCooldowns().addCooldown(this, cooldownTicks);
         }
         return super.use(level, player, hand);
     }
 
+    // makes the bar blue
     @Override
     public int getBarColor(ItemStack pStack) {
         return 0x0e629e;
