@@ -46,7 +46,6 @@ public class ThrownKnife extends AbstractArrow {
     // Also, I don't think it recognizes the itemstack with a different durability, so perhaps we might need to try another way.
     @Override
     protected boolean tryPickup(Player pPlayer) {
-        //TODO: Make sure that the item is picked up only ONCE.
         switch (this.pickup) {
             case ALLOWED:
                 return pickupItem(pPlayer);

@@ -22,9 +22,7 @@ public class KnifeItem extends TieredItem {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         float velocity = 1;
         ItemStack itemStack = player.getItemInHand(hand);
-        //for easier debugging.
-        var itemStackDmgVal = itemStack.getDamageValue();
-        var itemStackMaxDmg = itemStack.getMaxDamage();
+
         if (itemStack.getDamageValue() < itemStack.getMaxDamage()) {
             if (!level.isClientSide) {
                 ServerPlayer sPlayer =(ServerPlayer) player;

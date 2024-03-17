@@ -20,8 +20,7 @@ public class ThrownKnifeRenderer extends EntityRenderer<ThrownKnife> {
     @Override
     public void render(ThrownKnife pEntity, float pEntityYaw, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
         pPoseStack.pushPose();
-        var entityXRot = pEntity.getXRot();
-        var entityYRot = pEntity.getYRot();
+
         // Thank you Mickelus for letting me adapt this line!
         Minecraft.getInstance().getItemRenderer().renderStatic(pEntity.getUsedItem(), ItemTransforms.TransformType.FIXED,
                 pPackedLight, OverlayTexture.NO_OVERLAY, pPoseStack, pBuffer, pEntity.getId());
