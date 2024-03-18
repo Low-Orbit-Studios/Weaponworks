@@ -19,9 +19,7 @@ public class KnifeItem extends ThrowableWeaponItem {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        float velocity = 1.6f; // 1 is pretty low, 3 is really high.
-        int cooldownTicks = 10;
-        float innacuracy = 0.1F;
+
         ItemStack itemStack = player.getItemInHand(hand);
 
         if (itemStack.getDamageValue() < itemStack.getMaxDamage() && !level.isClientSide) {
@@ -32,9 +30,9 @@ public class KnifeItem extends ThrowableWeaponItem {
             //for easier debugging.
             var playerXRot = player.getXRot();
             var playerYRot = player.getYRot();
-            thrownKnife.shootFromRotation(player, playerXRot, playerYRot, 0, velocity, innacuracy);
+            thrownKnife.shootFromRotation(player, playerXRot, playerYRot, 0, throwVelocity, inaccuracy);
             level.addFreshEntity(thrownKnife);
-            player.getCooldowns().addCooldown(this, cooldownTicks);
+            player.getCooldowns().addCooldown(this, cooldown);
         }
         return super.use(level, player, hand);
     }
