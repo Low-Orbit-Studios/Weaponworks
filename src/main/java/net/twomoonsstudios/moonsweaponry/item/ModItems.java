@@ -29,10 +29,11 @@ public class ModItems {
             "throwing_knife",
             () -> new KnifeItem(
                     Tiers.IRON,
-                    IRON_THROWING_KNIFE_DEFAULT_VELOCITY,
-                    IRON_THROWING_KNIFE_DEFAULT_CD,
+                    THROWING_KNIFE_DEFAULT_VELOCITY,
+                    THROWING_KNIFE_DEFAULT_CD,
+                    THROWING_KNIFE_DEFAULT_INACCURACY,
                     new Item.Properties()
-                            .defaultDurability(IRON_THROWING_KNIFE_DEFAULT_USES)
+                            .defaultDurability(THROWING_KNIFE_DEFAULT_USES)
                             .tab(CreativeModeTab.TAB_COMBAT)
             )
     );

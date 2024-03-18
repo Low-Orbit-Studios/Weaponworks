@@ -13,8 +13,8 @@ import net.twomoonsstudios.moonsweaponry.entity.ThrownKnife;
 
 public class KnifeItem extends ThrowableWeaponItem {
 
-    public KnifeItem(Tier tier, float velocity, int cooldown, Item.Properties properties) {
-        super(tier, velocity, cooldown, properties);
+    public KnifeItem(Tier tier, float velocity, int cooldown, float inaccuracy, Item.Properties properties) {
+        super(tier, velocity, cooldown, inaccuracy, properties);
     }
 
     @Override

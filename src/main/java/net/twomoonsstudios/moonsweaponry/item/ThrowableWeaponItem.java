@@ -17,10 +17,12 @@ public class ThrowableWeaponItem extends TieredItem {
     /**
      * Cooldown, in ticks, between throwing two throwables.*/
     protected int cooldown;
-    public ThrowableWeaponItem(Tier pTier, float throwVelocity, int cooldown, Properties pProperties) {
+    protected float inaccuracy;
+    public ThrowableWeaponItem(Tier pTier, float throwVelocity, int cooldown, float inaccuracy, Properties pProperties) {
         super(pTier, pProperties);
         this.throwVelocity = throwVelocity;
         this.cooldown = cooldown;
+        this.inaccuracy = inaccuracy;
     }
 
     @Override
