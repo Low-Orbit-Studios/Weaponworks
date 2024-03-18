@@ -2,12 +2,11 @@ package net.twomoonsstudios.moonsweaponry.config.objects.mace;
 
 import net.minecraft.world.item.Tiers;
 import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
-import net.twomoonsstudios.moonsweaponry.config.objects.mace.MaceConfigObj;
 
 import java.lang.reflect.Type;
 
-import static net.twomoonsstudios.moonsweaponry.constants.WeaponDataConstants.WOODEN_MACE_DEFAULT_DMG;
-import static net.twomoonsstudios.moonsweaponry.constants.WeaponDataConstants.WOODEN_MACE_DEFAULT_TIER_NAME;
+import static net.twomoonsstudios.moonsweaponry.constants.MeleeWeaponDataConstants.WOODEN_MACE_DEFAULT_DMG;
+import static net.twomoonsstudios.moonsweaponry.constants.MeleeWeaponDataConstants.WOODEN_MACE_DEFAULT_TIER_NAME;
 
 public class WoodenMaceConfigObj extends MaceConfigObj {
     /**

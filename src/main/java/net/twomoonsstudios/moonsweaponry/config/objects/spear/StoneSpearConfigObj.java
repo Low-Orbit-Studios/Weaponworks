@@ -2,12 +2,11 @@ package net.twomoonsstudios.moonsweaponry.config.objects.spear;
 
 import net.minecraft.world.item.Tiers;
 import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
-import net.twomoonsstudios.moonsweaponry.config.objects.spear.SpearConfigObj;
 
 import java.lang.reflect.Type;
 
-import static net.twomoonsstudios.moonsweaponry.constants.WeaponDataConstants.STONE_SPEAR_DEFAULT_DMG;
-import static net.twomoonsstudios.moonsweaponry.constants.WeaponDataConstants.STONE_SPEAR_DEFAULT_TIER_NAME;
+import static net.twomoonsstudios.moonsweaponry.constants.MeleeWeaponDataConstants.STONE_SPEAR_DEFAULT_DMG;
+import static net.twomoonsstudios.moonsweaponry.constants.MeleeWeaponDataConstants.STONE_SPEAR_DEFAULT_TIER_NAME;
 
 public class StoneSpearConfigObj extends SpearConfigObj {
     /**

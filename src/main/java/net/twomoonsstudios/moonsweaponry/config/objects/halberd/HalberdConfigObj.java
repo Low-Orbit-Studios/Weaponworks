@@ -5,8 +5,8 @@ import net.twomoonsstudios.moonsweaponry.config.objects.WeaponConfigObj;
 
 import java.lang.reflect.Type;
 
-import static net.twomoonsstudios.moonsweaponry.constants.WeaponDataConstants.DEFAULT_ATTACK_SPEED;
-import static net.twomoonsstudios.moonsweaponry.constants.WeaponDataConstants.HALBERD_DEFAULT_ATK_SPD;
+import static net.twomoonsstudios.moonsweaponry.constants.MeleeWeaponDataConstants.DEFAULT_ATTACK_SPEED;
+import static net.twomoonsstudios.moonsweaponry.constants.MeleeWeaponDataConstants.HALBERD_DEFAULT_ATK_SPD;
 
 public abstract class HalberdConfigObj extends WeaponConfigObj {
     /**

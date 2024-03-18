@@ -4,11 +4,10 @@ import io.github.hornster.itemfig.api.serialization.config.ConfigObj;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
 import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
-import net.twomoonsstudios.moonsweaponry.config.helpers.ConfigHelper;
 
 import java.lang.reflect.Type;
 
-import static net.twomoonsstudios.moonsweaponry.constants.WeaponDataConstants.DEFAULT_ATTACK_SPEED;
+import static net.twomoonsstudios.moonsweaponry.constants.MeleeWeaponDataConstants.DEFAULT_ATTACK_SPEED;
 
 public abstract class WeaponConfigObj extends ConfigObj {
     public String tier;

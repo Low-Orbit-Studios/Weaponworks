@@ -5,7 +5,7 @@ import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 
 import java.lang.reflect.Type;
 
-import static net.twomoonsstudios.moonsweaponry.constants.WeaponDataConstants.*;
+import static net.twomoonsstudios.moonsweaponry.constants.MeleeWeaponDataConstants.*;
 
 public class NetheriteScytheConfigObj extends ScytheConfigObj {
     /**

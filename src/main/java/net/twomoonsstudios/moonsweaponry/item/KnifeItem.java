@@ -11,42 +11,31 @@ import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.level.Level;
 import net.twomoonsstudios.moonsweaponry.entity.ThrownKnife;
 
-public class KnifeItem extends TieredItem {
+public class KnifeItem extends ThrowableWeaponItem {
 
-    // TODO: Make this into a basic ThrownWeaponItem class
-    public KnifeItem(Tier tier, Item.Properties properties) {
-        super(tier, properties);
+    public KnifeItem(Tier tier, float velocity, int cooldown, Item.Properties properties) {
+        super(tier, velocity, cooldown, properties);
     }
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        float velocity = 1;
         ItemStack itemStack = player.getItemInHand(hand);
 
         if (itemStack.getDamageValue() < itemStack.getMaxDamage()) {
             if (!level.isClientSide) {
-                ServerPlayer sPlayer =(ServerPlayer) player;
                 ThrownKnife thrownKnife = new ThrownKnife(level, player, itemStack);
                 thrownKnife.setOwner(player);
                 //for easier debugging.
                 var playerXRot = player.getXRot();
                 var playerYRot = player.getYRot();
-                thrownKnife.shootFromRotation(player, playerXRot, playerYRot, 0, velocity, 0);
+                thrownKnife.shootFromRotation(player, playerXRot, playerYRot, 0, throwVelocity, 0);
                 level.addFreshEntity(thrownKnife);
-                player.getCooldowns().addCooldown(this, 20);
+                player.getCooldowns().addCooldown(this, cooldown);
+                //We throw one item at a time - hence 1
                 itemStack.hurt(1, null, null);
             }
         }
         return super.use(level, player, hand);
     }
 
-    @Override
-    public int getBarColor(ItemStack pStack) {
-        return 0x0e629e;
-    }
-
-    @Override
-    public boolean isBarVisible(ItemStack pStack) {
-        return true;
-    }
 }

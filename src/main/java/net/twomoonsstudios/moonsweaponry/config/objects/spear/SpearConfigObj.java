@@ -5,7 +5,7 @@ import net.twomoonsstudios.moonsweaponry.config.objects.WeaponConfigObj;
 
 import java.lang.reflect.Type;
 
-import static net.twomoonsstudios.moonsweaponry.constants.WeaponDataConstants.*;
+import static net.twomoonsstudios.moonsweaponry.constants.MeleeWeaponDataConstants.*;
 
 public abstract class SpearConfigObj extends WeaponConfigObj {
     /**

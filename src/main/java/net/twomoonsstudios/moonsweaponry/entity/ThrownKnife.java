@@ -34,6 +34,7 @@ public class ThrownKnife extends AbstractArrow {
     private boolean pickupItem(Player pPlayer) {
         var matchingItem =  matchingItem(pPlayer,usedItem);
         if(matchingItem != null){
+            //-1 since we picked up a single thrown item, which we put back in the item stack.
             matchingItem.hurt(-1, null, null);
             //We can pick up the item (we have proper itemstack). Return true to pick
             //the entity up.

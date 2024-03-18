@@ -1,6 +1,6 @@
 package net.twomoonsstudios.moonsweaponry.constants;
 
-public class WeaponDataConstants {
+public class MeleeWeaponDataConstants {
     //Base attack speed in MC is 4. By subtracting the desired speed
     //from it and then assigning the result with sign changed to negative,
     //we receive the desired speed in the game.

@@ -1,11 +1,7 @@
 package net.twomoonsstudios.moonsweaponry.config;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.gson.*;
-import com.ibm.icu.impl.number.MutablePatternModifier;
 import io.github.hornster.itemfig.api.serialization.ItemFigApi;
-import io.github.hornster.itemfig.api.serialization.config.ConfigObj;
-import io.github.hornster.itemfig.api.serialization.config.ConfigObjAdapterConfig;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
 import net.twomoonsstudios.moonsweaponry.MoonsWeaponry;
@@ -17,8 +13,6 @@ import net.twomoonsstudios.moonsweaponry.config.objects.WeaponConfigObj;
 import net.twomoonsstudios.moonsweaponry.constants.CommonConstants;
 import net.twomoonsstudios.moonsweaponry.enums.WeaponTypesEnum;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.tuple.MutablePair;
-import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -29,7 +23,7 @@ import java.util.*;
 
 import static net.twomoonsstudios.moonsweaponry.constants.CommonConstants.CONFIG_FILE_NAME;
 import static net.twomoonsstudios.moonsweaponry.constants.CommonConstants.CONFIG_FILE_NAME_SUFFIX;
-import static net.twomoonsstudios.moonsweaponry.constants.WeaponDataConstants.*;
+import static net.twomoonsstudios.moonsweaponry.constants.MeleeWeaponDataConstants.*;
 
 public class MoonsWeaponsConfig {
 

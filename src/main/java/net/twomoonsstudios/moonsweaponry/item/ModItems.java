@@ -19,12 +19,23 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig.WEAPON_CONFIGS;
+import static net.twomoonsstudios.moonsweaponry.constants.ThrownWeaponDataConstants.*;
 
 
 public class ModItems {
 
     public static DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MoonsWeaponry.MOD_ID);
-    public static RegistryObject<Item> THROWING_KNIFE = ITEMS.register("throwing_knife", () -> new KnifeItem(Tiers.IRON, new Item.Properties().defaultDurability(16).tab(CreativeModeTab.TAB_COMBAT)));
+    public static RegistryObject<Item> THROWING_KNIFE = ITEMS.register(
+            "throwing_knife",
+            () -> new KnifeItem(
+                    Tiers.IRON,
+                    IRON_THROWING_KNIFE_DEFAULT_VELOCITY,
+                    IRON_THROWING_KNIFE_DEFAULT_CD,
+                    new Item.Properties()
+                            .defaultDurability(IRON_THROWING_KNIFE_DEFAULT_USES)
+                            .tab(CreativeModeTab.TAB_COMBAT)
+            )
+    );
 
     /**
      * Sorts the items before they are registered in the game, making sure they are always

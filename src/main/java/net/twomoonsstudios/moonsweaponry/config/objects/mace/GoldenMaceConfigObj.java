@@ -1,12 +1,10 @@
 package net.twomoonsstudios.moonsweaponry.config.objects.mace;
 
-import net.minecraft.world.item.Tiers;
 import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
-import net.twomoonsstudios.moonsweaponry.config.objects.mace.MaceConfigObj;
 
 import java.lang.reflect.Type;
 
-import static net.twomoonsstudios.moonsweaponry.constants.WeaponDataConstants.*;
+import static net.twomoonsstudios.moonsweaponry.constants.MeleeWeaponDataConstants.*;
 
 public class GoldenMaceConfigObj extends MaceConfigObj {
     /**

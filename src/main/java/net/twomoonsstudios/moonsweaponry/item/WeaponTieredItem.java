@@ -12,17 +12,16 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 
-public class TriforgeTieredItem extends TieredItem implements Vanishable {
+public class WeaponTieredItem extends TieredItem implements Vanishable {
     private final float attackDamage;
     /** Modifiers applied when the item is in the mainhand of a user. */
     protected final Multimap<Attribute, AttributeModifier> defaultModifiers;
 
-    public TriforgeTieredItem(MoonsWeaponsConfig.WeaponInfo stats) {
+    public WeaponTieredItem(MoonsWeaponsConfig.WeaponInfo stats) {
         this(stats.tier, stats.damage, stats.speed, stats.fireRes
                 ? new Item.Properties().tab(CreativeModeTab.TAB_COMBAT)
                         .defaultDurability(stats.durability).fireResistant()
@@ -30,7 +29,7 @@ public class TriforgeTieredItem extends TieredItem implements Vanishable {
                         .defaultDurability(stats.durability));
     }
 
-    public TriforgeTieredItem(Tier pTier, int pAttackDamageModifier, float pAttackSpeedModifier, Item.Properties pProperties) {
+    public WeaponTieredItem(Tier pTier, int pAttackDamageModifier, float pAttackSpeedModifier, Item.Properties pProperties) {
         super(pTier, pProperties);
         this.attackDamage = (float)pAttackDamageModifier;
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();

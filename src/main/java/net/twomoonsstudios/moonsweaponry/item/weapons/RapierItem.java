@@ -2,9 +2,9 @@ package net.twomoonsstudios.moonsweaponry.item.weapons;
 
 import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 import net.twomoonsstudios.moonsweaponry.config.objects.WeaponConfigObj;
-import net.twomoonsstudios.moonsweaponry.item.TriforgeSwordItem;
+import net.twomoonsstudios.moonsweaponry.item.WeaponSwordItem;
 
-public class RapierItem extends TriforgeSwordItem {
+public class RapierItem extends WeaponSwordItem {
     public RapierItem(MoonsWeaponsConfig.WeaponInfo stats) {
         super(stats);
     }

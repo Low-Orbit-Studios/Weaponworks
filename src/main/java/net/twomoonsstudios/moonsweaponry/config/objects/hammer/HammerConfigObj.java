@@ -2,12 +2,11 @@ package net.twomoonsstudios.moonsweaponry.config.objects.hammer;
 
 import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 import net.twomoonsstudios.moonsweaponry.config.objects.WeaponConfigObj;
-import net.twomoonsstudios.moonsweaponry.config.objects.halberd.WoodenHalberdConfigObj;
 
 import java.lang.reflect.Type;
 
-import static net.twomoonsstudios.moonsweaponry.constants.WeaponDataConstants.DEFAULT_ATTACK_SPEED;
-import static net.twomoonsstudios.moonsweaponry.constants.WeaponDataConstants.HAMMER_DEFAULT_ATK_SPD;
+import static net.twomoonsstudios.moonsweaponry.constants.MeleeWeaponDataConstants.DEFAULT_ATTACK_SPEED;
+import static net.twomoonsstudios.moonsweaponry.constants.MeleeWeaponDataConstants.HAMMER_DEFAULT_ATK_SPD;
 
 public abstract class HammerConfigObj extends WeaponConfigObj {
     /**
