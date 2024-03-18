@@ -13,7 +13,7 @@ public class WeaponworksEntities {
 
     public static final RegistryObject<EntityType<ThrownKnife>> THROWN_KNIFE =
             ENTITY_TYPES.register("thrown_knife", () -> EntityType.Builder.<ThrownKnife>of(ThrownKnife::new, MobCategory.MISC)
-                    .sized(0.25f, 0.25f).build("thrown_knife"));
+                    .sized(0.4f, 0.4f).build("thrown_knife"));
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);
