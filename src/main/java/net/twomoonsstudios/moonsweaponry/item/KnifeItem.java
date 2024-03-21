@@ -27,6 +27,7 @@ public class KnifeItem extends ThrowableWeaponItem {
             itemStack.hurt(1, null, null);
             ThrownKnife thrownKnife = new ThrownKnife(level, player, itemStack);
             thrownKnife.setOwner(player);
+            applyEnchantments(itemStack, thrownKnife);
             //for easier debugging.
             var playerXRot = player.getXRot();
             var playerYRot = player.getYRot();

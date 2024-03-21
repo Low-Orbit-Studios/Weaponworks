@@ -62,11 +62,12 @@ public class ThrownKnife extends AbstractArrow {
     }
 
     public ItemStack matchingItem(Player player, ItemStack itemStack) {
-        var enchantments = itemStack.getAllEnchantments().toString();
+        var enchantments = itemStack.getAllEnchantments();//.toString();
         NonNullList<ItemStack> inventory = player.getInventory().items;
         for (var stack : inventory) {
-            var testEnchantments = stack.getAllEnchantments().toString(); // for future use
-            if (stack.sameItem(itemStack) && stack.isDamaged() && testEnchantments == enchantments) {
+            var testEnchantments = stack.getAllEnchantments();//.toString(); // for future use
+            if (stack.sameItem(itemStack) && stack.isDamaged() && testEnchantments.equals(enchantments))
+            {
                 return stack;
             }
         }
