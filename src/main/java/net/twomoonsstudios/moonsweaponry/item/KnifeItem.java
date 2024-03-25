@@ -11,6 +11,8 @@ import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.level.Level;
 import net.twomoonsstudios.moonsweaponry.entity.ThrownKnife;
 
+import static net.twomoonsstudios.moonsweaponry.entity.WeaponworksEntities.THROWN_KNIFE_ENTITY_TYPE;
+
 public class KnifeItem extends ThrowableWeaponItem {
 
     public KnifeItem(Tier tier, float velocity, int cooldown, float inaccuracy, Item.Properties properties) {
@@ -25,7 +27,8 @@ public class KnifeItem extends ThrowableWeaponItem {
         if (itemStack.getDamageValue() < itemStack.getMaxDamage() && !level.isClientSide) {
             //We throw one item at a time - hence 1
             itemStack.hurt(1, null, null);
-            ThrownKnife thrownKnife = new ThrownKnife(level, player, itemStack);
+            ThrownKnife thrownKnife = new ThrownKnife(THROWN_KNIFE_ENTITY_TYPE.get(), level, player, itemStack);
+            this.applyEnchantments(itemStack, thrownKnife);
             thrownKnife.setOwner(player);
             applyEnchantments(itemStack, thrownKnife);
             //for easier debugging.

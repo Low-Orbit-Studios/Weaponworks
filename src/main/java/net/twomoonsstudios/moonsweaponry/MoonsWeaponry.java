@@ -1,25 +1,15 @@
 package net.twomoonsstudios.moonsweaponry;
 
 import com.mojang.logging.LogUtils;
-import io.github.hornster.itemfig.api.serialization.ItemFigApi;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.client.renderer.entity.SpectralArrowRenderer;
-import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.ForgeRegistries;
 //import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 import net.twomoonsstudios.moonsweaponry.entity.ThrownKnifeRenderer;
@@ -72,7 +62,7 @@ public class MoonsWeaponry
         {
             // Some client setup code
 
-            EntityRenderers.register(WeaponworksEntities.THROWN_KNIFE.get(), ThrownKnifeRenderer::new);
+            EntityRenderers.register(WeaponworksEntities.THROWN_KNIFE_ENTITY_TYPE.get(), ThrownKnifeRenderer::new);
         }
     }
 }

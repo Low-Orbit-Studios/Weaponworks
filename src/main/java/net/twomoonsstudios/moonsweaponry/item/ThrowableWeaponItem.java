@@ -1,25 +1,13 @@
 package net.twomoonsstudios.moonsweaponry.item;
 
-import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentCategory;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.level.Level;
 
-import javax.annotation.Nullable;
-
-import static net.twomoonsstudios.moonsweaponry.constants.ThrownWeaponDataConstants.THROWABLES_FLAME_ENCHANT_SECONDS;
+import static net.twomoonsstudios.moonsweaponry.constants.ThrownWeaponDataConstants.THROWABLES_FLAME_ENCHANT_TICKS;
 
 public abstract class ThrowableWeaponItem extends TieredItem {
     protected float throwVelocity;
@@ -65,7 +53,7 @@ public abstract class ThrowableWeaponItem extends TieredItem {
         }
 
         if(flameEnchantmentLevel > 0){
-            projectile.setSecondsOnFire(THROWABLES_FLAME_ENCHANT_SECONDS);
+            projectile.setSecondsOnFire(THROWABLES_FLAME_ENCHANT_TICKS);
         }
     }
 
