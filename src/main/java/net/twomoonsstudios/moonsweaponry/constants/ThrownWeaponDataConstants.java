@@ -4,7 +4,11 @@ public class ThrownWeaponDataConstants{
     //Notes:
     //For thrown items, USES is equal to DURABILITY
     //CD - cooldown, in ticks, between throws.
-    public static final int THROWABLES_FLAME_ENCHANT_TICKS = 100;
+    /**How long are the shot projectiles considered of fire for, in seconds.
+     * As long as projectile is on fire, it will light entities that it hits on fire.*/
+    public static final int THROWABLES_FLAME_ENCHANT_SECONDS = 100;
+    /**How long will struck entity be set on fire for, in seconds.*/
+    public static final int THROWABLES_FLAME_ENCHANT_ENTITY_SECONDS = 5;
     //Throwing knives
     public static final int THROWING_KNIFE_DEFAULT_CD = 10;
     public static final float THROWING_KNIFE_DEFAULT_INACCURACY = 0.1f;

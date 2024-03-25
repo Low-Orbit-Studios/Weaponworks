@@ -7,7 +7,7 @@ import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 
-import static net.twomoonsstudios.moonsweaponry.constants.ThrownWeaponDataConstants.THROWABLES_FLAME_ENCHANT_TICKS;
+import static net.twomoonsstudios.moonsweaponry.constants.ThrownWeaponDataConstants.THROWABLES_FLAME_ENCHANT_SECONDS;
 
 public abstract class ThrowableWeaponItem extends TieredItem {
     protected float throwVelocity;
@@ -53,7 +53,7 @@ public abstract class ThrowableWeaponItem extends TieredItem {
         }
 
         if(flameEnchantmentLevel > 0){
-            projectile.setSecondsOnFire(THROWABLES_FLAME_ENCHANT_TICKS);
+            projectile.setSecondsOnFire(THROWABLES_FLAME_ENCHANT_SECONDS);
         }
     }
 
