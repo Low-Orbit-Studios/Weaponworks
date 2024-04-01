@@ -57,4 +57,18 @@ public class ThrownKnife extends AbstractThrowable {
         this.yRotO += 180.0F;
     }
 
+    // This (if it works) should save the used item that is just a local variable into actual entity data...
+    @Override
+    public void addAdditionalSaveData(CompoundTag tag) {
+        super.addAdditionalSaveData(tag);
+        tag.put("usedItem", usedItem.save(new CompoundTag()));
+    }
+
+    //... and this one should read said data and put it into the actual entity's variable!
+    @Override
+    public void readAdditionalSaveData(CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
+        this.usedItem = ItemStack.of(tag.getCompound("usedItem"));
+    }
+
 }
