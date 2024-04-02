@@ -1,6 +1,8 @@
 package net.twomoonsstudios.moonsweaponry.entity;
 
 import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
@@ -9,14 +11,24 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.Tiers;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.twomoonsstudios.moonsweaponry.enums.WeaponTypesEnum;
+import net.twomoonsstudios.moonsweaponry.item.ThrowableWeaponItem;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static net.twomoonsstudios.moonsweaponry.constants.ThrownWeaponDataConstants.THROWABLES_FLAME_ENCHANT_ENTITY_SECONDS;
 
 public abstract class AbstractThrowable extends AbstractArrow {
-    public ItemStack usedItem;
+    protected ItemStack usedItem;
+    protected ResourceLocation throwableTexture;
+
     public AbstractThrowable(EntityType<? extends AbstractThrowable> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
@@ -46,6 +58,19 @@ public abstract class AbstractThrowable extends AbstractArrow {
             default:
                 return false;
         }
+    }
+    // This (if it works) should save the used item that is just a local variable into actual entity data...
+    @Override
+    public void addAdditionalSaveData(CompoundTag tag) {
+        super.addAdditionalSaveData(tag);
+        tag.put("usedItem", usedItem.save(new CompoundTag()));
+    }
+
+    //... and this one should read said data and put it into the actual entity's variable!
+    @Override
+    public void readAdditionalSaveData(CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
+        this.usedItem = ItemStack.of(tag.getCompound("usedItem"));
     }
     protected boolean pickupItem(Player pPlayer) {
         var matchingItem = matchingItem(pPlayer, usedItem);
@@ -93,4 +118,8 @@ public abstract class AbstractThrowable extends AbstractArrow {
             }
         }
     }
+
+//    public ResourceLocation getTextureLocation() {
+//
+//    }
 }

@@ -62,7 +62,7 @@ public class MoonsWeaponry
         {
             // Some client setup code
 
-            EntityRenderers.register(WeaponworksEntities.THROWN_KNIFE_ENTITY_TYPE.get(), ThrownKnifeRenderer::new);
+            EntityRenderers.register(WeaponworksEntities.THROWN_IRON_KNIFE_ENTITY_TYPE.get(), ThrownKnifeRenderer::new);
         }
     }
 }
