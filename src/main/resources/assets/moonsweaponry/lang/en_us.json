@@ -53,5 +53,10 @@
   "item.moonsweaponry.wooden_rapier": "Wooden Rapier",
   "item.moonsweaponry.wooden_spear": "Wooden Spear",
   "item.moonsweaponry.wooden_mace": "Wooden Mace",
-  "itemGroup.moonsweaponrytab": "Weaponworks"
+  "itemGroup.moonsweaponrytab": "Weaponworks",
+
+  "enchantment.moonsweaponry.velocity": "Velocity",
+  "enchantment.moonsweaponry.velocity.desc": "Makes thrown items move faster.",
+  "enchantment.moonsweaponry.capacity": "Capacity",
+  "enchantment.moonsweaponry.capacity.desc": "Increases amount of ammo of throwable item."
 }

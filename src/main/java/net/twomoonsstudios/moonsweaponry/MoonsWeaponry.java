@@ -12,6 +12,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 //import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
+import net.twomoonsstudios.moonsweaponry.enchanting.ModEnchantments;
 import net.twomoonsstudios.moonsweaponry.entity.ThrownKnifeRenderer;
 import net.twomoonsstudios.moonsweaponry.entity.WeaponworksEntities;
 import net.twomoonsstudios.moonsweaponry.item.ModItems;
@@ -36,6 +37,7 @@ public class MoonsWeaponry
 
         WeaponworksEntities.register(modEventBus);
         ModItems.register(modEventBus);
+        ModEnchantments.register(modEventBus);
 
         // here lies the site where calico made a tiny mistake and got stuck for a week
 

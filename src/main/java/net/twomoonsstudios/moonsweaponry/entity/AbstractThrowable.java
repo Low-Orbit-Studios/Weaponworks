@@ -118,8 +118,4 @@ public abstract class AbstractThrowable extends AbstractArrow {
             }
         }
     }
-
-//    public ResourceLocation getTextureLocation() {
-//
-//    }
 }
