@@ -2,16 +2,13 @@ package net.twomoonsstudios.moonsweaponry.item;
 
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.twomoonsstudios.moonsweaponry.MoonsWeaponry;
-import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 import net.twomoonsstudios.moonsweaponry.config.objects.WeaponConfigObj;
-import net.twomoonsstudios.moonsweaponry.constants.CommonConstants;
 import net.twomoonsstudios.moonsweaponry.enums.WeaponTypesEnum;
 import net.twomoonsstudios.moonsweaponry.item.weapons.*;
 

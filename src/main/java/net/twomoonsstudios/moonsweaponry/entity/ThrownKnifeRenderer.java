@@ -8,10 +8,8 @@ import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -27,7 +25,7 @@ public class ThrownKnifeRenderer extends EntityRenderer<ThrownKnifeEntity> {
     public void render(ThrownKnifeEntity pEntity, float pEntityYaw, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
         pPoseStack.pushPose();
 
-        tranformRendering(pEntity, pPartialTick, pPoseStack);
+        transformRendering(pEntity, pPartialTick, pPoseStack);
         var usedItem = pEntity.getPickupItem();
         Minecraft.getInstance().getItemRenderer().renderStatic(usedItem, ItemTransforms.TransformType.FIXED,
                 pPackedLight, OverlayTexture.NO_OVERLAY, pPoseStack, pBuffer, pEntity.getId());
@@ -36,7 +34,7 @@ public class ThrownKnifeRenderer extends EntityRenderer<ThrownKnifeEntity> {
         super.render(pEntity, pEntityYaw, pPartialTick, pPoseStack, pBuffer, pPackedLight);
     }
 
-    public void tranformRendering(ThrownKnifeEntity pEntity, float partialTicks, PoseStack pPoseStack) {
+    public void transformRendering(ThrownKnifeEntity pEntity, float partialTicks, PoseStack pPoseStack) {
 
         // Points away from player
         float yRotModifier = 270.0F;

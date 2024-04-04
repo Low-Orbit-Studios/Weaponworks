@@ -18,12 +18,13 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.twomoonsstudios.moonsweaponry.enums.WeaponTypesEnum;
+import net.twomoonsstudios.moonsweaponry.helpers.ThrowablesHelper;
 import net.twomoonsstudios.moonsweaponry.item.ThrowableWeaponItem;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static net.twomoonsstudios.moonsweaponry.constants.ThrownWeaponDataConstants.THROWABLES_FLAME_ENCHANT_ENTITY_SECONDS;
+import static net.twomoonsstudios.moonsweaponry.constants.ThrownWeaponDataConstants.*;
 
 public abstract class AbstractThrowable extends AbstractArrow {
     protected ItemStack usedItem;
@@ -89,17 +90,22 @@ public abstract class AbstractThrowable extends AbstractArrow {
     // in the event they shoot themselves.
     @Override
     protected void onHitEntity(EntityHitResult pResult) {
+        var itemBaseDamage = this.usedItem.getDamageValue();
         var hitEntity = pResult.getEntity();
         var knockback = this.getKnockback();
 
         var isEnderman = hitEntity.getType() == EntityType.ENDERMAN;
 
-        double velocity = Mth.floor(this.getDeltaMovement().length());
-        double minDamageVelocity = 0.5;
-        double maxDamageVelocity = 1;
-        int damagePoints = 4;
+        float velocity = Mth.floor(this.getDeltaMovement().length());
+        float dmgToDeal = ThrowablesHelper.getDmgByVelocity(THROWABLE_MAX_DMG_VELOCITY_THRESHOLD
+                , THROWABLE_MIN_DMG_VELOCITY_THRESHOLD
+                , velocity
+                , THROWING_KNIFE_DEFAULT_VELOCITY
+                , itemBaseDamage
+                , THROWABLE_MIN_DMG_COEF
+        );
 
-        if(hitEntity.hurt(DamageSource.mobAttack((LivingEntity) this.getOwner()), damagePoints)){
+        if(hitEntity.hurt(DamageSource.mobAttack((LivingEntity) this.getOwner()), dmgToDeal)){
             if(hitEntity instanceof LivingEntity livingHitEntity){
                 if(isEnderman){
                     return; //Endermen are known to be unsmackable with ranged physical attacks.

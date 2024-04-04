@@ -13,6 +13,14 @@ public class ThrownWeaponDataConstants{
     public static final int THROWING_KNIFE_DEFAULT_CD = 10;
     public static final float THROWING_KNIFE_DEFAULT_INACCURACY = 0.1f;
     public static final float THROWING_KNIFE_DEFAULT_VELOCITY = 1.6f;
+    /**If the speed is greater or equal to this value, the weapon will deal max damage on impact.
+     * Below it the damage will be properly scaled down. Range [0, 1]. Treat as % of max velocity.*/
+    public static final float THROWABLE_MAX_DMG_VELOCITY_THRESHOLD = 0.8f;
+    /**If the speed is lower or equal to this value, the weapon will deal minimum damage on impact.
+     * {@link ThrownWeaponDataConstants#THROWABLE_MIN_DMG_COEF}. Treat as % of max velocity.*/
+    public static final float THROWABLE_MIN_DMG_VELOCITY_THRESHOLD = 0.4f;
+    /**The minimal damage multiplier a throwable can deal due to low movement speed. Range [0, 1]*/
+    public static final float THROWABLE_MIN_DMG_COEF = 0.2f;
     public static final int THROWING_KNIFE_DEFAULT_USES = 16;
 
     public static final String WOODEN_THROWING_KNIFE_DEFAULT_TIER_NAME = "WOOD";
