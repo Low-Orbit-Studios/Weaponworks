@@ -16,8 +16,8 @@ public class ThrownIronKnifeEntity extends ThrownKnifeEntity {
         super(pEntityType, pLevel);
         usedItem = new ItemStack(ModItems.THROWING_KNIFE.get());
     }
-    public ThrownIronKnifeEntity(Level level, LivingEntity entity, ItemStack stack) {
-        super(WeaponworksEntities.THROWN_IRON_KNIFE_ENTITY_TYPE.get(), level, entity, stack);
+    public ThrownIronKnifeEntity(Level level, LivingEntity entity, ItemStack stack, float initialVelocity) {
+        super(WeaponworksEntities.THROWN_IRON_KNIFE_ENTITY_TYPE.get(), level, entity, stack, initialVelocity);
         throwableTexture = TextureConstants.IRON_KNIFE_TEX;
     }
     @Override

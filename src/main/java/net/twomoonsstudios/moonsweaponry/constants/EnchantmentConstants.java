@@ -6,4 +6,6 @@ public class EnchantmentConstants {
     public static final int VELOCITY_ENCHANTMENT_MAX_LEVEL = 3;
     public static final int CAPACITY_ENCHANTMENT_MAX_LEVEL = 2;
     public static final String THROWABLE_ENCHANT_CATEGORY_NAME = "THROWABLE";
+
+    public static final float VELOCITY_MUL_PER_LEVEL = 0.1f;//10% increase of velocity per level
 }

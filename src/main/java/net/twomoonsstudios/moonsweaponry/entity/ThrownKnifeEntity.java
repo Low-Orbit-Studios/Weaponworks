@@ -26,8 +26,8 @@ public class ThrownKnifeEntity extends AbstractThrowable {
         super(pEntityType, pLevel);
     }
 
-    public ThrownKnifeEntity(EntityType<? extends ThrownKnifeEntity> entityType, Level level, LivingEntity entity, ItemStack stack) {
-        super(entityType, level, entity, stack);
+    public ThrownKnifeEntity(EntityType<? extends ThrownKnifeEntity> entityType, Level level, LivingEntity entity, ItemStack stack, float initialVelocity) {
+        super(entityType, level, entity, stack, initialVelocity);
     }
 
     // We want to not lose thrown projectiles, without this they'd disappear within about a minute.

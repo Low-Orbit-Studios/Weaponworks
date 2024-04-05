@@ -7,6 +7,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
+import net.twomoonsstudios.moonsweaponry.entity.AbstractThrowable;
 import net.twomoonsstudios.moonsweaponry.entity.ThrownKnifeEntity;
 import net.twomoonsstudios.moonsweaponry.entity.thrownKnife.ThrownIronKnifeEntity;
 import net.twomoonsstudios.moonsweaponry.item.ThrowableWeaponItem;
@@ -16,27 +17,8 @@ public class KnifeItem extends ThrowableWeaponItem {
     public KnifeItem(Tier tier, float velocity, int cooldown, float inaccuracy, Item.Properties properties) {
         super(tier, velocity, cooldown, inaccuracy, properties);
     }
-
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-
-        ItemStack itemStack = player.getItemInHand(hand);
-
-        if (itemStack.getDamageValue() < itemStack.getMaxDamage() && !level.isClientSide) {
-            //We throw one item at a time - hence 1
-            itemStack.hurt(1, null, null);
-            ThrownKnifeEntity thrownKnifeEntity = new ThrownIronKnifeEntity(/*THROWN_KNIFE_ENTITY_TYPE.get(),*/ level, player, itemStack);
-            this.applyEnchantments(itemStack, thrownKnifeEntity);
-            thrownKnifeEntity.setOwner(player);
-            applyEnchantments(itemStack, thrownKnifeEntity);
-            //for easier debugging.
-            var playerXRot = player.getXRot();
-            var playerYRot = player.getYRot();
-            thrownKnifeEntity.shootFromRotation(player, playerXRot, playerYRot, 0, throwVelocity, inaccuracy);
-            level.addFreshEntity(thrownKnifeEntity);
-            player.getCooldowns().addCooldown(this, cooldown);
-        }
-        return super.use(level, player, hand);
+    protected AbstractThrowable createThrownEntity(Level level, Player player, ItemStack itemStack, float initialVelocity){
+        return new ThrownIronKnifeEntity(level, player, itemStack, initialVelocity);
     }
-
 }

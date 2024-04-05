@@ -7,6 +7,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.twomoonsstudios.moonsweaponry.item.ThrowableWeaponItem;
 
 import static net.twomoonsstudios.moonsweaponry.constants.EnchantmentConstants.VELOCITY_ENCHANTMENT_MAX_LEVEL;
+import static net.twomoonsstudios.moonsweaponry.constants.EnchantmentConstants.VELOCITY_MUL_PER_LEVEL;
 
 public class VelocityEnchantment extends WeaponworksThrowableEnchantment {
     protected VelocityEnchantment(Rarity pRarity, EquipmentSlot pApplicableSlots) {
@@ -24,5 +25,14 @@ public class VelocityEnchantment extends WeaponworksThrowableEnchantment {
 
     public int getMaxLevel(){
         return VELOCITY_ENCHANTMENT_MAX_LEVEL;
+    }
+    /**
+     * Modifies the provided velocity by amount dictated by the enchantment level.*/
+    public static float modifyVelocity(float baseVelocity, int enchantmentLevel){
+        if(enchantmentLevel > VELOCITY_ENCHANTMENT_MAX_LEVEL){
+            enchantmentLevel = VELOCITY_ENCHANTMENT_MAX_LEVEL;
+        }
+        var totalIncrease = 1 + VELOCITY_MUL_PER_LEVEL * enchantmentLevel; //1 for easy multiplication
+        return baseVelocity * totalIncrease;
     }
 }

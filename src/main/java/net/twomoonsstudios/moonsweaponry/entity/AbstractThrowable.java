@@ -29,13 +29,17 @@ import static net.twomoonsstudios.moonsweaponry.constants.ThrownWeaponDataConsta
 public abstract class AbstractThrowable extends AbstractArrow {
     protected ItemStack usedItem;
     protected ResourceLocation throwableTexture;
+    protected int velocityEnchantmentLevel = 0;
+    /**The velocity assigned upon throwing. Includes enchantments effects.*/
+    protected float initialVelocity;
 
     public AbstractThrowable(EntityType<? extends AbstractThrowable> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
-    public AbstractThrowable(EntityType<? extends AbstractThrowable> entityType, Level level, LivingEntity entity, ItemStack stack) {
+    public AbstractThrowable(EntityType<? extends AbstractThrowable> entityType, Level level, LivingEntity entity, ItemStack stack, float initialVelocity) {
         super(entityType, entity, level);
         this.usedItem = stack.copy();
+        this.initialVelocity = initialVelocity;
     }
     protected ItemStack matchingItem(Player player, ItemStack itemStack) {
         var enchantments = itemStack.getAllEnchantments();//.toString();
@@ -59,6 +63,18 @@ public abstract class AbstractThrowable extends AbstractArrow {
             default:
                 return false;
         }
+    }
+    public void setInitialVelocity(float initialVelocity){
+        this.initialVelocity = initialVelocity;
+    }
+    public float getInitialVelocity(){
+        return this.initialVelocity;
+    }
+    public void setVelocityEnchantmentLevel(int newLevel){
+        this.velocityEnchantmentLevel = newLevel;
+    }
+    public int getVelocityEnchantmentLevel(){
+        return this.velocityEnchantmentLevel;
     }
     // This (if it works) should save the used item that is just a local variable into actual entity data...
     @Override
