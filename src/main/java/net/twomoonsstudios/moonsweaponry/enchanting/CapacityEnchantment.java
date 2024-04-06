@@ -2,8 +2,7 @@ package net.twomoonsstudios.moonsweaponry.enchanting;
 
 import net.minecraft.world.entity.EquipmentSlot;
 
-import static net.twomoonsstudios.moonsweaponry.constants.EnchantmentConstants.CAPACITY_ENCHANTMENT_MAX_LEVEL;
-import static net.twomoonsstudios.moonsweaponry.constants.EnchantmentConstants.VELOCITY_ENCHANTMENT_MAX_LEVEL;
+import static net.twomoonsstudios.moonsweaponry.constants.EnchantmentConstants.*;
 
 public class CapacityEnchantment extends WeaponworksThrowableEnchantment{
     protected CapacityEnchantment(Rarity pRarity, EquipmentSlot... pApplicableSlots) {
@@ -21,5 +20,14 @@ public class CapacityEnchantment extends WeaponworksThrowableEnchantment{
 
     public int getMaxLevel(){
         return CAPACITY_ENCHANTMENT_MAX_LEVEL;
+    }
+
+    public static int modifyDurability(int baseDurability, int enchantmentLevel){
+        if(enchantmentLevel > CAPACITY_ENCHANTMENT_MAX_LEVEL){
+            enchantmentLevel = CAPACITY_ENCHANTMENT_MAX_LEVEL;
+        }
+        var totalIncrease = 1 + CAPACITY_MUL_PER_LEVEL * enchantmentLevel;//1 for easy multiplication
+        var newDurability = baseDurability * totalIncrease;
+        return Math.round(newDurability);
     }
 }

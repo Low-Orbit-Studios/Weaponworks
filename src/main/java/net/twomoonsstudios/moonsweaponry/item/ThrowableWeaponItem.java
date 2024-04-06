@@ -8,8 +8,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
+import net.twomoonsstudios.moonsweaponry.enchanting.CapacityEnchantment;
 import net.twomoonsstudios.moonsweaponry.enchanting.ModEnchantments;
 import net.twomoonsstudios.moonsweaponry.enchanting.VelocityEnchantment;
 import net.twomoonsstudios.moonsweaponry.entity.AbstractThrowable;
@@ -19,16 +21,17 @@ import net.twomoonsstudios.moonsweaponry.entity.thrownKnife.ThrownIronKnifeEntit
 import static net.twomoonsstudios.moonsweaponry.constants.ThrownWeaponDataConstants.THROWABLES_FLAME_ENCHANT_SECONDS;
 
 public abstract class ThrowableWeaponItem extends TieredItem {
+
     protected float throwVelocity;
     /**
      * Cooldown, in ticks, between throwing two throwables.*/
     protected int cooldown;
     protected float inaccuracy;
-    public ThrowableWeaponItem(Tier pTier, float throwVelocity, int cooldown, float inaccuracy, Properties pProperties) {
+    public ThrowableWeaponItem(Tier pTier, ThrowableProperties throwableProperties, Properties pProperties) {
         super(pTier, pProperties);
-        this.throwVelocity = throwVelocity;
-        this.cooldown = cooldown;
-        this.inaccuracy = inaccuracy;
+        this.throwVelocity = throwableProperties.throwVelocity;
+        this.cooldown = throwableProperties.cooldown;
+        this.inaccuracy = throwableProperties.inaccuracy;
     }
 
     @Override
@@ -53,6 +56,14 @@ public abstract class ThrowableWeaponItem extends TieredItem {
             return super.canApplyAtEnchantingTable(stack, enchantment);
         }
     }
+    @Override
+    public int getMaxDamage(ItemStack stack) {
+        var baseMaxDurability = super.getMaxDamage(stack);
+        var capacityLevel = stack.getEnchantmentLevel(ModEnchantments.CAPACITY_ENCHANTMENT.get());
+        var modifiedDurability = CapacityEnchantment.modifyDurability(baseMaxDurability, capacityLevel);
+        return modifiedDurability;
+    }
+
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
 
@@ -95,4 +106,22 @@ public abstract class ThrowableWeaponItem extends TieredItem {
 
     protected abstract AbstractThrowable createThrownEntity(Level level, Player player, ItemStack itemStack, float initialVelocity);
 
+    public static class ThrowableProperties {
+        float throwVelocity;
+        float inaccuracy;
+        int cooldown;
+
+        public ThrowableWeaponItem.ThrowableProperties setThrowVelocity(float velocity){
+            throwVelocity = velocity;
+            return this;
+        }
+        public ThrowableWeaponItem.ThrowableProperties setInaccuracy(float inaccuracy){
+            this.inaccuracy = inaccuracy;
+            return this;
+        }
+        public ThrowableWeaponItem.ThrowableProperties setCooldown(int cooldown){
+            this.cooldown = cooldown;
+            return this;
+        }
+    }
 }

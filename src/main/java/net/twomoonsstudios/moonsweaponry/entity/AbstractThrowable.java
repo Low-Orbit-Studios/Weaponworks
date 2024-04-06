@@ -81,6 +81,7 @@ public abstract class AbstractThrowable extends AbstractArrow {
     public void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
         tag.put("usedItem", usedItem.save(new CompoundTag()));
+        tag.putFloat("initialVelocity", initialVelocity);
     }
 
     //... and this one should read said data and put it into the actual entity's variable!
@@ -88,6 +89,7 @@ public abstract class AbstractThrowable extends AbstractArrow {
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
         this.usedItem = ItemStack.of(tag.getCompound("usedItem"));
+        this.initialVelocity = tag.getFloat("initialVelocity");
     }
     protected boolean pickupItem(Player pPlayer) {
         var matchingItem = matchingItem(pPlayer, usedItem);

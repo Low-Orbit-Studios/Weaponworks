@@ -26,9 +26,11 @@ public class ModItems {
             "throwing_knife",
             () -> new KnifeItem(
                     Tiers.IRON,
-                    THROWING_KNIFE_DEFAULT_VELOCITY,
-                    THROWING_KNIFE_DEFAULT_CD,
-                    THROWING_KNIFE_DEFAULT_INACCURACY,
+                    new ThrowableWeaponItem.ThrowableProperties()
+                            .setThrowVelocity(THROWING_KNIFE_DEFAULT_VELOCITY)
+                            .setCooldown(THROWING_KNIFE_DEFAULT_CD)
+                            .setInaccuracy(THROWING_KNIFE_DEFAULT_INACCURACY)
+                    ,
                     new Item.Properties()
                             .defaultDurability(THROWING_KNIFE_DEFAULT_USES)
                             .tab(CreativeModeTab.TAB_COMBAT)

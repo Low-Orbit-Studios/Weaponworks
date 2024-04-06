@@ -8,4 +8,5 @@ public class EnchantmentConstants {
     public static final String THROWABLE_ENCHANT_CATEGORY_NAME = "THROWABLE";
 
     public static final float VELOCITY_MUL_PER_LEVEL = 0.1f;//10% increase of velocity per level
+    public static final float CAPACITY_MUL_PER_LEVEL = 0.25f;//25% increase per level
 }

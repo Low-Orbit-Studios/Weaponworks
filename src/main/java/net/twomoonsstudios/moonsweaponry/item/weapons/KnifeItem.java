@@ -14,8 +14,8 @@ import net.twomoonsstudios.moonsweaponry.item.ThrowableWeaponItem;
 
 public class KnifeItem extends ThrowableWeaponItem {
 
-    public KnifeItem(Tier tier, float velocity, int cooldown, float inaccuracy, Item.Properties properties) {
-        super(tier, velocity, cooldown, inaccuracy, properties);
+    public KnifeItem(Tier tier, ThrowableProperties throwableProperties, Item.Properties properties) {
+        super(tier, throwableProperties, properties);
     }
     @Override
     protected AbstractThrowable createThrownEntity(Level level, Player player, ItemStack itemStack, float initialVelocity){
