@@ -10,6 +10,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.twomoonsstudios.moonsweaponry.MoonsWeaponry;
 import net.twomoonsstudios.moonsweaponry.config.objects.WeaponConfigObj;
 import net.twomoonsstudios.moonsweaponry.enums.WeaponTypesEnum;
+import net.twomoonsstudios.moonsweaponry.item.ranged.ModifiableBowItem;
 import net.twomoonsstudios.moonsweaponry.item.weapons.*;
 
 import java.util.LinkedHashMap;
@@ -37,6 +38,19 @@ public class ModItems {
             )
     );
 
+    public static RegistryObject<Item> LONGBOW = ITEMS.register(
+            "longbow", () -> new ModifiableBowItem(
+                    new ModifiableBowItem.BowProperties()
+                            .setDrawDuration(50)
+                            .setMinVelocity(0.5F)
+                            .setMaxVelocity(3.5F)
+                            .setInaccuracy(0.5F)
+                            .setDamageBonus(1.3D),
+                    new Item.Properties()
+                            .defaultDurability(128)
+                            .tab(CreativeModeTab.TAB_COMBAT)
+            )
+    );
     /**
      * Sorts the items before they are registered in the game, making sure they are always
      * added in correct, default material minecraft order.
