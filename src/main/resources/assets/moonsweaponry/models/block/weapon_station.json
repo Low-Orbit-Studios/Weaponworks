@@ -1,0 +1,12 @@
+{
+	"parent": "minecraft:block/cube",
+	"textures": {
+		"down": "minecraft:block/polished_deepslate",
+		"east": "moonsweaponry:block/weapon_station_side",
+		"north": "moonsweaponry:block/weapon_station_front",
+		"particle": "moonsweaponry:block/weapon_station_front",
+		"south": "moonsweaponry:block/weapon_station_side",
+		"up": "moonsweaponry:block/weapon_station_top",
+		"west": "moonsweaponry:block/weapon_station_front"
+	}
+}

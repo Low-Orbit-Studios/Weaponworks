@@ -1,6 +1,7 @@
 package net.twomoonsstudios.moonsweaponry.constants;
 
 public class CommonConstants {
+    public static final String WEAPON_STATION_ID = "weapon_station";
     public static final int TICKS_PER_SECOND = 20;
     public static final String WOOD_MATERIAL_NAME = "wooden";
     public static final String GOLD_MATERIAL_NAME = "golden";
