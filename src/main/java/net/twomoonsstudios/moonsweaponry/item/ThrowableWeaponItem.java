@@ -11,6 +11,16 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.AnvilUpdateEvent;
+import net.minecraftforge.event.ForgeEventFactory;
+import net.minecraftforge.event.entity.player.AnvilRepairEvent;
+import net.minecraftforge.eventbus.api.Event;
+import net.minecraftforge.eventbus.api.EventListenerHelper;
+import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.twomoonsstudios.moonsweaponry.enchanting.CapacityEnchantment;
 import net.twomoonsstudios.moonsweaponry.enchanting.ModEnchantments;
 import net.twomoonsstudios.moonsweaponry.enchanting.VelocityEnchantment;
@@ -18,10 +28,15 @@ import net.twomoonsstudios.moonsweaponry.entity.AbstractThrowable;
 import net.twomoonsstudios.moonsweaponry.entity.ThrownKnifeEntity;
 import net.twomoonsstudios.moonsweaponry.entity.thrownKnife.ThrownIronKnifeEntity;
 
+import static net.twomoonsstudios.moonsweaponry.MoonsWeaponry.MOD_ID;
 import static net.twomoonsstudios.moonsweaponry.constants.ThrownWeaponDataConstants.THROWABLES_FLAME_ENCHANT_SECONDS;
+
 
 public abstract class ThrowableWeaponItem extends TieredItem {
 
+    /**Set to TRUE after registering the events since the events have to be
+     * registered only once.*/
+    private static boolean eventsRegistered;
     protected float throwVelocity;
     /**
      * Cooldown, in ticks, between throwing two throwables.*/
@@ -32,7 +47,11 @@ public abstract class ThrowableWeaponItem extends TieredItem {
         this.throwVelocity = throwableProperties.throwVelocity;
         this.cooldown = throwableProperties.cooldown;
         this.inaccuracy = throwableProperties.inaccuracy;
+
+        MinecraftForge.EVENT_BUS.addListener(EventPriority.LOW, this::OnAnvilUpdate);
+        //MinecraftForge.EVENT_BUS.addListener(EventPriority.LOW, this::OnAnvilRepair);
     }
+
 
     @Override
     public int getBarColor(ItemStack pStack) {
@@ -84,6 +103,67 @@ public abstract class ThrowableWeaponItem extends TieredItem {
         }
         return super.use(level, player, hand);
     }
+
+    @Override
+    public float getXpRepairRatio(ItemStack stack) {
+        return 1f;
+    }
+
+    protected void OnAnvilUpdate(AnvilUpdateEvent event){
+        if(event.getPlayer().getLevel().isClientSide){
+            return;
+        }
+        var outputItemStack = event.getOutput();
+
+        var isLeftItemThrowable = false;
+        var isRightItemThrowable = false;
+
+        var rightItemStack = event.getRight();
+        var rightItem = rightItemStack.getItem();
+        if(rightItem instanceof  ThrowableWeaponItem){
+            isRightItemThrowable = true;
+            rightItemStack.setRepairCost(0);
+        }
+
+        var leftItemStack = event.getLeft();
+        var leftItem = leftItemStack.getItem();
+        if(leftItem instanceof ThrowableWeaponItem){
+            isLeftItemThrowable = true;
+            leftItemStack.setRepairCost(0);
+
+            if(leftItem.isValidRepairItem(leftItemStack, rightItemStack) && !isRightItemThrowable){
+                outputItemStack = leftItemStack.copy();
+                outputItemStack.setDamageValue(0);//We need only one item to fix a throwable fully.
+                event.setOutput(outputItemStack);
+            }
+        }
+    }
+//    private void OnAnvilRepair(AnvilRepairEvent event) {
+//        var isLeftItemThrowable = false;
+//        var isRightItemThrowable = false;
+//        var leftItemStack = event.getLeft();
+//        var leftItem = leftItemStack.getItem();
+//        if(leftItem instanceof ThrowableWeaponItem){
+//            isLeftItemThrowable = true;
+//        }
+//
+//        var rightItemStack = event.getRight();
+//        var rightItem = rightItemStack.getItem();
+//        if(rightItem instanceof  ThrowableWeaponItem){
+//            isRightItemThrowable = true;
+//        }
+//
+//        var outputItemStack = event.getOutput();
+//        var outputItem = outputItemStack.getItem();
+//
+//        var bothIngredientsThrowables = isLeftItemThrowable && isRightItemThrowable;
+//
+//        if(outputItem instanceof ThrowableWeaponItem && !bothIngredientsThrowables){
+//            //If we are fixing with a material, we fix entire stack with just one item.
+//            //outputItemStack.setDamageValue(0);
+//        }
+//    }
+
     protected void applyEnchantments(ItemStack itemStack, AbstractThrowable projectile){
         var punchEnchantmentLevel = itemStack.getEnchantmentLevel(Enchantments.PUNCH_ARROWS);
         var flameEnchantmentLevel = itemStack.getEnchantmentLevel(Enchantments.FLAMING_ARROWS);

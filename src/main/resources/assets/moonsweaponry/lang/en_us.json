@@ -62,5 +62,7 @@
   "enchantment.moonsweaponry.velocity": "Velocity",
   "enchantment.moonsweaponry.velocity.desc": "Makes thrown items move faster.",
   "enchantment.moonsweaponry.capacity": "Capacity",
-  "enchantment.moonsweaponry.capacity.desc": "Increases amount of ammo of throwable item."
+  "enchantment.moonsweaponry.capacity.desc": "Increases amount of ammo of throwable item.",
+
+  "block.moonsweaponry.weapon_station": "Weapon Station"
 }
