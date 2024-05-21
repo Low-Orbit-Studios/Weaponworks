@@ -1,0 +1,6 @@
+{
+  "parent": "moonsweaponry:item/longbow",
+  "textures": {
+    "layer0": "moonsweaponry:item/longbow_pulling_0"
+  }
+}

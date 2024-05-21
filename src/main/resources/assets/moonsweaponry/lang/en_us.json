@@ -53,6 +53,10 @@
   "item.moonsweaponry.wooden_rapier": "Wooden Rapier",
   "item.moonsweaponry.wooden_spear": "Wooden Spear",
   "item.moonsweaponry.wooden_mace": "Wooden Mace",
+
+  "item.moonsweaponry.longbow": "Longbow",
+  "item.moonsweaponry.shortbow": "Shortbow",
+
   "itemGroup.moonsweaponrytab": "Weaponworks",
 
   "enchantment.moonsweaponry.velocity": "Velocity",

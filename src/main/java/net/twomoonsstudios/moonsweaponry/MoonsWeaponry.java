@@ -15,6 +15,7 @@ import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 import net.twomoonsstudios.moonsweaponry.enchanting.ModEnchantments;
 import net.twomoonsstudios.moonsweaponry.entity.ThrownKnifeRenderer;
 import net.twomoonsstudios.moonsweaponry.entity.WeaponworksEntities;
+import net.twomoonsstudios.moonsweaponry.events.SetupEvents;
 import net.twomoonsstudios.moonsweaponry.item.ModItems;
 import org.slf4j.Logger;
 
@@ -65,6 +66,8 @@ public class MoonsWeaponry
             // Some client setup code
 
             EntityRenderers.register(WeaponworksEntities.THROWN_IRON_KNIFE_ENTITY_TYPE.get(), ThrownKnifeRenderer::new);
+            SetupEvents.registerBowPredicates(ModItems.LONGBOW.get());
+            SetupEvents.registerBowPredicates(ModItems.SHORTBOW.get());
         }
     }
 }
