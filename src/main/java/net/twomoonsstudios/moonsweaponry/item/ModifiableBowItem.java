@@ -57,7 +57,7 @@ public class ModifiableBowItem extends BowItem {
                     Item projectileItem = projectileStack.getItem();
                     boolean noConsumeArrow = player.getAbilities().instabuild ||
                             (projectileItem) instanceof ArrowItem &&
-                            ((ArrowItem)projectileItem).isInfinite(projectileStack, stack, player);
+                                    ((ArrowItem)projectileItem).isInfinite(projectileStack, stack, player);
                     if (!level.isClientSide) {
                         ArrowItem arrowitem = (ArrowItem)(projectileItem instanceof ArrowItem ? projectileItem : Items.ARROW);
                         AbstractArrow abstractArrow = arrowitem.createArrow(level,projectileStack,player);
@@ -77,7 +77,7 @@ public class ModifiableBowItem extends BowItem {
                                 event.broadcastBreakEvent(player.getUsedItemHand()));
                         if (noConsumeArrow ||
                                 player.getAbilities().instabuild && (projectileStack.is(Items.SPECTRAL_ARROW) ||
-                                projectileStack.is(Items.TIPPED_ARROW))) {
+                                        projectileStack.is(Items.TIPPED_ARROW))) {
                             abstractArrow.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
                         }
                         level.addFreshEntity(abstractArrow);

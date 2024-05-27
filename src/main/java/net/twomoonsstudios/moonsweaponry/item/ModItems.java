@@ -10,6 +10,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.twomoonsstudios.moonsweaponry.MoonsWeaponry;
 import net.twomoonsstudios.moonsweaponry.config.objects.WeaponConfigObj;
 import net.twomoonsstudios.moonsweaponry.enums.WeaponTypesEnum;
+import net.twomoonsstudios.moonsweaponry.item.ModifiableBowItem;
 import net.twomoonsstudios.moonsweaponry.item.weapons.*;
 
 import java.util.LinkedHashMap;
@@ -63,6 +64,7 @@ public class ModItems {
                             .tab(CreativeModeTab.TAB_COMBAT)
             )
     );
+
     /**
      * Sorts the items before they are registered in the game, making sure they are always
      * added in correct, default material minecraft order.

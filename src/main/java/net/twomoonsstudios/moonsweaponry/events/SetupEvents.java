@@ -14,8 +14,6 @@ import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 import net.twomoonsstudios.moonsweaponry.item.ModItems;
 import net.twomoonsstudios.moonsweaponry.item.ModifiableBowItem;
 
-import static net.twomoonsstudios.moonsweaponry.MoonsWeaponry.MOD_ID;
-
 @Mod.EventBusSubscriber
 public class SetupEvents {
     @SubscribeEvent
@@ -33,7 +31,7 @@ public class SetupEvents {
                 return 0.0F;
             } else {
                 return entity.getUseItem() != stack ? 0.0F :
-                        (float) (stack.getUseDuration() - entity.getUseItemRemainingTicks()) / ((ModifiableBowItem)stack.getItem()).getDrawDuration();
+                        (float) (stack.getUseDuration() - entity.getUseItemRemainingTicks()) / ((ModifiableBowItem) stack.getItem()).getDrawDuration();
             }
         });
     }
