@@ -10,7 +10,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.twomoonsstudios.moonsweaponry.MoonsWeaponry;
 import net.twomoonsstudios.moonsweaponry.config.objects.WeaponConfigObj;
 import net.twomoonsstudios.moonsweaponry.enums.WeaponTypesEnum;
-import net.twomoonsstudios.moonsweaponry.item.ranged.ModifiableBowItem;
+import net.twomoonsstudios.moonsweaponry.item.ModifiableBowItem;
 import net.twomoonsstudios.moonsweaponry.item.weapons.*;
 
 import java.util.LinkedHashMap;
@@ -43,14 +43,28 @@ public class ModItems {
                     new ModifiableBowItem.BowProperties()
                             .setDrawDuration(50)
                             .setMinVelocity(0.5F)
-                            .setMaxVelocity(3.5F)
-                            .setInaccuracy(0.5F)
+                            .setMaxVelocity(3.0F)
+                            .setInaccuracy(0.3F)
                             .setDamageBonus(1.3D),
                     new Item.Properties()
-                            .defaultDurability(128)
+                            .defaultDurability(192)
                             .tab(CreativeModeTab.TAB_COMBAT)
             )
     );
+    public static RegistryObject<Item> SHORTBOW = ITEMS.register(
+            "shortbow", () -> new ModifiableBowItem(
+                    new ModifiableBowItem.BowProperties()
+                            .setDrawDuration(13)
+                            .setMinVelocity(0.6F)
+                            .setMaxVelocity(2F)
+                            .setInaccuracy(1.0F)
+                            .setDamageBonus(0.65D),
+                    new Item.Properties()
+                            .defaultDurability(192)
+                            .tab(CreativeModeTab.TAB_COMBAT)
+            )
+    );
+
     /**
      * Sorts the items before they are registered in the game, making sure they are always
      * added in correct, default material minecraft order.

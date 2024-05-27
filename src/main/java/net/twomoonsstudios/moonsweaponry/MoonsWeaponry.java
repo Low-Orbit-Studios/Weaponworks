@@ -18,6 +18,7 @@ import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 import net.twomoonsstudios.moonsweaponry.enchanting.ModEnchantments;
 import net.twomoonsstudios.moonsweaponry.entity.ThrownKnifeRenderer;
 import net.twomoonsstudios.moonsweaponry.entity.WeaponworksEntities;
+import net.twomoonsstudios.moonsweaponry.events.SetupEvents;
 import net.twomoonsstudios.moonsweaponry.item.ModItems;
 import net.twomoonsstudios.moonsweaponry.screen.ModMenuTypes;
 import net.twomoonsstudios.moonsweaponry.screen.WeaponStationScreen;
@@ -70,9 +71,12 @@ public class MoonsWeaponry
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
-            // Some client setup code
-
+            // Register the renderer for the thrown weapons. Probably will have to redo this soon.
             EntityRenderers.register(WeaponworksEntities.THROWN_IRON_KNIFE_ENTITY_TYPE.get(), ThrownKnifeRenderer::new);
+            // Fix the bow models so they register at the right times.
+            SetupEvents.registerBowPredicates(ModItems.LONGBOW.get());
+            SetupEvents.registerBowPredicates(ModItems.SHORTBOW.get());
+            // Add the menu for the weapon station
             MenuScreens.register(ModMenuTypes.WEAPON_STATION_MENU.get(), WeaponStationScreen::new);
         }
     }

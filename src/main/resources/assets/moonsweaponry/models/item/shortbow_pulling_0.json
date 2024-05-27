@@ -1,0 +1,6 @@
+{
+  "parent": "moonsweaponry:item/shortbow",
+  "textures": {
+    "layer0": "moonsweaponry:item/shortbow_pulling_0"
+  }
+}
