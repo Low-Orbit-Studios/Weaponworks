@@ -185,6 +185,13 @@ public class WeaponStationBlockEntity extends BlockEntity implements MenuProvide
         return inventory.getItem(WEAPON_STATION_CRAFTING_OUTPUT_ID).equals(ItemStack.EMPTY);
     }
 
+    public ItemStack getNextTemplatePreview() {
+        return templateCollectionController.getNextTemplateNoIncrement().getDefaultInstance();
+    }
+    public ItemStack getPreviousTemplatePreview() {
+        return templateCollectionController.getPreviousTemplateNoDecrement().getDefaultInstance();
+    }
+
     public ItemStack selectNextTemplate() {
         return templateCollectionController.getNextTemplate().getDefaultInstance();
     }

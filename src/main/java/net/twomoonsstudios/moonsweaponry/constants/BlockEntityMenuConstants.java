@@ -5,10 +5,12 @@ public class BlockEntityMenuConstants {
 
     public static final int WEAPON_STATION_MATERIAL_INPUT_ID = 0;
     public static final int WEAPON_STATION_HANDLE_INPUT_ID = 1;
-    public static final int WEAPON_STATION_SELECTION_INPUT_ID = 2;
-    public static final int WEAPON_STATION_CRAFTING_OUTPUT_ID = 3;
+    public static final int WEAPON_STATION_PREV_PREVIEW_ID = 2;
+    public static final int WEAPON_STATION_SELECTION_INPUT_ID = 3;
+    public static final int WEAPON_STATION_NEXT_PREVIEW_ID = 4;
+    public static final int WEAPON_STATION_CRAFTING_OUTPUT_ID = 5;
 
-    public static final int WEAPON_STATION_INPUT_SLOTS_TOTAL = 3;
+    public static final int WEAPON_STATION_INPUT_SLOTS_TOTAL = 5;
     public static final int WEAPON_STATION_OUTPUT_SLOTS_TOTAL = 1;
     public static final int WEAPON_STATION_SLOTS_TOTAL = WEAPON_STATION_INPUT_SLOTS_TOTAL + WEAPON_STATION_OUTPUT_SLOTS_TOTAL;
 
@@ -42,8 +44,10 @@ public class BlockEntityMenuConstants {
     public static final int WEAPON_STATION_CRAFT_HANDLE_IN_X = 24;
     public static final int WEAPON_STATION_CRAFT_HANDLE_IN_Y = 64;
 
-    public static final int WEAPON_STATION_WEAPON_TYPE_SEL_X = 76;
-    public static final int WEAPON_STATION_WEAPON_TYPE_SEL_Y = 43;
+    public static final int WEAPON_STATION_WEAPON_TYPE_SEL_X = 77;
+    public static final int WEAPON_STATION_WEAPON_TYPE_PREV_PREVIEW_SEL_Y = 20;
+    public static final int WEAPON_STATION_WEAPON_TYPE_SEL_Y = 44;
+    public static final int WEAPON_STATION_WEAPON_TYPE_NEXT_PREVIEW_SEL_Y = 68;
     public static final int WEAPON_STATION_CRAFT_OUTPUT_X = 136;
     public static final int WEAPON_STATION_CRAFT_OUTPUT_Y = 44;
 }
