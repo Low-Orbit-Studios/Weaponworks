@@ -1,4 +1,4 @@
-package net.twomoonsstudios.moonsweaponry.item.ranged;
+package net.twomoonsstudios.moonsweaponry.item;
 
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -22,7 +22,7 @@ public class ModifiableBowItem extends BowItem {
 
     // note: will never fire at minimum velocity, must always be 0.1 higher otherwise it won't fire.
     protected float MIN_VELOCITY; //Vanilla bow: 0.3F
-    protected float MAX_VELOCITY; //Vanilla bow: 3.0F
+    protected float MAX_VELOCITY; //Vanilla bow: 3.0F. Anything higher than this can be buggy, fair warning.
     protected float INACCURACY; //Vanilla bow: 1.0F
 
     protected double DAMAGE_BONUS; //Vanilla bow: 1D (this is a multiplier)
@@ -57,13 +57,13 @@ public class ModifiableBowItem extends BowItem {
                     Item projectileItem = projectileStack.getItem();
                     boolean noConsumeArrow = player.getAbilities().instabuild ||
                             (projectileItem) instanceof ArrowItem &&
-                            ((ArrowItem)projectileItem).isInfinite(projectileStack, stack, player);
+                                    ((ArrowItem)projectileItem).isInfinite(projectileStack, stack, player);
                     if (!level.isClientSide) {
                         ArrowItem arrowitem = (ArrowItem)(projectileItem instanceof ArrowItem ? projectileItem : Items.ARROW);
                         AbstractArrow abstractArrow = arrowitem.createArrow(level,projectileStack,player);
                         abstractArrow = customArrow(abstractArrow);
                         defineArrowMotion(abstractArrow, player, velocity);
-                        if (velocity == MAX_VELOCITY) {
+                        if (velocity >= MAX_VELOCITY - 0.1F) {
                             abstractArrow.setCritArrow(true);
                         }
 
@@ -77,10 +77,12 @@ public class ModifiableBowItem extends BowItem {
                                 event.broadcastBreakEvent(player.getUsedItemHand()));
                         if (noConsumeArrow ||
                                 player.getAbilities().instabuild && (projectileStack.is(Items.SPECTRAL_ARROW) ||
-                                projectileStack.is(Items.TIPPED_ARROW))) {
+                                        projectileStack.is(Items.TIPPED_ARROW))) {
                             abstractArrow.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
                         }
                         level.addFreshEntity(abstractArrow);
+
+
                     }
 
                     level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 1.0F, 1.0F / (level.getRandom().nextFloat() * 0.4F + 1.2F) + (velocity/MAX_VELOCITY) * 0.5F);
@@ -97,9 +99,21 @@ public class ModifiableBowItem extends BowItem {
         }
     }
 
+    public float getDrawnPercent(int time) {
+        return (float) time / DRAW_DURATION;
+    }
+
+    public int getDrawDuration() {
+        return DRAW_DURATION;
+    }
+
+    @Override
+    public int getUseDuration(ItemStack pStack) {
+        return super.getUseDuration(pStack);
+    }
+
     public float getVelocity(int time) {
-        float percentDrawn = ((float) time)/DRAW_DURATION;
-        return Mth.lerp(percentDrawn, MIN_VELOCITY, MAX_VELOCITY);
+        return Mth.lerp(getDrawnPercent(time), MIN_VELOCITY, MAX_VELOCITY);
     }
 
     public void defineArrowMotion(AbstractArrow arrow, Player player, float velocity) {
@@ -161,8 +175,4 @@ public class ModifiableBowItem extends BowItem {
         }
     }
 
-    @Override
-    public UseAnim getUseAnimation(ItemStack pStack) {
-        return UseAnim.BOW;
-    }
 }

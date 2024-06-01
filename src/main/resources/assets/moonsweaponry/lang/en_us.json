@@ -62,6 +62,8 @@
   "item.moonsweaponry.template_rapier": "Template Rapier",
   "item.moonsweaponry.template_spear": "Template Spear",
   "item.moonsweaponry.template_mace": "Template Mace",
+  "item.moonsweaponry.longbow": "Longbow",
+  "item.moonsweaponry.shortbow": "Shortbow",
   "itemGroup.moonsweaponrytab": "Weaponworks",
 
   "enchantment.moonsweaponry.velocity": "Velocity",
