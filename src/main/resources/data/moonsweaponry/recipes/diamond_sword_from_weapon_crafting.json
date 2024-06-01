@@ -1,0 +1,20 @@
+{
+  "type": "moonsweaponry:weapon_crafting",
+  "ingredients": [
+    {
+      "item": "minecraft:diamond",
+      "count": 3
+    },
+    {
+      "item": "minecraft:stick",
+      "count": 1
+    },
+    {
+      "item": "weaponworks:greatsword_template"
+    }
+  ],
+  "output":
+  {
+    "item":"moonsweaponry:diamond_greatsword"
+  }
+}

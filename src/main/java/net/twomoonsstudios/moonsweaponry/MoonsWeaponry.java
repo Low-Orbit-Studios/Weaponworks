@@ -14,11 +14,13 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 //import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 import net.twomoonsstudios.moonsweaponry.block.ModBlocks;
 import net.twomoonsstudios.moonsweaponry.block.entity.ModBlockEntities;
+import net.twomoonsstudios.moonsweaponry.block.entity.itemtemplates.TemplateCollectionController;
 import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 import net.twomoonsstudios.moonsweaponry.enchanting.ModEnchantments;
 import net.twomoonsstudios.moonsweaponry.entity.ThrownKnifeRenderer;
 import net.twomoonsstudios.moonsweaponry.entity.WeaponworksEntities;
 import net.twomoonsstudios.moonsweaponry.item.ModItems;
+import net.twomoonsstudios.moonsweaponry.recipe.ModRecipes;
 import net.twomoonsstudios.moonsweaponry.screen.ModMenuTypes;
 import net.twomoonsstudios.moonsweaponry.screen.WeaponStationScreen;
 import org.slf4j.Logger;
@@ -29,6 +31,8 @@ public class MoonsWeaponry
 {
     // Define mod id in a common place for everything to reference
     public static final String MOD_ID = "moonsweaponry";
+//    public static final String MOD_ID = "weaponworks";
+//    public static final String MOD_ID_DEPRECATED = "moonsweaponry";
     // Directly reference a slf4j logger
     protected static final Logger LOGGER = LogUtils.getLogger();
 
@@ -42,11 +46,13 @@ public class MoonsWeaponry
 
         WeaponworksEntities.register(modEventBus);
         ModItems.register(modEventBus);
+        TemplateCollectionController.INSTANCE.loadTemplates();//Has to be AFTER item init!
         ModEnchantments.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         ModMenuTypes.register(modEventBus);
 
+        ModRecipes.register(modEventBus);
         // here lies the site where calico made a tiny mistake and got stuck for a week
 
         // Register the commonSetup method for modloading

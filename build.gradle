@@ -141,6 +141,16 @@ repositories {
     maven { url "https://maven.shedaniel.me/" }
     maven { url "https://maven.terraformersmc.com/releases/" }
     maven { url "https://s01.oss.sonatype.org/content/repositories/releases/"}
+    maven {
+        // location of the maven that hosts JEI files since January 2023
+        name = "Jared's maven"
+        url = "https://maven.blamejared.com/"
+    }
+    maven {
+        // location of a maven mirror for JEI files, as a fallback
+        name = "ModMaven"
+        url = "https://modmaven.dev"
+    }
 
     //BetterCombat/
     // If you have mod jar dependencies in ./libs, you can declare them as a repository like so:
@@ -178,6 +188,12 @@ dependencies {
     testRuntimeOnly "io.github.hornster.itemfig:itemfig:${itemfigver}"
 
     testImplementation  'org.junit.jupiter:junit-jupiter:5.8.1'
+
+    // compile against the JEI API but do not include it at runtime
+    compileOnly(fg.deobf("mezz.jei:jei-${mcver}-common-api:${jei_version}"))
+    compileOnly(fg.deobf("mezz.jei:jei-${mcver}-forge-api:${jei_version}"))
+    // at runtime, use the full JEI jar for Forge
+    runtimeOnly(fg.deobf("mezz.jei:jei-${mcver}-forge:${jei_version}"))
     //BetterCombat/
 
     // Examples using mod jars from ./libs

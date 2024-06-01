@@ -25,6 +25,8 @@ public class CommonConstants {
     /**Base ID for the spear. For editor support and typo reduction.*/
     public static final String SPEAR_BASE_ID = "spear";
 
+    public static final String TEMPLATE_PREFIX = "template_";
+
 
     public static final String THROWING_KNIFE_BASE_ID = "throwing_knife";
 

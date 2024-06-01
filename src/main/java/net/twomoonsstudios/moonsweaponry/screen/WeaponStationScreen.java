@@ -15,9 +15,10 @@ import static net.twomoonsstudios.moonsweaponry.constants.BlockEntityMenuConstan
 
 public class WeaponStationScreen extends AbstractContainerScreen<WeaponStationMenu> {
     private static final ResourceLocation TEXTURE = new ResourceLocation(MoonsWeaponry.MOD_ID, "textures/gui/weapon_station_craft_gui.png");
+    private WeaponStationMenu weaponStationMenu;
     public WeaponStationScreen(WeaponStationMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
-
+        weaponStationMenu = pMenu;
         imageHeight = WEAPON_STATION_INVENTORY_HEIGHT;
         this.inventoryLabelY = imageHeight - WEAPON_STATION_INVENTORY_LABEL_HEIGHT;
     }
@@ -38,5 +39,11 @@ public class WeaponStationScreen extends AbstractContainerScreen<WeaponStationMe
         renderBackground(pPoseStack);
         super.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
         renderTooltip(pPoseStack, pMouseX, pMouseY);
+    }
+    @Override
+    public boolean mouseScrolled(double pMouseX, double pMouseY, double pDelta){
+        pDelta = Math.floor(pDelta);
+        weaponStationMenu.changeWeaponTemplate((int) pDelta);
+        return true;
     }
 }

@@ -11,9 +11,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.SlotItemHandler;
 import net.twomoonsstudios.moonsweaponry.block.ModBlocks;
 import net.twomoonsstudios.moonsweaponry.block.entity.WeaponStationBlockEntity;
+import net.twomoonsstudios.moonsweaponry.screen.components.WeaponOutputSlotItemHandler;
+import net.twomoonsstudios.moonsweaponry.screen.components.WeaponSelectionSlotItemHandler;
 import org.jetbrains.annotations.Nullable;
 
 import static net.twomoonsstudios.moonsweaponry.constants.BlockEntityMenuConstants.*;
@@ -31,7 +34,11 @@ public class WeaponStationMenu extends AbstractContainerMenu {
 
 
     public WeaponStationMenu(int pContainerId, Inventory pPlayerInventory, FriendlyByteBuf extraData) {
-        this(pContainerId, pPlayerInventory, pPlayerInventory.player.level.getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(EXTRA_DATA_SYNCED_PARAMS_COUNT));
+        this(pContainerId,
+                pPlayerInventory,
+                pPlayerInventory.player.level.getBlockEntity(extraData.readBlockPos()),
+                new SimpleContainerData(EXTRA_DATA_SYNCED_PARAMS_COUNT
+                ));
     }
 
     public WeaponStationMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data){
@@ -43,21 +50,26 @@ public class WeaponStationMenu extends AbstractContainerMenu {
         this.blockEntity = (WeaponStationBlockEntity) entity;
         this.containerData = data;
 
+        var defaultSelectedTemplate = this.blockEntity.getSelectedTemplate();
+
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
-            this.addSlot(new SlotItemHandler(handler, WEAPON_STATION_MATERIAL_INPUT_ID, WEAPON_STATION_CRAFT_MATERIAL_IN_X, WEAPON_STATION_CRAFT_MATERIAL_IN_Y));
-            this.addSlot(new SlotItemHandler(handler, WEAPON_STATION_HANDLE_INPUT_ID, WEAPON_STATION_CRAFT_HANDLE_IN_X, WEAPON_STATION_CRAFT_HANDLE_IN_Y));
-            this.addSlot(new SlotItemHandler(handler, WEAPON_STATION_CRAFTING_OUTPUT_ID, WEAPON_STATION_CRAFT_OUTPUT_X, WEAPON_STATION_CRAFT_OUTPUT_Y) {
-//                public boolean mayPlace(ItemStack stack){return false;}
-//                public void onTake(Player player, ItemStack itemStack){
-//                    WeaponStationMenu.this.onTake(player, itemStack);
-//                }
+                var weaponSelectionSlotHandler =new WeaponSelectionSlotItemHandler(handler, WEAPON_STATION_SELECTION_INPUT_ID, WEAPON_STATION_WEAPON_TYPE_SEL_X, WEAPON_STATION_WEAPON_TYPE_SEL_Y);
+                weaponSelectionSlotHandler.set(defaultSelectedTemplate);
+
+                this.addSlot(new SlotItemHandler(handler, WEAPON_STATION_MATERIAL_INPUT_ID, WEAPON_STATION_CRAFT_MATERIAL_IN_X, WEAPON_STATION_CRAFT_MATERIAL_IN_Y));
+                this.addSlot(new SlotItemHandler(handler, WEAPON_STATION_HANDLE_INPUT_ID, WEAPON_STATION_CRAFT_HANDLE_IN_X, WEAPON_STATION_CRAFT_HANDLE_IN_Y));
+                this.addSlot(weaponSelectionSlotHandler);
+                this.addSlot(new WeaponOutputSlotItemHandler(handler, WEAPON_STATION_CRAFTING_OUTPUT_ID, WEAPON_STATION_CRAFT_OUTPUT_X, WEAPON_STATION_CRAFT_OUTPUT_Y) {
             });
         });
 
         addDataSlots(this.containerData);
+    }
+    private void selectDefaultSelectionSlotItem(){
+
     }
 
     protected void addPlayerInventory(Inventory pPlayerInventory){
@@ -98,6 +110,11 @@ public class WeaponStationMenu extends AbstractContainerMenu {
     public ItemStack quickMoveStack(Player playerIn, int index) {
         Slot sourceSlot = slots.get(index);
         if (sourceSlot == null || !sourceSlot.hasItem()) return ItemStack.EMPTY;  //EMPTY_ITEM
+
+        if(sourceSlot.index == WEAPON_STATION_SELECTION_INPUT_ID){
+            return ItemStack.EMPTY;//We do not allow modifications to the weapon type selection slot.
+        }
+
         ItemStack sourceStack = sourceSlot.getItem();
         ItemStack copyOfSourceStack = sourceStack.copy();
 
@@ -133,4 +150,22 @@ public class WeaponStationMenu extends AbstractContainerMenu {
                 pPlayer, ModBlocks.WEAPON_STATION.get());
     }
 
+    public void changeWeaponTemplate(int pDelta) {
+        var direction = pDelta > 0 ? 1 : -1;//1 for next, -1 for previous
+        var pDeltaAbs = Math.abs(pDelta);
+        for(int i = 0; i < pDeltaAbs; i++){
+            ItemStack nextItem = null;
+            if(direction > 0){
+                nextItem = blockEntity.selectNextTemplate();
+            }else{
+                nextItem = blockEntity.selectPreviousTemplate();
+            }
+            var itemHandler = this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER);
+            final ItemStack finalNextItem = nextItem.copy();
+            itemHandler.ifPresent(handler -> {
+                handler.extractItem(WEAPON_STATION_SELECTION_INPUT_ID, 1, false);
+                handler.insertItem(WEAPON_STATION_SELECTION_INPUT_ID, finalNextItem, false);
+            });
+        }
+    }
 }

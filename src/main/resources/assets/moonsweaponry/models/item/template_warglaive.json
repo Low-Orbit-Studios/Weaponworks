@@ -1,0 +1,21 @@
+{
+  "parent": "minecraft:item/handheld",
+  "loader": "forge:separate_transforms",
+  "textures": {
+    "layer0": "moonsweaponry:item/template_warglaive_gui"
+  },
+  "base": {
+    "parent": "moonsweaponry:item/template_warglaive_handheld"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "moonsweaponry:item/template_warglaive_gui"
+    },
+    "fixed": {
+      "parent": "moonsweaponry:item/template_warglaive_gui"
+    },
+    "ground": {
+      "parent": "moonsweaponry:item/template_warglaive_gui"
+    }
+  }
+}

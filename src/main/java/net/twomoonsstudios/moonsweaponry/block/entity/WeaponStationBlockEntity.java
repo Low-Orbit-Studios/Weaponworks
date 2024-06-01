@@ -24,6 +24,9 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import net.twomoonsstudios.moonsweaponry.block.custom.WeaponStationBlock;
+import net.twomoonsstudios.moonsweaponry.block.entity.itemtemplates.TemplateCollectionController;
+import net.twomoonsstudios.moonsweaponry.recipe.WeaponStationRecipe;
 import net.twomoonsstudios.moonsweaponry.screen.WeaponStationMenu;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -34,7 +37,8 @@ public class WeaponStationBlockEntity extends BlockEntity implements MenuProvide
     protected static final String INVENTORY_NBT_NAME = "inventory";
     private Recipe selectedRecipe;
     private int selectedRecipeId = 0;
-    private final ItemStackHandler itemHandler = new ItemStackHandler(3){
+    private TemplateCollectionController templateCollectionController = TemplateCollectionController.INSTANCE;
+    private final ItemStackHandler itemHandler = new ItemStackHandler(WEAPON_STATION_SLOTS_TOTAL){
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
@@ -80,6 +84,10 @@ public class WeaponStationBlockEntity extends BlockEntity implements MenuProvide
         return new WeaponStationMenu(pContainerId, pPlayerInventory, this, this.data);
     }
 
+    public ItemStack getSelectedTemplate(){
+        return templateCollectionController.getCurrentTemplate().getDefaultInstance();
+    }
+
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
         if(cap == ForgeCapabilities.ITEM_HANDLER){
@@ -117,54 +125,77 @@ public class WeaponStationBlockEntity extends BlockEntity implements MenuProvide
     public void drops(){
         var inventory = new SimpleContainer(itemHandler.getSlots());
         for(int i = 0; i < itemHandler.getSlots(); i++){
+            if(i == WEAPON_STATION_SELECTION_INPUT_ID){
+                continue; //We do NOT want to drop the templates.
+            }
             inventory.setItem(i, itemHandler.getStackInSlot(i));
         }
 
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
 
-//    private void craftItem(Item craftedItem, RecipeHolder selectedRecipe){
-//        if(hasRecipe()){
-//            //TODO
-//            var usedRecipe = selectedRecipe.getRecipeUsed();
-//            var ingredients = usedRecipe.getIngredients();
-//
-//            itemHandler.extractItem(WEAPON_STATION_MATERIAL_INPUT_ID, recipe.materialCount, false);
-//            itemHandler.extractItem(WEAPON_STATION_HANDLE_INPUT_ID, recipe.handleCount, false);
-//
-//            itemHandler.setStackInSlot(WEAPON_STATION_CRAFTING_OUTPUT_ID, new ItemStack(craftedItem));
-//        }
-//    }
+    private void craftItem(WeaponStationBlockEntity entity){
+        var level = entity.level;
+        var inventory = new SimpleContainer(this.itemHandler.getSlots());
+        for(int i = 0; i < this.itemHandler.getSlots(); i++){
+            inventory.setItem(i, this.itemHandler.getStackInSlot(i));
+        }
+        var recipe = level.getRecipeManager().getRecipeFor(WeaponStationRecipe.Type.INSTANCE,
+                inventory,
+                level
+        );
+
+        var recipePresent = recipe.isPresent();
+        if(hasRecipe(entity)){
+            itemHandler.extractItem(WEAPON_STATION_MATERIAL_INPUT_ID, recipe.get().getIngredientAmount(WEAPON_STATION_MATERIAL_INPUT_ID), false);
+            itemHandler.extractItem(WEAPON_STATION_HANDLE_INPUT_ID, recipe.get().getIngredientAmount(WEAPON_STATION_HANDLE_INPUT_ID), false);
+
+            itemHandler.setStackInSlot(WEAPON_STATION_CRAFTING_OUTPUT_ID, new ItemStack(recipe.get().getResultItem().getItem()));
+        }
+    }
     public static void tick(Level level, BlockPos blockPos, BlockState blockState, WeaponStationBlockEntity entity) {
         if(level.isClientSide()) {
         }
     }
 
-    private boolean hasRecipe(){
+    private boolean hasRecipe(WeaponStationBlockEntity entity){
+        var level = entity.level;
         var inventory = new SimpleContainer(this.itemHandler.getSlots());
         for(int i = 0; i < this.itemHandler.getSlots(); i++){
             inventory.setItem(i, this.itemHandler.getStackInSlot(i));
         }
 
         var materialInputSlotItem = this.itemHandler.getStackInSlot(WEAPON_STATION_MATERIAL_INPUT_ID).getItem();
-        //TODO chk against recipes
         var handleInputSlotItem = this.itemHandler.getStackInSlot(WEAPON_STATION_HANDLE_INPUT_ID).getItem();
 
         if(materialInputSlotItem.equals(Items.AIR) || handleInputSlotItem.equals(Items.AIR)){
             return false;
         }
 
-        return canInsertIntoCraftingOutputSlot(inventory);
+        var recipe = level.getRecipeManager().getRecipeFor(WeaponStationRecipe.Type.INSTANCE,
+                inventory,
+                level
+        );
 
-        //TODO For now. Recipe check needed.
+        var recipePresent = recipe.isPresent();
+        return recipePresent && canInsertIntoCraftingOutputSlot(inventory);
     }
 
     private boolean canInsertIntoCraftingOutputSlot(SimpleContainer inventory){
         return inventory.getItem(WEAPON_STATION_CRAFTING_OUTPUT_ID).equals(ItemStack.EMPTY);
+    }
+
+    public ItemStack selectNextTemplate() {
+        return templateCollectionController.getNextTemplate().getDefaultInstance();
+    }
+
+    public ItemStack selectPreviousTemplate() {
+        return templateCollectionController.getPreviousTemplate().getDefaultInstance();
     }
 }
 //TODO: https://www.youtube.com/watch?v=jo0BTisGpJk&list=PLKGarocXCE1HrC60yuTNTGRoZc6hf5Uvl&t=824s
 //Slot IDs:
 //0: material
 //1: handle
-//2: craft result
+//2: weapon type
+//3: craft result
