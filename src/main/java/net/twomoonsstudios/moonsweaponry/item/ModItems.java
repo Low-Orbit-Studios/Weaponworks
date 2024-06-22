@@ -23,6 +23,7 @@ import java.util.Map;
 import static net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig.WEAPON_CONFIGS;
 import static net.twomoonsstudios.moonsweaponry.constants.CommonConstants.TEMPLATE_PREFIX;
 import static net.twomoonsstudios.moonsweaponry.constants.ThrownWeaponDataConstants.*;
+import static net.twomoonsstudios.moonsweaponry.constants.RangedWeaponConstants.*;
 
 
 public class ModItems {
@@ -36,6 +37,7 @@ public class ModItems {
                             .setThrowVelocity(THROWING_KNIFE_DEFAULT_VELOCITY)
                             .setCooldown(THROWING_KNIFE_DEFAULT_CD)
                             .setInaccuracy(THROWING_KNIFE_DEFAULT_INACCURACY)
+                            .setBaseDamage(THROWING_KNIFE_DEFAULT_DAMAGE)
                     ,
                     new Item.Properties()
                             .defaultDurability(THROWING_KNIFE_DEFAULT_USES)
@@ -49,26 +51,26 @@ public class ModItems {
     public static RegistryObject<Item> LONGBOW = ITEMS.register(
             "longbow", () -> new ModifiableBowItem(
                     new ModifiableBowItem.BowProperties()
-                            .setDrawDuration(50)
-                            .setMinVelocity(0.5F)
-                            .setMaxVelocity(3.0F)
-                            .setInaccuracy(0.3F)
-                            .setDamageBonus(1.3D),
+                            .setDrawDuration(LONGBOW_DEFAULT_DRAW_DURATION)
+                            .setMinVelocity(LONGBOW_DEFAULT_MIN_VELOCITY)
+                            .setMaxVelocity(LONGBOW_DEFAULT_MAX_VELOCITY)
+                            .setInaccuracy(LONGBOW_DEFAULT_INNACURACY)
+                            .setDamageBonus(LONGBOW_DEFAULT_DAMAGE_MULTIPLIER),
                     new Item.Properties()
-                            .defaultDurability(192)
+                            .defaultDurability(LONGBOW_DEFAULT_DURABILITY)
                             .tab(CreativeModeTab.TAB_COMBAT)
             )
     );
     public static RegistryObject<Item> SHORTBOW = ITEMS.register(
             "shortbow", () -> new ModifiableBowItem(
                     new ModifiableBowItem.BowProperties()
-                            .setDrawDuration(13)
-                            .setMinVelocity(0.6F)
-                            .setMaxVelocity(2F)
-                            .setInaccuracy(1.0F)
-                            .setDamageBonus(0.65D),
+                            .setDrawDuration(SHORTBOW_DEFAULT_DRAW_DURATION)
+                            .setMinVelocity(SHORTBOW_DEFAULT_MIN_VELOCITY)
+                            .setMaxVelocity(SHORTBOW_DEFAULT_MAX_VELOCITY)
+                            .setInaccuracy(SHORTBOW_DEFAULT_INNACURACY)
+                            .setDamageBonus(SHORTBOW_DEFAULT_DAMAGE_MULTIPLIER),
                     new Item.Properties()
-                            .defaultDurability(192)
+                            .defaultDurability(SHORTBOW_DEFAULT_DURABILITY)
                             .tab(CreativeModeTab.TAB_COMBAT)
             )
     );

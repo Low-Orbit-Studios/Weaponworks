@@ -3,6 +3,7 @@ package net.twomoonsstudios.moonsweaponry.entity.thrownKnife;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.twomoonsstudios.moonsweaponry.constants.TextureConstants;
 import net.twomoonsstudios.moonsweaponry.entity.ThrownKnifeEntity;
@@ -19,9 +20,5 @@ public class ThrownIronKnifeEntity extends ThrownKnifeEntity {
     public ThrownIronKnifeEntity(Level level, LivingEntity entity, ItemStack stack, float initialVelocity) {
         super(WeaponworksEntities.THROWN_IRON_KNIFE_ENTITY_TYPE.get(), level, entity, stack, initialVelocity);
         throwableTexture = TextureConstants.IRON_KNIFE_TEX;
-    }
-    @Override
-    protected @NotNull ItemStack getPickupItem() {
-        return new ItemStack(ModItems.THROWING_KNIFE.get());
     }
 }

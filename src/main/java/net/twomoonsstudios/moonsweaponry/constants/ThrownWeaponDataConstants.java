@@ -22,6 +22,7 @@ public class ThrownWeaponDataConstants{
     /**The minimal damage multiplier a throwable can deal due to low movement speed. Range [0, 1]*/
     public static final float THROWABLE_MIN_DMG_COEF = 0.2f;
     public static final int THROWING_KNIFE_DEFAULT_USES = 16;
+    public static final int THROWING_KNIFE_DEFAULT_DAMAGE = 10;
 
     public static final String WOODEN_THROWING_KNIFE_DEFAULT_TIER_NAME = "WOOD";
     public static final int WOODEN_THROWING_KNIFE_DEFAULT_DMG = 5;

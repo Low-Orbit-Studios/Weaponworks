@@ -35,10 +35,8 @@ public class ThrownKnifeEntity extends AbstractThrowable {
     protected void tickDespawn() {}
 
     // Use a separate variable for saving and rendering the item
-    @Override
-    protected @NotNull ItemStack getPickupItem() {
-        return ItemStack.EMPTY;
-    }
+
+
     @Override
     protected void onHitEntity(EntityHitResult pResult) {
         super.onHitEntity(pResult);

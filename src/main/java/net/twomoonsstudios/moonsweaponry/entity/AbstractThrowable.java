@@ -15,11 +15,13 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.twomoonsstudios.moonsweaponry.enums.WeaponTypesEnum;
 import net.twomoonsstudios.moonsweaponry.helpers.ThrowablesHelper;
 import net.twomoonsstudios.moonsweaponry.item.ThrowableWeaponItem;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,6 +34,7 @@ public abstract class AbstractThrowable extends AbstractArrow {
     protected int velocityEnchantmentLevel = 0;
     /**The velocity assigned upon throwing. Includes enchantments effects.*/
     protected float initialVelocity;
+    public boolean inGroundCheck;
 
     public AbstractThrowable(EntityType<? extends AbstractThrowable> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -40,6 +43,7 @@ public abstract class AbstractThrowable extends AbstractArrow {
         super(entityType, entity, level);
         this.usedItem = stack.copy();
         this.initialVelocity = initialVelocity;
+        this.inGroundCheck = this.inGround;
     }
     protected ItemStack matchingItem(Player player, ItemStack itemStack) {
         var enchantments = itemStack.getAllEnchantments();//.toString();
@@ -53,6 +57,16 @@ public abstract class AbstractThrowable extends AbstractArrow {
         }
         return null;
     }
+
+    @Override
+    public void tick() {
+        this.inGroundCheck = this.inGround;
+        if (this.inGround) {
+            this.setDeltaMovement(new Vec3(0D,0D,0D));
+        }
+        super.tick();
+    }
+
     @Override
     protected boolean tryPickup(Player pPlayer) {
         switch (this.pickup) {
@@ -91,6 +105,11 @@ public abstract class AbstractThrowable extends AbstractArrow {
         this.usedItem = ItemStack.of(tag.getCompound("usedItem"));
         this.initialVelocity = tag.getFloat("initialVelocity");
     }
+
+    public ItemStack getUsedItem() {
+        return this.usedItem;
+    }
+
     protected boolean pickupItem(Player pPlayer) {
         var matchingItem = matchingItem(pPlayer, usedItem);
         if(matchingItem != null){
@@ -103,12 +122,19 @@ public abstract class AbstractThrowable extends AbstractArrow {
         //We do not seem to have proper itemstack to be able to pick up the item. Do not pick it up.
         return false;
     }
-    // TODO: The damage points should be referencing the entity velocity and doing min/max damage based on it.
+
+    // do NOT let the player pick up a new itemstack lol
+    @Override
+    protected @NotNull ItemStack getPickupItem() {
+        return ItemStack.EMPTY;
+    }
+
+    // DONE!: The damage points should be referencing the entity velocity and doing min/max damage based on it.
     // Please note: if you do the "super.onHitEntity(pResult)" at the end, the player will have an arrow stuck in them
     // in the event they shoot themselves.
     @Override
     protected void onHitEntity(EntityHitResult pResult) {
-        var itemBaseDamage = this.usedItem.getDamageValue();
+        var itemBaseDamage = ((ThrowableWeaponItem)this.getUsedItem().getItem()).getBaseDamage();
         var hitEntity = pResult.getEntity();
         var knockback = this.getKnockback();
 
