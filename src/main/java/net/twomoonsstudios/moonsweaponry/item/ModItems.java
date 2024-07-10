@@ -1,6 +1,5 @@
 package net.twomoonsstudios.moonsweaponry.item;
 
-import net.minecraft.commands.synchronization.ArgumentTypeInfo;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Tiers;
@@ -9,11 +8,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.twomoonsstudios.moonsweaponry.MoonsWeaponry;
-import net.twomoonsstudios.moonsweaponry.config.objects.TemplateConfigObj;
 import net.twomoonsstudios.moonsweaponry.config.objects.WeaponConfigObj;
-import net.twomoonsstudios.moonsweaponry.config.objects.greatsword.WoodenGreatswordConfigObj;
 import net.twomoonsstudios.moonsweaponry.enums.WeaponTypesEnum;
-import net.twomoonsstudios.moonsweaponry.item.ModifiableBowItem;
 import net.twomoonsstudios.moonsweaponry.item.weapons.*;
 
 import java.util.LinkedHashMap;
@@ -29,18 +25,33 @@ import static net.twomoonsstudios.moonsweaponry.constants.RangedWeaponConstants.
 public class ModItems {
 
     public static DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MoonsWeaponry.MOD_ID);
-    public static RegistryObject<Item> THROWING_KNIFE = ITEMS.register(
-            "throwing_knife",
-            () -> new KnifeItem(
+    public static RegistryObject<Item> IRON_DAGGER = ITEMS.register(
+            "iron_dagger",
+            () -> new DaggerItem(
                     Tiers.IRON,
                     new ThrowableWeaponItem.ThrowableProperties()
-                            .setThrowVelocity(THROWING_KNIFE_DEFAULT_VELOCITY)
-                            .setCooldown(THROWING_KNIFE_DEFAULT_CD)
-                            .setInaccuracy(THROWING_KNIFE_DEFAULT_INACCURACY)
-                            .setBaseDamage(THROWING_KNIFE_DEFAULT_DAMAGE)
+                            .setThrowVelocity(DAGGER_DEFAULT_VELOCITY)
+                            .setCooldown(DAGGER_DEFAULT_CD)
+                            .setInaccuracy(DAGGER_DEFAULT_INACCURACY)
+                            .setBaseDamage(IRON_DAGGER_DEFAULT_DMG)
                     ,
                     new Item.Properties()
-                            .defaultDurability(THROWING_KNIFE_DEFAULT_USES)
+                            .defaultDurability(IRON_DAGGER_DEFAULT_USES)
+                            .tab(CreativeModeTab.TAB_COMBAT)
+            )
+    );
+    public static RegistryObject<Item> GOLD_DAGGER = ITEMS.register(
+            "gold_dagger",
+            () -> new DaggerItem(
+                    Tiers.GOLD,
+                    new ThrowableWeaponItem.ThrowableProperties()
+                            .setThrowVelocity(DAGGER_DEFAULT_VELOCITY)
+                            .setCooldown(DAGGER_DEFAULT_CD)
+                            .setInaccuracy(DAGGER_DEFAULT_INACCURACY)
+                            .setBaseDamage(GOLD_DAGGER_DEFAULT_DMG)
+                    ,
+                    new Item.Properties()
+                            .defaultDurability(GOLD_DAGGER_DEFAULT_USES)
                             .tab(CreativeModeTab.TAB_COMBAT)
             )
     );

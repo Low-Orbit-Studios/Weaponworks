@@ -86,14 +86,19 @@ public abstract class ThrowableWeaponItem extends TieredItem {
         if (itemStack.getDamageValue() < itemStack.getMaxDamage() && !level.isClientSide) {
             //We throw one item at a time - hence 1
             itemStack.hurt(1, null, null);
-            var thrownKnifeEntity = createThrownEntity(level, player, itemStack, throwVelocity);//new ThrownIronKnifeEntity(level, player, itemStack);
-            this.applyEnchantments(itemStack, thrownKnifeEntity);
-            thrownKnifeEntity.setOwner(player);
+            AbstractThrowable thrownDaggerEntity = null;//new ThrownIronDaggerEntity(level, player, itemStack);
+            try {
+                thrownDaggerEntity = createThrownEntity(level, player, itemStack, throwVelocity);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+            this.applyEnchantments(itemStack, thrownDaggerEntity);
+            thrownDaggerEntity.setOwner(player);
             //for easier debugging.
             var playerXRot = player.getXRot();
             var playerYRot = player.getYRot();
-            thrownKnifeEntity.shootFromRotation(player, playerXRot, playerYRot, 0, thrownKnifeEntity.getInitialVelocity(), inaccuracy);
-            level.addFreshEntity(thrownKnifeEntity);
+            thrownDaggerEntity.shootFromRotation(player, playerXRot, playerYRot, 0, thrownDaggerEntity.getInitialVelocity(), inaccuracy);
+            level.addFreshEntity(thrownDaggerEntity);
             player.getCooldowns().addCooldown(this, cooldown);
         }
         return super.use(level, player, hand);
@@ -179,7 +184,7 @@ public abstract class ThrowableWeaponItem extends TieredItem {
         }
     }
 
-    protected abstract AbstractThrowable createThrownEntity(Level level, Player player, ItemStack itemStack, float initialVelocity);
+    protected abstract AbstractThrowable createThrownEntity(Level level, Player player, ItemStack itemStack, float initialVelocity) throws ClassNotFoundException;
 
     public static class ThrowableProperties {
         float throwVelocity;

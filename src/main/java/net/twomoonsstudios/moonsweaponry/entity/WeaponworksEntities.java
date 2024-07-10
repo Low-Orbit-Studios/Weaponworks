@@ -8,15 +8,24 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.twomoonsstudios.moonsweaponry.MoonsWeaponry;
-import net.twomoonsstudios.moonsweaponry.entity.thrownKnife.ThrownIronKnifeEntity;
 
 public class WeaponworksEntities {
     public static DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, MoonsWeaponry.MOD_ID);
 
-    public static final RegistryObject<EntityType<ThrownKnifeEntity>> THROWN_IRON_KNIFE_ENTITY_TYPE =
-            ENTITY_TYPES.register("thrown_iron_knife", () -> EntityType.Builder.<ThrownKnifeEntity>of(ThrownIronKnifeEntity::new, MobCategory.MISC)
-                    .sized(0.4f, 0.4f)
-                    .build(new ResourceLocation(MoonsWeaponry.MOD_ID, "thrown_iron_knife_entity").toString()));
+    public static final RegistryObject<EntityType<ThrownDaggerEntity>> THROWN_DAGGER_ENTITY_TYPE =
+            ENTITY_TYPES.register("thrown_dagger", () -> EntityType.Builder.<ThrownDaggerEntity>of(ThrownDaggerEntity::new, MobCategory.MISC)
+                    .sized(0.4f,0.4f)
+                    .build(new ResourceLocation(MoonsWeaponry.MOD_ID, "thrown_dagger_entity").toString()));
+
+    //public static final RegistryObject<EntityType<ThrownDaggerEntity>> THROWN_IRON_DAGGER_ENTITY_TYPE =
+    //        ENTITY_TYPES.register("thrown_iron_dagger", () -> EntityType.Builder.<ThrownDaggerEntity>of(ThrownIronDaggerEntity::new, MobCategory.MISC)
+    //                .sized(0.4f, 0.4f)
+    //                .build(new ResourceLocation(MoonsWeaponry.MOD_ID, "thrown_iron_dagger_entity").toString()));
+//
+    //public static final RegistryObject<EntityType<ThrownDaggerEntity>> THROWN_GOLD_DAGGER_ENTITY_TYPE =
+    //        ENTITY_TYPES.register("thrown_gold_dagger", () -> EntityType.Builder.<ThrownDaggerEntity>of(ThrownGoldDaggerEntity::new, MobCategory.MISC)
+    //                .sized(0.4f, 0.4f)
+    //                .build(new ResourceLocation(MoonsWeaponry.MOD_ID, "thrown_gold_dagger_entity").toString()));
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

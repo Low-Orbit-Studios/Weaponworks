@@ -2,6 +2,8 @@ package net.twomoonsstudios.moonsweaponry.entity;
 
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.protocol.Packet;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
@@ -11,25 +13,21 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.Tiers;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.twomoonsstudios.moonsweaponry.enums.WeaponTypesEnum;
+import net.minecraftforge.entity.IEntityAdditionalSpawnData;
+import net.minecraftforge.network.NetworkHooks;
 import net.twomoonsstudios.moonsweaponry.helpers.ThrowablesHelper;
+import net.twomoonsstudios.moonsweaponry.item.ModItems;
 import net.twomoonsstudios.moonsweaponry.item.ThrowableWeaponItem;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashMap;
-import java.util.Map;
 
 import static net.twomoonsstudios.moonsweaponry.constants.ThrownWeaponDataConstants.*;
 
-public abstract class AbstractThrowable extends AbstractArrow {
-    protected ItemStack usedItem;
+public abstract class AbstractThrowable extends AbstractArrow implements IEntityAdditionalSpawnData {
+    private ItemStack usedItem = new ItemStack(ModItems.IRON_DAGGER.get());
     protected ResourceLocation throwableTexture;
     protected int velocityEnchantmentLevel = 0;
     /**The velocity assigned upon throwing. Includes enchantments effects.*/
@@ -39,11 +37,11 @@ public abstract class AbstractThrowable extends AbstractArrow {
     public AbstractThrowable(EntityType<? extends AbstractThrowable> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
-    public AbstractThrowable(EntityType<? extends AbstractThrowable> entityType, Level level, LivingEntity entity, ItemStack stack, float initialVelocity) {
+    public AbstractThrowable(EntityType<? extends AbstractThrowable> entityType, Level level, LivingEntity entity, ItemStack stack, float velocityIn) {
         super(entityType, entity, level);
-        this.usedItem = stack.copy();
-        this.initialVelocity = initialVelocity;
-        this.inGroundCheck = this.inGround;
+        usedItem = stack.copy();
+        initialVelocity = velocityIn;
+        inGroundCheck = this.inGround;
     }
     protected ItemStack matchingItem(Player player, ItemStack itemStack) {
         var enchantments = itemStack.getAllEnchantments();//.toString();
@@ -87,10 +85,19 @@ public abstract class AbstractThrowable extends AbstractArrow {
     public void setVelocityEnchantmentLevel(int newLevel){
         this.velocityEnchantmentLevel = newLevel;
     }
-    public int getVelocityEnchantmentLevel(){
+    public int getVelocityEnchantmentLevel() {
         return this.velocityEnchantmentLevel;
     }
-    // This (if it works) should save the used item that is just a local variable into actual entity data...
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
+        if (tag.contains("usedItem", 10)) {
+            this.usedItem = ItemStack.of(tag.getCompound("usedItem"));
+        }
+        this.initialVelocity = tag.getFloat("initialVelocity");
+    }
+
     @Override
     public void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
@@ -98,16 +105,8 @@ public abstract class AbstractThrowable extends AbstractArrow {
         tag.putFloat("initialVelocity", initialVelocity);
     }
 
-    //... and this one should read said data and put it into the actual entity's variable!
-    @Override
-    public void readAdditionalSaveData(CompoundTag tag) {
-        super.readAdditionalSaveData(tag);
-        this.usedItem = ItemStack.of(tag.getCompound("usedItem"));
-        this.initialVelocity = tag.getFloat("initialVelocity");
-    }
-
     public ItemStack getUsedItem() {
-        return this.usedItem;
+        return usedItem.copy();
     }
 
     protected boolean pickupItem(Player pPlayer) {
@@ -126,7 +125,7 @@ public abstract class AbstractThrowable extends AbstractArrow {
     // do NOT let the player pick up a new itemstack lol
     @Override
     protected @NotNull ItemStack getPickupItem() {
-        return ItemStack.EMPTY;
+        return usedItem.copy();
     }
 
     // DONE!: The damage points should be referencing the entity velocity and doing min/max damage based on it.
@@ -144,7 +143,7 @@ public abstract class AbstractThrowable extends AbstractArrow {
         float dmgToDeal = ThrowablesHelper.getDmgByVelocity(THROWABLE_MAX_DMG_VELOCITY_THRESHOLD
                 , THROWABLE_MIN_DMG_VELOCITY_THRESHOLD
                 , velocity
-                , THROWING_KNIFE_DEFAULT_VELOCITY
+                , DAGGER_DEFAULT_VELOCITY
                 , itemBaseDamage
                 , THROWABLE_MIN_DMG_COEF
         );
@@ -167,5 +166,20 @@ public abstract class AbstractThrowable extends AbstractArrow {
                 }
             }
         }
+    }
+
+    @Override
+    public void writeSpawnData(FriendlyByteBuf friendlyByteBuf) {
+        friendlyByteBuf.writeItem(usedItem);
+    }
+
+    @Override
+    public void readSpawnData(FriendlyByteBuf friendlyByteBuf) {
+        usedItem = friendlyByteBuf.readItem();
+    }
+
+    @Override
+    public @NotNull Packet<?> getAddEntityPacket() {
+        return NetworkHooks.getEntitySpawningPacket(this);
     }
 }

@@ -10,9 +10,9 @@ public class ThrownWeaponDataConstants{
     /**How long will struck entity be set on fire for, in seconds.*/
     public static final int THROWABLES_FLAME_ENCHANT_ENTITY_SECONDS = 5;
     //Throwing knives
-    public static final int THROWING_KNIFE_DEFAULT_CD = 10;
-    public static final float THROWING_KNIFE_DEFAULT_INACCURACY = 0.1f;
-    public static final float THROWING_KNIFE_DEFAULT_VELOCITY = 1.6f;
+    public static final int DAGGER_DEFAULT_CD = 10;
+    public static final float DAGGER_DEFAULT_INACCURACY = 0.1f;
+    public static final float DAGGER_DEFAULT_VELOCITY = 1.6f;
     /**If the speed is greater or equal to this value, the weapon will deal max damage on impact.
      * Below it the damage will be properly scaled down. Range [0, 1]. Treat as % of max velocity.*/
     public static final float THROWABLE_MAX_DMG_VELOCITY_THRESHOLD = 0.8f;
@@ -21,17 +21,23 @@ public class ThrownWeaponDataConstants{
     public static final float THROWABLE_MIN_DMG_VELOCITY_THRESHOLD = 0.4f;
     /**The minimal damage multiplier a throwable can deal due to low movement speed. Range [0, 1]*/
     public static final float THROWABLE_MIN_DMG_COEF = 0.2f;
-    public static final int THROWING_KNIFE_DEFAULT_USES = 16;
-    public static final int THROWING_KNIFE_DEFAULT_DAMAGE = 10;
+    public static final int DAGGER_DEFAULT_USES = 16;
+    public static final int DAGGER_DEFAULT_DAMAGE = 10;
 
-    public static final String WOODEN_THROWING_KNIFE_DEFAULT_TIER_NAME = "WOOD";
-    public static final int WOODEN_THROWING_KNIFE_DEFAULT_DMG = 5;
-    public static final int WOODEN_THROWING_KNIFE_DEFAULT_USES = 16;
+    public static final String WOODEN_DAGGER_DEFAULT_TIER_NAME = "WOOD";
+    public static final int WOODEN_DAGGER_DEFAULT_DMG = 7;
+    public static final int WOODEN_DAGGER_DEFAULT_USES = 16;
 
-    public static final String STONE_THROWING_KNIFE_DEFAULT_TIER_NAME = "STONE";
-    public static final int STONE_THROWING_KNIFE_DEFAULT_DMG = 6;
+    public static final String STONE_DAGGER_DEFAULT_TIER_NAME = "STONE";
+    public static final int STONE_DAGGER_DEFAULT_DMG = 8;
+    public static final int STONE_DAGGER_DEFAULT_USES = 24;
 
-    public static final String IRON_THROWING_KNIFE_DEFAULT_TIER_NAME = "IRON";
-    public static final int IRON_THROWING_KNIFE_DEFAULT_DMG = 7;
+    public static final String IRON_DAGGER_DEFAULT_TIER_NAME = "IRON";
+    public static final int IRON_DAGGER_DEFAULT_DMG = 9;
+    public static final int IRON_DAGGER_DEFAULT_USES = 32;
+
+    public static final String GOLD_DAGGER_DEFAULT_TIER_NAME = "IRON";
+    public static final int GOLD_DAGGER_DEFAULT_DMG = 10;
+    public static final int GOLD_DAGGER_DEFAULT_USES = 8;
     //TODO add rest when the time comes
 }

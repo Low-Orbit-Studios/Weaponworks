@@ -17,7 +17,7 @@ import net.twomoonsstudios.moonsweaponry.block.entity.ModBlockEntities;
 import net.twomoonsstudios.moonsweaponry.block.entity.itemtemplates.TemplateCollectionController;
 import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 import net.twomoonsstudios.moonsweaponry.enchanting.ModEnchantments;
-import net.twomoonsstudios.moonsweaponry.entity.ThrownKnifeRenderer;
+import net.twomoonsstudios.moonsweaponry.entity.ThrownWeaponRenderer;
 import net.twomoonsstudios.moonsweaponry.entity.WeaponworksEntities;
 import net.twomoonsstudios.moonsweaponry.events.SetupEvents;
 import net.twomoonsstudios.moonsweaponry.item.ModItems;
@@ -78,7 +78,7 @@ public class MoonsWeaponry
         public static void onClientSetup(FMLClientSetupEvent event)
         {
             // Register the renderer for the thrown weapons. Probably will have to redo this soon.
-            EntityRenderers.register(WeaponworksEntities.THROWN_IRON_KNIFE_ENTITY_TYPE.get(), ThrownKnifeRenderer::new);
+            EntityRenderers.register(WeaponworksEntities.THROWN_DAGGER_ENTITY_TYPE.get(), ThrownWeaponRenderer::new);
             // Fix the bow models so they register at the right times.
             SetupEvents.registerBowPredicates(ModItems.LONGBOW.get());
             SetupEvents.registerBowPredicates(ModItems.SHORTBOW.get());

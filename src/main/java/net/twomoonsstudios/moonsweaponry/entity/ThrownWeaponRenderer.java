@@ -10,29 +10,25 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.twomoonsstudios.moonsweaponry.MoonsWeaponry;
 
 // Big thanks to Mickelus for letting me reference/adapt some lines from his work! Check out tetra if you haven't already.
 
-@OnlyIn(Dist.CLIENT)
-public class ThrownKnifeRenderer extends EntityRenderer<ThrownKnifeEntity> {
-    public ThrownKnifeRenderer(EntityRendererProvider.Context pContext) {
+public class ThrownWeaponRenderer extends EntityRenderer<AbstractThrowable> {
+    public ThrownWeaponRenderer(EntityRendererProvider.Context pContext) {
         super(pContext);
     }
 
     @Override
-    public void render(ThrownKnifeEntity pEntity, float pEntityYaw, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
+    public void render(AbstractThrowable pEntity, float pEntityYaw, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
         pPoseStack.pushPose();
 
         float velocity = (float) pEntity.getDeltaMovement().normalize().length();
         boolean shouldSpin = (velocity > 0.1 || pEntity.isNoPhysics()) && !(pEntity.inGroundCheck || pEntity.isInWall() || pEntity.isOnGround() || pEntity.isInWaterOrBubble() || pEntity.isInPowderSnow);
-        if (shouldSpin) {
-            spin(pEntity, pPartialTick, pPoseStack);
+        if (shouldSpin && pEntity instanceof ThrownDaggerEntity) {
+            verticalSpin(pEntity, pPartialTick, pPoseStack);
         } else {pointFirst(pEntity, pPartialTick, pPoseStack);}
 
-        var usedItem = pEntity.getUsedItem();
+        var usedItem = pEntity.getPickupItem();
         Minecraft.getInstance().getItemRenderer().renderStatic(usedItem, ItemTransforms.TransformType.FIXED,
                 pPackedLight, OverlayTexture.NO_OVERLAY, pPoseStack, pBuffer, pEntity.getId());
 
@@ -40,7 +36,7 @@ public class ThrownKnifeRenderer extends EntityRenderer<ThrownKnifeEntity> {
         super.render(pEntity, pEntityYaw, pPartialTick, pPoseStack, pBuffer, pPackedLight);
     }
 
-    public void pointFirst(ThrownKnifeEntity pEntity, float partialTicks, PoseStack pPoseStack) {
+    public void pointFirst(AbstractThrowable pEntity, float partialTicks, PoseStack pPoseStack) {
 
         // Points away from player
         float yRotModifier = 270.0F;
@@ -55,7 +51,7 @@ public class ThrownKnifeRenderer extends EntityRenderer<ThrownKnifeEntity> {
         pPoseStack.mulPose(Vector3f.XP.rotationDegrees(xRotModifier));
     }
 
-    public void spin(ThrownKnifeEntity entity, float partialTicks, PoseStack poseStack) {
+    public void verticalSpin(AbstractThrowable entity, float partialTicks, PoseStack poseStack) {
 
         float spinModifier = entity.tickCount + partialTicks;
         // Points away from player
@@ -63,20 +59,16 @@ public class ThrownKnifeRenderer extends EntityRenderer<ThrownKnifeEntity> {
         poseStack.mulPose(Vector3f.YP.rotationDegrees(Mth.lerp(partialTicks, entity.getYRot(), entity.getYRot()) + yRotModifier));
 
         //epic spinny
-        float zRotModifier = spinModifier * -30;
+        float zRotModifier = spinModifier * -40;
         poseStack.mulPose(Vector3f.ZP.rotationDegrees(Mth.lerp(partialTicks, entity.getXRot(), entity.getXRot()) + zRotModifier));
 
         float xRotModifier = 180.0F;
         poseStack.mulPose(Vector3f.XP.rotationDegrees(xRotModifier));
-
-        poseStack.translate(-0.2f,0.2f,0f);
     }
-
-
 
     // This stops it from trying to render it like a normal entity
     @Override
-    public ResourceLocation getTextureLocation(ThrownKnifeEntity pEntity) {
+    public ResourceLocation getTextureLocation(AbstractThrowable pEntity) {
         return null;
     }
 }
