@@ -17,15 +17,15 @@ public class WeaponworksEntities {
                     .sized(0.4f,0.4f)
                     .build(new ResourceLocation(MoonsWeaponry.MOD_ID, "thrown_dagger_entity").toString()));
 
-    //public static final RegistryObject<EntityType<ThrownDaggerEntity>> THROWN_IRON_DAGGER_ENTITY_TYPE =
-    //        ENTITY_TYPES.register("thrown_iron_dagger", () -> EntityType.Builder.<ThrownDaggerEntity>of(ThrownIronDaggerEntity::new, MobCategory.MISC)
-    //                .sized(0.4f, 0.4f)
-    //                .build(new ResourceLocation(MoonsWeaponry.MOD_ID, "thrown_iron_dagger_entity").toString()));
-//
-    //public static final RegistryObject<EntityType<ThrownDaggerEntity>> THROWN_GOLD_DAGGER_ENTITY_TYPE =
-    //        ENTITY_TYPES.register("thrown_gold_dagger", () -> EntityType.Builder.<ThrownDaggerEntity>of(ThrownGoldDaggerEntity::new, MobCategory.MISC)
-    //                .sized(0.4f, 0.4f)
-    //                .build(new ResourceLocation(MoonsWeaponry.MOD_ID, "thrown_gold_dagger_entity").toString()));
+    public static final RegistryObject<EntityType<ThrownJavelinEntity>> THROWN_JAVELIN_ENTITY_TYPE =
+            ENTITY_TYPES.register("thrown_javelin", () -> EntityType.Builder.<ThrownJavelinEntity>of(ThrownJavelinEntity::new, MobCategory.MISC)
+                    .sized(0.4f,0.4f)
+                    .build(new ResourceLocation(MoonsWeaponry.MOD_ID, "thrown_javelin_entity").toString()));
+
+    public static final RegistryObject<EntityType<ThrownShurikenEntity>> THROWN_SHURIKEN_ENTITY_TYPE =
+            ENTITY_TYPES.register("thrown_shuriken", () -> EntityType.Builder.<ThrownShurikenEntity>of(ThrownShurikenEntity::new, MobCategory.MISC)
+                    .sized(0.4f,0.4f)
+                    .build(new ResourceLocation(MoonsWeaponry.MOD_ID, "thrown_shuriken_entity").toString()));
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

@@ -56,6 +56,30 @@ public class ModItems {
             )
     );
 
+    public static RegistryObject<Item> IRON_JAVELIN = ITEMS.register(
+            "iron_javelin",
+            () -> new JavelinItem(
+                    Tiers.IRON,
+                    new ThrowableWeaponItem.ThrowableProperties()
+                            .setThrowVelocity(JAVELIN_DEFAULT_VELOCITY)
+                            .setCooldown(JAVELIN_DEFAULT_CD)
+                            .setInaccuracy(JAVELIN_DEFAULT_INACCURACY)
+                            .setBaseDamage(IRON_JAVELIN_DEFAULT_DMG)
+                    ,
+                    new Item.Properties()
+                            .defaultDurability(IRON_JAVELIN_DEFAULT_USES)
+                            .tab(CreativeModeTab.TAB_COMBAT)
+            )
+    );
+
+    public static RegistryObject<Item> IRON_SHURIKEN = ITEMS.register("iron_shuriken",
+            () -> new ShurikenItem(
+                    Tiers.IRON,
+                    new ThrowableWeaponItem.ThrowableProperties()
+                            .setThrowVelocity(1.5f).setCooldown(15).setInaccuracy(0).setBaseDamage(5),
+                    new Item.Properties().defaultDurability(8).tab(CreativeModeTab.TAB_COMBAT)
+            ));
+
     /**Stores references to proper weapon items, excluding templates used in crafting stations.*/
     public static LinkedList<RegistryObject<Item>> WEAPONS_ITEMS = new LinkedList<>();
 

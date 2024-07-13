@@ -24,9 +24,13 @@ public class ThrownWeaponRenderer extends EntityRenderer<AbstractThrowable> {
 
         float velocity = (float) pEntity.getDeltaMovement().normalize().length();
         boolean shouldSpin = (velocity > 0.1 || pEntity.isNoPhysics()) && !(pEntity.inGroundCheck || pEntity.isInWall() || pEntity.isOnGround() || pEntity.isInWaterOrBubble() || pEntity.isInPowderSnow);
-        if (shouldSpin && pEntity instanceof ThrownDaggerEntity) {
+        if (shouldSpin && (pEntity instanceof ThrownDaggerEntity)) {
             verticalSpin(pEntity, pPartialTick, pPoseStack);
         } else {pointFirst(pEntity, pPartialTick, pPoseStack);}
+
+        if (pEntity instanceof ThrownJavelinEntity) {pPoseStack.translate(0.35,-0.35,0);}
+
+        if (pEntity instanceof ThrownShurikenEntity) {pointHorizontal(pEntity,pPartialTick,pPoseStack, shouldSpin);}
 
         var usedItem = pEntity.getPickupItem();
         Minecraft.getInstance().getItemRenderer().renderStatic(usedItem, ItemTransforms.TransformType.FIXED,
@@ -62,8 +66,16 @@ public class ThrownWeaponRenderer extends EntityRenderer<AbstractThrowable> {
         float zRotModifier = spinModifier * -40;
         poseStack.mulPose(Vector3f.ZP.rotationDegrees(Mth.lerp(partialTicks, entity.getXRot(), entity.getXRot()) + zRotModifier));
 
-        float xRotModifier = 180.0F;
-        poseStack.mulPose(Vector3f.XP.rotationDegrees(xRotModifier));
+        poseStack.mulPose(Vector3f.XP.rotationDegrees(180.0f));
+    }
+
+    public void pointHorizontal(AbstractThrowable entity, float partialTicks, PoseStack poseStack, boolean shouldSpin) {
+        poseStack.mulPose(Vector3f.XP.rotationDegrees(90));
+        poseStack.mulPose(Vector3f.YP.rotationDegrees(-45));
+        if (shouldSpin) {
+            float spinModifier = (entity.tickCount + partialTicks) * -15;
+            poseStack.mulPose(Vector3f.ZP.rotationDegrees(Mth.lerp(partialTicks, entity.getXRot(), entity.getXRot() + spinModifier)));
+        }
     }
 
     // This stops it from trying to render it like a normal entity

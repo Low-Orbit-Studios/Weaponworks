@@ -2,7 +2,9 @@ package net.twomoonsstudios.moonsweaponry.item;
 
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TieredItem;
@@ -12,6 +14,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.registries.RegistryObject;
 import net.twomoonsstudios.moonsweaponry.enchanting.CapacityEnchantment;
 import net.twomoonsstudios.moonsweaponry.enchanting.ModEnchantments;
 import net.twomoonsstudios.moonsweaponry.enchanting.VelocityEnchantment;
@@ -78,30 +81,50 @@ public abstract class ThrowableWeaponItem extends TieredItem {
         return this.baseDamage;
     }
 
+    //things that fire more than one projectile should take more than one from the stack
+    public int useCost() {
+        return 1;
+    }
+
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
 
         ItemStack itemStack = player.getItemInHand(hand);
+        boolean mainHandPriority = true;
+        if (hand.equals(InteractionHand.OFF_HAND) && (player.getItemInHand(InteractionHand.MAIN_HAND).getItem() instanceof ThrowableWeaponItem)) {
+           mainHandPriority = false;
+        }
 
-        if (itemStack.getDamageValue() < itemStack.getMaxDamage() && !level.isClientSide) {
+
+        if (itemStack.getDamageValue() < itemStack.getMaxDamage() && !level.isClientSide && mainHandPriority) {
             //We throw one item at a time - hence 1
-            itemStack.hurt(1, null, null);
-            AbstractThrowable thrownDaggerEntity = null;//new ThrownIronDaggerEntity(level, player, itemStack);
+            itemStack.hurt(useCost(), null, null);
+            AbstractThrowable entityForThrowing = null;//new ThrownIronDaggerEntity(level, player, itemStack);
             try {
-                thrownDaggerEntity = createThrownEntity(level, player, itemStack, throwVelocity);
+                entityForThrowing = createThrownEntity(level, player, itemStack, throwVelocity);
             } catch (ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
-            this.applyEnchantments(itemStack, thrownDaggerEntity);
-            thrownDaggerEntity.setOwner(player);
+            this.applyEnchantments(itemStack, entityForThrowing);
+            entityForThrowing.setOwner(player);
             //for easier debugging.
             var playerXRot = player.getXRot();
             var playerYRot = player.getYRot();
-            thrownDaggerEntity.shootFromRotation(player, playerXRot, playerYRot, 0, thrownDaggerEntity.getInitialVelocity(), inaccuracy);
-            level.addFreshEntity(thrownDaggerEntity);
-            player.getCooldowns().addCooldown(this, cooldown);
+
+            shootingAction(level, entityForThrowing, player, playerXRot, playerYRot, 0, entityForThrowing.getInitialVelocity(), inaccuracy, itemStack);
+            for (RegistryObject<Item> item: ModItems.ITEMS.getEntries()) {
+                if (item.get() instanceof ThrowableWeaponItem throwingItem) {
+                    player.getCooldowns().addCooldown(throwingItem, cooldown);
+                }
+            }
         }
         return super.use(level, player, hand);
+    }
+
+    // having this allows for more complex things than just "throw one thing where the player is looking" like shurikens
+    public void shootingAction(Level level, AbstractThrowable entity, Player player, float xRot, float yRot, float zRot, float initialVelocity, float inaccuracy, ItemStack itemStack) {
+        entity.shootFromRotation(player, xRot, yRot, zRot, initialVelocity, inaccuracy);
+        level.addFreshEntity(entity);
     }
 
     @Override

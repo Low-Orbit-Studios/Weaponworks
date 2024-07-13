@@ -79,6 +79,8 @@ public class MoonsWeaponry
         {
             // Register the renderer for the thrown weapons. Probably will have to redo this soon.
             EntityRenderers.register(WeaponworksEntities.THROWN_DAGGER_ENTITY_TYPE.get(), ThrownWeaponRenderer::new);
+            EntityRenderers.register(WeaponworksEntities.THROWN_JAVELIN_ENTITY_TYPE.get(), ThrownWeaponRenderer::new);
+            EntityRenderers.register(WeaponworksEntities.THROWN_SHURIKEN_ENTITY_TYPE.get(), ThrownWeaponRenderer::new);
             // Fix the bow models so they register at the right times.
             SetupEvents.registerBowPredicates(ModItems.LONGBOW.get());
             SetupEvents.registerBowPredicates(ModItems.SHORTBOW.get());

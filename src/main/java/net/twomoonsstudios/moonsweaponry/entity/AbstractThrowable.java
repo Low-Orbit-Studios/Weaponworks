@@ -63,6 +63,7 @@ public abstract class AbstractThrowable extends AbstractArrow implements IEntity
             this.setDeltaMovement(new Vec3(0D,0D,0D));
         }
         super.tick();
+        if (this.tickCount > 3600) {this.discard();}
     }
 
     @Override
