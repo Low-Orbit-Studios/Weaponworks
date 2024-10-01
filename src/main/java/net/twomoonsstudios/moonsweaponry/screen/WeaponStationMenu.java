@@ -11,13 +11,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.SlotItemHandler;
 import net.twomoonsstudios.moonsweaponry.block.ModBlocks;
 import net.twomoonsstudios.moonsweaponry.block.entity.WeaponStationBlockEntity;
 import net.twomoonsstudios.moonsweaponry.screen.components.WeaponOutputSlotItemHandler;
 import net.twomoonsstudios.moonsweaponry.screen.components.WeaponSelectionSlotItemHandler;
-import org.jetbrains.annotations.Nullable;
 
 import static net.twomoonsstudios.moonsweaponry.constants.BlockEntityMenuConstants.*;
 import static net.twomoonsstudios.moonsweaponry.screen.ModMenuTypes.WEAPON_STATION_MENU;
@@ -157,6 +155,8 @@ public class WeaponStationMenu extends AbstractContainerMenu {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
                 pPlayer, ModBlocks.WEAPON_STATION.get());
     }
+
+
 
     public void changeWeaponTemplate(int pDelta) {
         var direction = pDelta > 0 ? -1 : 1;//1 for next, -1 for previous

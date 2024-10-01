@@ -27,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
 import static net.twomoonsstudios.moonsweaponry.constants.ThrownWeaponDataConstants.*;
 
 public abstract class AbstractThrowable extends AbstractArrow implements IEntityAdditionalSpawnData {
-    private ItemStack usedItem = new ItemStack(ModItems.IRON_DAGGER.get());
+    private ItemStack usedItem;
     protected ResourceLocation throwableTexture;
     protected int velocityEnchantmentLevel = 0;
     /**The velocity assigned upon throwing. Includes enchantments effects.*/
@@ -68,14 +68,11 @@ public abstract class AbstractThrowable extends AbstractArrow implements IEntity
 
     @Override
     protected boolean tryPickup(Player pPlayer) {
-        switch (this.pickup) {
-            case ALLOWED:
-                return pickupItem(pPlayer);
-            case CREATIVE_ONLY:
-                return pPlayer.getAbilities().instabuild;
-            default:
-                return false;
-        }
+        return switch (this.pickup) {
+            case ALLOWED -> pickupItem(pPlayer);
+            case CREATIVE_ONLY -> pPlayer.getAbilities().instabuild;
+            default -> false;
+        };
     }
     public void setInitialVelocity(float initialVelocity){
         this.initialVelocity = initialVelocity;
@@ -123,6 +120,10 @@ public abstract class AbstractThrowable extends AbstractArrow implements IEntity
         return false;
     }
 
+    public float getDefaultVelocity() {
+        return ((ThrowableWeaponItem) usedItem.getItem()).getBaseVelocity();
+    }
+
     // do NOT let the player pick up a new itemstack lol
     @Override
     protected @NotNull ItemStack getPickupItem() {
@@ -141,10 +142,10 @@ public abstract class AbstractThrowable extends AbstractArrow implements IEntity
         var isEnderman = hitEntity.getType() == EntityType.ENDERMAN;
 
         float velocity = Mth.floor(this.getDeltaMovement().length());
-        float dmgToDeal = ThrowablesHelper.getDmgByVelocity(THROWABLE_MAX_DMG_VELOCITY_THRESHOLD
+        float dmgToDeal = 2 * ThrowablesHelper.getDmgByVelocity(THROWABLE_MAX_DMG_VELOCITY_THRESHOLD
                 , THROWABLE_MIN_DMG_VELOCITY_THRESHOLD
                 , velocity
-                , DAGGER_DEFAULT_VELOCITY
+                , getDefaultVelocity()
                 , itemBaseDamage
                 , THROWABLE_MIN_DMG_COEF
         );

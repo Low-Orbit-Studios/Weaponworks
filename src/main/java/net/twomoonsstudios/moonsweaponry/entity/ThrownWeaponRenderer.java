@@ -24,13 +24,24 @@ public class ThrownWeaponRenderer extends EntityRenderer<AbstractThrowable> {
 
         float velocity = (float) pEntity.getDeltaMovement().normalize().length();
         boolean shouldSpin = (velocity > 0.1 || pEntity.isNoPhysics()) && !(pEntity.inGroundCheck || pEntity.isInWall() || pEntity.isOnGround() || pEntity.isInWaterOrBubble() || pEntity.isInPowderSnow);
-        if (shouldSpin && (pEntity instanceof ThrownDaggerEntity)) {
+        if (shouldSpin && (pEntity instanceof ThrownDaggerEntity || pEntity instanceof ThrownHatchetEntity)) {
             verticalSpin(pEntity, pPartialTick, pPoseStack);
-        } else {pointFirst(pEntity, pPartialTick, pPoseStack);}
+        } else {
+            pointFirst(pEntity, pPartialTick, pPoseStack);
+            if (pEntity instanceof ThrownHatchetEntity) { // hatchet hits blocks properly
+                pPoseStack.translate(0.1,-0.1, 0);
+                pPoseStack.mulPose(Vector3f.ZP.rotationDegrees(25));
+                pPoseStack.mulPose(Vector3f.YN.rotationDegrees(180));
+            }
+        }
 
-        if (pEntity instanceof ThrownJavelinEntity) {pPoseStack.translate(0.35,-0.35,0);}
+        if (pEntity instanceof ThrownJavelinEntity) {
+            pPoseStack.translate(0.35,-0.35,0); // Translates the point to where the hitbox is
+        }
 
-        if (pEntity instanceof ThrownShurikenEntity) {pointHorizontal(pEntity,pPartialTick,pPoseStack, shouldSpin);}
+        if (pEntity instanceof ThrownShurikenEntity || pEntity instanceof ThrownBoomerangEntity) {
+            pointHorizontal(pEntity,pPartialTick,pPoseStack, shouldSpin); // Points these entities sideways
+        }
 
         var usedItem = pEntity.getPickupItem();
         Minecraft.getInstance().getItemRenderer().renderStatic(usedItem, ItemTransforms.TransformType.FIXED,
@@ -63,7 +74,7 @@ public class ThrownWeaponRenderer extends EntityRenderer<AbstractThrowable> {
         poseStack.mulPose(Vector3f.YP.rotationDegrees(Mth.lerp(partialTicks, entity.getYRot(), entity.getYRot()) + yRotModifier));
 
         //epic spinny
-        float zRotModifier = spinModifier * -40;
+        float zRotModifier = spinModifier * -60f;
         poseStack.mulPose(Vector3f.ZP.rotationDegrees(Mth.lerp(partialTicks, entity.getXRot(), entity.getXRot()) + zRotModifier));
 
         poseStack.mulPose(Vector3f.XP.rotationDegrees(180.0f));
@@ -73,7 +84,7 @@ public class ThrownWeaponRenderer extends EntityRenderer<AbstractThrowable> {
         poseStack.mulPose(Vector3f.XP.rotationDegrees(90));
         poseStack.mulPose(Vector3f.YP.rotationDegrees(-45));
         if (shouldSpin) {
-            float spinModifier = (entity.tickCount + partialTicks) * -15;
+            float spinModifier = (entity.tickCount + partialTicks) * -60f;
             poseStack.mulPose(Vector3f.ZP.rotationDegrees(Mth.lerp(partialTicks, entity.getXRot(), entity.getXRot() + spinModifier)));
         }
     }

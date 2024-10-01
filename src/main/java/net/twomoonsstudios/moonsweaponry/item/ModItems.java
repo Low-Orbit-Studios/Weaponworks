@@ -2,6 +2,7 @@ package net.twomoonsstudios.moonsweaponry.item;
 
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -10,12 +11,12 @@ import net.minecraftforge.registries.RegistryObject;
 import net.twomoonsstudios.moonsweaponry.MoonsWeaponry;
 import net.twomoonsstudios.moonsweaponry.config.objects.WeaponConfigObj;
 import net.twomoonsstudios.moonsweaponry.enums.WeaponTypesEnum;
+import net.twomoonsstudios.moonsweaponry.helpers.ThrowablesHelper;
 import net.twomoonsstudios.moonsweaponry.item.weapons.*;
 
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.*;
 
+import static java.lang.System.in;
 import static net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig.WEAPON_CONFIGS;
 import static net.twomoonsstudios.moonsweaponry.constants.CommonConstants.TEMPLATE_PREFIX;
 import static net.twomoonsstudios.moonsweaponry.constants.ThrownWeaponDataConstants.*;
@@ -25,60 +26,50 @@ import static net.twomoonsstudios.moonsweaponry.constants.RangedWeaponConstants.
 public class ModItems {
 
     public static DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MoonsWeaponry.MOD_ID);
-    public static RegistryObject<Item> IRON_DAGGER = ITEMS.register(
-            "iron_dagger",
-            () -> new DaggerItem(
-                    Tiers.IRON,
-                    new ThrowableWeaponItem.ThrowableProperties()
-                            .setThrowVelocity(DAGGER_DEFAULT_VELOCITY)
-                            .setCooldown(DAGGER_DEFAULT_CD)
-                            .setInaccuracy(DAGGER_DEFAULT_INACCURACY)
-                            .setBaseDamage(IRON_DAGGER_DEFAULT_DMG)
-                    ,
-                    new Item.Properties()
-                            .defaultDurability(IRON_DAGGER_DEFAULT_USES)
-                            .tab(CreativeModeTab.TAB_COMBAT)
-            )
-    );
-    public static RegistryObject<Item> GOLD_DAGGER = ITEMS.register(
-            "gold_dagger",
-            () -> new DaggerItem(
-                    Tiers.GOLD,
-                    new ThrowableWeaponItem.ThrowableProperties()
-                            .setThrowVelocity(DAGGER_DEFAULT_VELOCITY)
-                            .setCooldown(DAGGER_DEFAULT_CD)
-                            .setInaccuracy(DAGGER_DEFAULT_INACCURACY)
-                            .setBaseDamage(GOLD_DAGGER_DEFAULT_DMG)
-                    ,
-                    new Item.Properties()
-                            .defaultDurability(GOLD_DAGGER_DEFAULT_USES)
-                            .tab(CreativeModeTab.TAB_COMBAT)
-            )
-    );
 
-    public static RegistryObject<Item> IRON_JAVELIN = ITEMS.register(
-            "iron_javelin",
-            () -> new JavelinItem(
-                    Tiers.IRON,
-                    new ThrowableWeaponItem.ThrowableProperties()
-                            .setThrowVelocity(JAVELIN_DEFAULT_VELOCITY)
-                            .setCooldown(JAVELIN_DEFAULT_CD)
-                            .setInaccuracy(JAVELIN_DEFAULT_INACCURACY)
-                            .setBaseDamage(IRON_JAVELIN_DEFAULT_DMG)
-                    ,
-                    new Item.Properties()
-                            .defaultDurability(IRON_JAVELIN_DEFAULT_USES)
-                            .tab(CreativeModeTab.TAB_COMBAT)
-            )
-    );
+    public static List<RegistryObject<Item>> createBaseThrowables() {
+        String[] tierNames = {"wood", "stone", "iron", "gold", "diamond", "netherite"};
+        String[] weaponNames = {"dagger", "javelin", "shuriken", "hatchet", "boomerang"};
+        var a = new ArrayList<RegistryObject<Item>>();
+        for (int i = 0; i < tierNames.length; i++) {
+            for (int j = 0; j < weaponNames.length; j++) {
+                String itemID = tierNames[i] + "_" + weaponNames[j];
+                var properties = getProperties(tierNames[i], weaponNames[j]);
+                int defaultUses = (int) ThrowablesHelper.getDefaultConfig().getOrDefault(itemID + "_default_uses",8);
+                int finalI = i;
+                if (j == 0) {
+                    a.add( ITEMS.register(itemID, () -> new DaggerItem(Tiers.valueOf(tierNames[finalI].toUpperCase()), properties, new Item.Properties().tab(CreativeModeTab.TAB_COMBAT).defaultDurability(defaultUses))));
+                }
+                if (j == 1) {
+                    a.add( ITEMS.register(itemID, () -> new JavelinItem(Tiers.valueOf(tierNames[finalI].toUpperCase()), properties, new Item.Properties().tab(CreativeModeTab.TAB_COMBAT).defaultDurability(defaultUses))));
+                }
+                if (j == 2) {
+                    a.add( ITEMS.register(itemID, () -> new ShurikenItem(Tiers.valueOf(tierNames[finalI].toUpperCase()), properties, new Item.Properties().tab(CreativeModeTab.TAB_COMBAT).defaultDurability(defaultUses))));
+                }
+                if (j == 3) {
+                    a.add( ITEMS.register(itemID, () -> new HatchetItem(Tiers.valueOf(tierNames[finalI].toUpperCase()), properties, new Item.Properties().tab(CreativeModeTab.TAB_COMBAT).defaultDurability(defaultUses))));
+                }
+                if (j == 4) {
+                    a.add( ITEMS.register(itemID, () -> new BoomerangItem(Tiers.valueOf(tierNames[finalI].toUpperCase()), properties, new Item.Properties().tab(CreativeModeTab.TAB_COMBAT).defaultDurability(defaultUses))));
+                }
+            }
+        }
+        return a;
+    }
 
-    public static RegistryObject<Item> IRON_SHURIKEN = ITEMS.register("iron_shuriken",
-            () -> new ShurikenItem(
-                    Tiers.IRON,
-                    new ThrowableWeaponItem.ThrowableProperties()
-                            .setThrowVelocity(1.5f).setCooldown(15).setInaccuracy(0).setBaseDamage(5),
-                    new Item.Properties().defaultDurability(8).tab(CreativeModeTab.TAB_COMBAT)
-            ));
+    public static ThrowableWeaponItem.ThrowableProperties getProperties(String tier, String type) {
+        String id = tier + "_" + type;
+        var config = ThrowablesHelper.getDefaultConfig();
+        float throwVelocity = (float) config.get(type + "_default_velocity");
+        int cooldown = (int) config.get(type + "_default_cooldown");
+        float inaccuracy = (float) config.get(type+ "_default_inaccuracy");
+        int baseDamage = (int) config.get(id + "_default_dmg");
+        return new ThrowableWeaponItem.ThrowableProperties()
+                .setThrowVelocity(throwVelocity)
+                .setInaccuracy(inaccuracy)
+                .setCooldown(cooldown)
+                .setBaseDamage(baseDamage);
+    }
 
     /**Stores references to proper weapon items, excluding templates used in crafting stations.*/
     public static LinkedList<RegistryObject<Item>> WEAPONS_ITEMS = new LinkedList<>();
@@ -193,7 +184,6 @@ public class ModItems {
             }
             itemsToRegister.put(weaponType, sortedWeaponTypeItems);
         }
-
         return itemsToRegister;
     }
 
@@ -245,6 +235,7 @@ public class ModItems {
             MoonsWeaponry.getLogger().error("Failed to load weapons: " + ex.getMessage());
         }
 
+        createBaseThrowables();
 
         ITEMS.register(eventBus);
     }

@@ -27,6 +27,16 @@ public class WeaponworksEntities {
                     .sized(0.4f,0.4f)
                     .build(new ResourceLocation(MoonsWeaponry.MOD_ID, "thrown_shuriken_entity").toString()));
 
+    public static final RegistryObject<EntityType<ThrownHatchetEntity>> THROWN_HATCHET_ENTITY_TYPE =
+            ENTITY_TYPES.register("thrown_hatchet", () -> EntityType.Builder.<ThrownHatchetEntity>of(ThrownHatchetEntity::new, MobCategory.MISC)
+                    .sized(0.4f,0.4f)
+                    .build(new ResourceLocation(MoonsWeaponry.MOD_ID, "thrown_hatchet_entity").toString()));
+
+    public static final RegistryObject<EntityType<ThrownBoomerangEntity>> THROWN_BOOMERANG_ENTITY_TYPE =
+            ENTITY_TYPES.register("thrown_boomerang", () -> EntityType.Builder.<ThrownBoomerangEntity>of(ThrownBoomerangEntity::new, MobCategory.MISC)
+                    .sized(0.7f,0.3f)
+                    .build(new ResourceLocation(MoonsWeaponry.MOD_ID, "thrown_boomerang_entity").toString()));
+
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);
     }

@@ -1,13 +1,11 @@
 package net.twomoonsstudios.moonsweaponry.item;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.TieredItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
@@ -19,6 +17,10 @@ import net.twomoonsstudios.moonsweaponry.enchanting.CapacityEnchantment;
 import net.twomoonsstudios.moonsweaponry.enchanting.ModEnchantments;
 import net.twomoonsstudios.moonsweaponry.enchanting.VelocityEnchantment;
 import net.twomoonsstudios.moonsweaponry.entity.AbstractThrowable;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
+import java.util.Map;
 
 import static net.twomoonsstudios.moonsweaponry.constants.ThrownWeaponDataConstants.THROWABLES_FLAME_ENCHANT_SECONDS;
 
@@ -46,6 +48,11 @@ public abstract class ThrowableWeaponItem extends TieredItem {
         //MinecraftForge.EVENT_BUS.addListener(EventPriority.LOW, this::OnAnvilRepair);
     }
 
+    @Override
+    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+        pTooltipComponents.add(Component.literal( (getMaxDamage(pStack) - getDamage(pStack)) +" uses remaining"));
+        pTooltipComponents.add(Component.literal( (this.baseDamage) + " damage"));
+    }
 
     @Override
     public int getBarColor(ItemStack pStack) {
@@ -59,7 +66,7 @@ public abstract class ThrowableWeaponItem extends TieredItem {
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-        if(enchantment.equals(Enchantments.UNBREAKING)){
+        if(enchantment.equals(Enchantments.UNBREAKING) || enchantment.equals(Enchantments.MENDING)){
             return false;
         }
         else if(enchantment.equals(Enchantments.FLAMING_ARROWS) || enchantment.equals(Enchantments.PUNCH_ARROWS)){
@@ -81,6 +88,8 @@ public abstract class ThrowableWeaponItem extends TieredItem {
         return this.baseDamage;
     }
 
+    public float getBaseVelocity() {return this.throwVelocity;}
+
     //things that fire more than one projectile should take more than one from the stack
     public int useCost() {
         return 1;
@@ -96,7 +105,7 @@ public abstract class ThrowableWeaponItem extends TieredItem {
         }
 
 
-        if (itemStack.getDamageValue() < itemStack.getMaxDamage() && !level.isClientSide && mainHandPriority) {
+        if (itemStack.getDamageValue() + useCost() <= itemStack.getMaxDamage() && !level.isClientSide && mainHandPriority) {
             //We throw one item at a time - hence 1
             itemStack.hurt(useCost(), null, null);
             AbstractThrowable entityForThrowing = null;//new ThrownIronDaggerEntity(level, player, itemStack);
@@ -161,7 +170,15 @@ public abstract class ThrowableWeaponItem extends TieredItem {
             }
         }
     }
-//    private void OnAnvilRepair(AnvilRepairEvent event) {
+
+    @Override
+    public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
+        var enchantments = book.getAllEnchantments();
+        if (enchantments.containsValue(Enchantments.MENDING) || enchantments.containsValue(Enchantments.UNBREAKING)) {return false;}
+        return super.isBookEnchantable(stack, book);
+    }
+
+    //    private void OnAnvilRepair(AnvilRepairEvent event) {
 //        var isLeftItemThrowable = false;
 //        var isRightItemThrowable = false;
 //        var leftItemStack = event.getLeft();
@@ -187,7 +204,7 @@ public abstract class ThrowableWeaponItem extends TieredItem {
 //        }
 //    }
 
-    protected void applyEnchantments(ItemStack itemStack, AbstractThrowable projectile){
+    protected void applyEnchantments(ItemStack itemStack, AbstractThrowable projectile) {
         var punchEnchantmentLevel = itemStack.getEnchantmentLevel(Enchantments.PUNCH_ARROWS);
         var flameEnchantmentLevel = itemStack.getEnchantmentLevel(Enchantments.FLAMING_ARROWS);
         var velocityEnchantmentLevel = itemStack.getEnchantmentLevel(ModEnchantments.VELOCITY_ENCHANTMENT.get());

@@ -1,6 +1,9 @@
 package net.twomoonsstudios.moonsweaponry.enchanting;
 
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
+import net.twomoonsstudios.moonsweaponry.entity.AbstractThrowable;
+import net.twomoonsstudios.moonsweaponry.item.ThrowableWeaponItem;
 
 import static net.twomoonsstudios.moonsweaponry.constants.EnchantmentConstants.*;
 
@@ -29,5 +32,10 @@ public class CapacityEnchantment extends WeaponworksThrowableEnchantment{
         var totalIncrease = 1 + CAPACITY_MUL_PER_LEVEL * enchantmentLevel;//1 for easy multiplication
         var newDurability = baseDurability * totalIncrease;
         return Math.round(newDurability);
+    }
+
+    @Override
+    public boolean canEnchant(ItemStack pStack) {
+        return pStack.getItem() instanceof ThrowableWeaponItem;
     }
 }

@@ -64,7 +64,12 @@
   "item.moonsweaponry.template_mace": "Template Mace",
   "item.moonsweaponry.longbow": "Longbow",
   "item.moonsweaponry.shortbow": "Shortbow",
+
   "item.moonsweaponry.iron_dagger": "Iron Dagger",
+  "item.moonsweaponry.gold_dagger": "Gold Dagger",
+  "item.moonsweaponry.iron_javelin": "Iron Javelin",
+  "item.moonsweaponry.iron_shuriken": "Iron Shuriken",
+
   "itemGroup.moonsweaponrytab": "Weaponworks",
 
   "enchantment.moonsweaponry.velocity": "Velocity",
