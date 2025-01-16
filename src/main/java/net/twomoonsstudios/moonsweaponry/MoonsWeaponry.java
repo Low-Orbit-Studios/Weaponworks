@@ -20,10 +20,13 @@ import net.twomoonsstudios.moonsweaponry.block.entity.itemtemplates.TemplateColl
 import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 import net.twomoonsstudios.moonsweaponry.enchanting.ModEnchantments;
 import net.twomoonsstudios.moonsweaponry.entity.AbstractThrowable;
+import net.twomoonsstudios.moonsweaponry.entity.ThrownBombRenderer;
 import net.twomoonsstudios.moonsweaponry.entity.ThrownWeaponRenderer;
 import net.twomoonsstudios.moonsweaponry.entity.WeaponworksEntities;
 import net.twomoonsstudios.moonsweaponry.events.SetupEvents;
 import net.twomoonsstudios.moonsweaponry.item.ModItems;
+import net.twomoonsstudios.moonsweaponry.item.ModifiableBowItem;
+import net.twomoonsstudios.moonsweaponry.item.weapons.BombCannonItem;
 import net.twomoonsstudios.moonsweaponry.recipe.ModRecipes;
 import net.twomoonsstudios.moonsweaponry.screen.ModMenuTypes;
 import net.twomoonsstudios.moonsweaponry.screen.WeaponStationScreen;
@@ -86,9 +89,12 @@ public class MoonsWeaponry
             EntityRenderers.register(WeaponworksEntities.THROWN_SHURIKEN_ENTITY_TYPE.get(), ThrownWeaponRenderer::new);
             EntityRenderers.register(WeaponworksEntities.THROWN_HATCHET_ENTITY_TYPE.get(), ThrownWeaponRenderer::new);
             EntityRenderers.register(WeaponworksEntities.THROWN_BOOMERANG_ENTITY_TYPE.get(), ThrownWeaponRenderer::new);
+            EntityRenderers.register(WeaponworksEntities.THROWN_BOMB_ENTITY_TYPE.get(), ThrownBombRenderer::new);
             // Fix the bow models so they register at the right times.
-            SetupEvents.registerBowPredicates(ModItems.LONGBOW.get());
-            SetupEvents.registerBowPredicates(ModItems.SHORTBOW.get());
+            SetupEvents.registerBowPredicates((ModifiableBowItem) ModItems.LONGBOW.get());
+            SetupEvents.registerBowPredicates((ModifiableBowItem) ModItems.SHORTBOW.get());
+            // Add the bomb cannon model predicates to fix the models
+            SetupEvents.registerBombCannonPredicates((BombCannonItem) ModItems.BOMB_CANNON.get());
             // Add the menu for the weapon station
             MenuScreens.register(ModMenuTypes.WEAPON_STATION_MENU.get(), WeaponStationScreen::new);
         }

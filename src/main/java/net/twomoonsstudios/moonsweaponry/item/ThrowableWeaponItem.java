@@ -17,6 +17,8 @@ import net.twomoonsstudios.moonsweaponry.enchanting.CapacityEnchantment;
 import net.twomoonsstudios.moonsweaponry.enchanting.ModEnchantments;
 import net.twomoonsstudios.moonsweaponry.enchanting.VelocityEnchantment;
 import net.twomoonsstudios.moonsweaponry.entity.AbstractThrowable;
+import net.twomoonsstudios.moonsweaponry.entity.ThrownBombEntity;
+import net.twomoonsstudios.moonsweaponry.item.weapons.BombItem;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -104,7 +106,6 @@ public abstract class ThrowableWeaponItem extends TieredItem {
            mainHandPriority = false;
         }
 
-
         if (itemStack.getDamageValue() + useCost() <= itemStack.getMaxDamage() && !level.isClientSide && mainHandPriority) {
             //We throw one item at a time - hence 1
             itemStack.hurt(useCost(), null, null);
@@ -125,6 +126,10 @@ public abstract class ThrowableWeaponItem extends TieredItem {
                 if (item.get() instanceof ThrowableWeaponItem throwingItem) {
                     player.getCooldowns().addCooldown(throwingItem, cooldown);
                 }
+            }
+
+            if (this instanceof BombItem) {
+                itemStack.shrink(1);
             }
         }
         return super.use(level, player, hand);

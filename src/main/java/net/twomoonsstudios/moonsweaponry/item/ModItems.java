@@ -2,7 +2,6 @@ package net.twomoonsstudios.moonsweaponry.item;
 
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -16,10 +15,8 @@ import net.twomoonsstudios.moonsweaponry.item.weapons.*;
 
 import java.util.*;
 
-import static java.lang.System.in;
 import static net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig.WEAPON_CONFIGS;
 import static net.twomoonsstudios.moonsweaponry.constants.CommonConstants.TEMPLATE_PREFIX;
-import static net.twomoonsstudios.moonsweaponry.constants.ThrownWeaponDataConstants.*;
 import static net.twomoonsstudios.moonsweaponry.constants.RangedWeaponConstants.*;
 
 
@@ -71,6 +68,26 @@ public class ModItems {
                 .setBaseDamage(baseDamage);
     }
 
+    //public static RegistryObject<Item> BOMB = ITEMS.register(
+    //        "bomb", () -> new BombItem(new Item.Properties().stacksTo(16).tab(CreativeModeTab.TAB_COMBAT))
+    //);
+
+    public static RegistryObject<Item> BOMB = ITEMS.register(
+            "bomb",
+            () -> new BombItem(
+                    Tiers.IRON,
+                    new ThrowableWeaponItem.ThrowableProperties()
+                            .setThrowVelocity(1.5f)
+                            .setCooldown(40)
+                            .setInaccuracy(0.5f)
+                            .setBaseDamage(0)
+                    ,
+                    new Item.Properties()
+                            .tab(CreativeModeTab.TAB_COMBAT)
+                            .stacksTo(16)
+            )
+    );
+
     /**Stores references to proper weapon items, excluding templates used in crafting stations.*/
     public static LinkedList<RegistryObject<Item>> WEAPONS_ITEMS = new LinkedList<>();
 
@@ -87,6 +104,7 @@ public class ModItems {
                             .tab(CreativeModeTab.TAB_COMBAT)
             )
     );
+
     public static RegistryObject<Item> SHORTBOW = ITEMS.register(
             "shortbow", () -> new ModifiableBowItem(
                     new ModifiableBowItem.BowProperties()
@@ -100,6 +118,12 @@ public class ModItems {
                             .tab(CreativeModeTab.TAB_COMBAT)
             )
     );
+
+    public static RegistryObject<Item> BOMB_CANNON = ITEMS.register(
+            "bomb_cannon", () -> new BombCannonItem(new Item.Properties().stacksTo(1).tab(CreativeModeTab.TAB_COMBAT)
+            )
+    );
+
     //Templates are used in weapon station to show the user what are they about to make.
     public static RegistryObject<Item> GREATSWORD_TEMPLATE = ITEMS.register(
             TEMPLATE_PREFIX + WeaponTypesEnum.GREATSWORD.getBaseId(),
