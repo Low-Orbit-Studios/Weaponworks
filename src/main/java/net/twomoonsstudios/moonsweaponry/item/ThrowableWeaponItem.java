@@ -4,6 +4,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -12,20 +13,20 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.fml.loading.FMLPaths;
 import net.minecraftforge.registries.RegistryObject;
+import net.twomoonsstudios.moonsweaponry.MoonsWeaponry;
 import net.twomoonsstudios.moonsweaponry.enchanting.CapacityEnchantment;
 import net.twomoonsstudios.moonsweaponry.enchanting.ModEnchantments;
 import net.twomoonsstudios.moonsweaponry.enchanting.VelocityEnchantment;
 import net.twomoonsstudios.moonsweaponry.entity.AbstractThrowable;
 import net.twomoonsstudios.moonsweaponry.entity.ThrownBombEntity;
 import net.twomoonsstudios.moonsweaponry.item.weapons.BombItem;
+import net.twomoonsstudios.moonsweaponry.newConfig.ConfigHelper;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Map;
-
-import static net.twomoonsstudios.moonsweaponry.constants.ThrownWeaponDataConstants.THROWABLES_FLAME_ENCHANT_SECONDS;
-
 
 public abstract class ThrowableWeaponItem extends TieredItem {
 
@@ -39,6 +40,8 @@ public abstract class ThrowableWeaponItem extends TieredItem {
     protected float inaccuracy;
 
     protected int baseDamage;
+
+    private ConfigHelper config = new ConfigHelper(FMLPaths.CONFIGDIR.get());
 
     public ThrowableWeaponItem(Tier pTier, ThrowableProperties throwableProperties, Properties pProperties) {
         super(pTier, pProperties);
@@ -78,6 +81,7 @@ public abstract class ThrowableWeaponItem extends TieredItem {
             return super.canApplyAtEnchantingTable(stack, enchantment);
         }
     }
+
     @Override
     public int getMaxDamage(ItemStack stack) {
         var baseMaxDurability = super.getMaxDamage(stack);
@@ -99,16 +103,33 @@ public abstract class ThrowableWeaponItem extends TieredItem {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-
-        ItemStack itemStack = player.getItemInHand(hand);
         boolean mainHandPriority = true;
+        ItemStack itemStack = player.getItemInHand(hand);
         if (hand.equals(InteractionHand.OFF_HAND) && (player.getItemInHand(InteractionHand.MAIN_HAND).getItem() instanceof ThrowableWeaponItem)) {
-           mainHandPriority = false;
+            mainHandPriority = false;
         }
-
         if (itemStack.getDamageValue() + useCost() <= itemStack.getMaxDamage() && !level.isClientSide && mainHandPriority) {
-            //We throw one item at a time - hence 1
-            itemStack.hurt(useCost(), null, null);
+            player.startUsingItem(hand);
+            return InteractionResultHolder.consume(itemStack);
+        };
+        return super.use(level, player, hand);
+    }
+
+    @Override
+    public int getUseDuration(ItemStack pStack) {
+        return 72000;
+    }
+
+    @Override
+    public @NotNull UseAnim getUseAnimation(ItemStack pStack) {
+        return UseAnim.SPEAR;
+    }
+
+    @Override
+    public void releaseUsing(ItemStack itemStack, Level level, LivingEntity pLivingEntity, int timeCharged) {
+        Player player = (Player) pLivingEntity;
+        if (72000 - timeCharged > 10) {
+            if (!player.getAbilities().instabuild) {itemStack.hurt(useCost(), null, null);}
             AbstractThrowable entityForThrowing = null;//new ThrownIronDaggerEntity(level, player, itemStack);
             try {
                 entityForThrowing = createThrownEntity(level, player, itemStack, throwVelocity);
@@ -120,19 +141,18 @@ public abstract class ThrowableWeaponItem extends TieredItem {
             //for easier debugging.
             var playerXRot = player.getXRot();
             var playerYRot = player.getYRot();
-
             shootingAction(level, entityForThrowing, player, playerXRot, playerYRot, 0, entityForThrowing.getInitialVelocity(), inaccuracy, itemStack);
-            for (RegistryObject<Item> item: ModItems.ITEMS.getEntries()) {
+            for (RegistryObject<Item> item : ModItems.ITEMS.getEntries()) {
                 if (item.get() instanceof ThrowableWeaponItem throwingItem) {
                     player.getCooldowns().addCooldown(throwingItem, cooldown);
                 }
             }
-
-            if (this instanceof BombItem) {
+            if (this instanceof BombItem && !(player.getAbilities().instabuild)) {
                 itemStack.shrink(1);
             }
         }
-        return super.use(level, player, hand);
+
+        super.releaseUsing(itemStack, level, pLivingEntity, timeCharged);
     }
 
     // having this allows for more complex things than just "throw one thing where the player is looking" like shurikens
@@ -178,9 +198,15 @@ public abstract class ThrowableWeaponItem extends TieredItem {
 
     @Override
     public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
-        var enchantments = book.getAllEnchantments();
-        if (enchantments.containsValue(Enchantments.MENDING) || enchantments.containsValue(Enchantments.UNBREAKING)) {return false;}
-        return super.isBookEnchantable(stack, book);
+        var unbLevel = book.getEnchantmentLevel(Enchantments.UNBREAKING);
+        if (unbLevel != 0) {return false;}
+        else {return super.isBookEnchantable(stack, book);}
+    }
+
+    @Override
+    public int getEnchantmentLevel(ItemStack stack, Enchantment enchantment) {
+        if (enchantment == Enchantments.UNBREAKING) {return 0;}
+        return super.getEnchantmentLevel(stack, enchantment);
     }
 
     //    private void OnAnvilRepair(AnvilRepairEvent event) {
@@ -219,7 +245,7 @@ public abstract class ThrowableWeaponItem extends TieredItem {
         }
 
         if(flameEnchantmentLevel > 0){
-            projectile.setSecondsOnFire(THROWABLES_FLAME_ENCHANT_SECONDS);
+            projectile.setSecondsOnFire(Math.round(((Double) config.weaponworksConfig.enchantmentConstants.get("flameEnchantProjectileSeconds")).floatValue()));
         }
 
         if(velocityEnchantmentLevel > 0){

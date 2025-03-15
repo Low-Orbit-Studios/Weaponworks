@@ -7,8 +7,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.twomoonsstudios.moonsweaponry.MoonsWeaponry;
+import net.twomoonsstudios.moonsweaponry.newConfig.ConfigHelper;
+
+import java.util.Map;
 
 public class ThrownBoomerangEntity extends AbstractThrowable {
+    ConfigHelper config = MoonsWeaponry.getConfigHelper();
+
     public ThrownBoomerangEntity(EntityType<? extends ThrownBoomerangEntity> entityType, Level level) {
         super(entityType, level);
     }
@@ -19,12 +25,12 @@ public class ThrownBoomerangEntity extends AbstractThrowable {
 
     public boolean noGrav = true;
     boolean returnAnyways = false;
-
+    int ticksTillReturn = config.convertToInt(config.weaponworksConfig.throwingWeaponConstants.get("boomerangReturnTicks"));
     @Override
     public void tick() {
         super.tick();
         if (this.inGround) {noGrav = false;}
-        if (((this.tickCount >= 15 )|| returnAnyways) && this.getOwner() != null && noGrav) {
+        if (((this.tickCount >= ticksTillReturn) || returnAnyways) && this.getOwner() != null && noGrav) {
             Vec3 baseTowardsOwner = this.getOwner().getEyePosition().subtract(this.position()).normalize();
             double inverseLength = 0.75/(baseTowardsOwner.length());
             Vec3 finalTowardsOwner = baseTowardsOwner.scale(inverseLength);

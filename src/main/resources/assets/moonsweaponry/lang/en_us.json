@@ -65,10 +65,40 @@
   "item.moonsweaponry.longbow": "Longbow",
   "item.moonsweaponry.shortbow": "Shortbow",
 
+  "item.moonsweaponry.wooden_dagger": "Wooden Dagger",
+  "item.moonsweaponry.stone_dagger": "Stone Dagger",
   "item.moonsweaponry.iron_dagger": "Iron Dagger",
-  "item.moonsweaponry.gold_dagger": "Gold Dagger",
+  "item.moonsweaponry.golden_dagger": "Golden Dagger",
+  "item.moonsweaponry.diamond_dagger": "Diamond Dagger",
+  "item.moonsweaponry.netherite_dagger": "Netherite Dagger",
+
+  "item.moonsweaponry.wooden_javelin": "Wooden Javelin",
+  "item.moonsweaponry.stone_javelin": "Stone Javelin",
   "item.moonsweaponry.iron_javelin": "Iron Javelin",
+  "item.moonsweaponry.golden_javelin": "Golden Javelin",
+  "item.moonsweaponry.diamond_javelin": "Diamond Javelin",
+  "item.moonsweaponry.netherite_javelin": "Netherite Javelin",
+
+  "item.moonsweaponry.wooden_hatchet": "Wooden Hatchet",
+  "item.moonsweaponry.stone_hatchet": "Stone Hatchet",
+  "item.moonsweaponry.iron_hatchet": "Iron Hatchet",
+  "item.moonsweaponry.golden_hatchet": "Golden Hatchet",
+  "item.moonsweaponry.diamond_hatchet": "Diamond Hatchet",
+  "item.moonsweaponry.netherite_hatchet": "Netherite Hatchet",
+
+  "item.moonsweaponry.wooden_boomerang": "Wooden Boomerang",
+  "item.moonsweaponry.stone_boomerang": "Stone Boomerang",
+  "item.moonsweaponry.iron_boomerang": "Iron Boomerang",
+  "item.moonsweaponry.golden_boomerang": "Golden Boomerang",
+  "item.moonsweaponry.diamond_boomerang": "Diamond Boomerang",
+  "item.moonsweaponry.netherite_boomerang": "Netherite Boomerang",
+
+  "item.moonsweaponry.wooden_shuriken": "Wooden Shuriken",
+  "item.moonsweaponry.stone_shuriken": "Stone Shuriken",
   "item.moonsweaponry.iron_shuriken": "Iron Shuriken",
+  "item.moonsweaponry.golden_shuriken": "Golden Shuriken",
+  "item.moonsweaponry.diamond_shuriken": "Diamond Shuriken",
+  "item.moonsweaponry.netherite_shuriken": "Netherite Shuriken",
 
   "itemGroup.moonsweaponrytab": "Weaponworks",
 

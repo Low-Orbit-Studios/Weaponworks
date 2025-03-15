@@ -1,5 +1,4 @@
 {
-	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
 		"0": "moonsweaponry:item/bomb_cannon",
@@ -183,5 +182,21 @@
 			"rotation": [30,225,0],
 			"scale": [0.7,0.7,0.7]
 		}
-	}
+	},
+	"overrides": [
+		{
+			"predicate": {
+				"charging": 1,
+				"armed": 0
+			},
+			"model": "moonsweaponry:item/bomb_cannon_charging"
+		},
+		{
+			"predicate": {
+				"charging": 0,
+				"armed": 1
+			},
+			"model": "moonsweaponry:item/bomb_cannon_armed"
+		}
+	]
 }

@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "net.twomoonsstudios.moonsweaponry.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "moonsweaponry.refmap.json",
+  "mixins": [
+    "DigDurabilityEnchantmentMixin",
+    "EnchantmentHelperMixin"
+  ],
+  "client": [
+  ],
+  "minVersion": "0.8"
+}

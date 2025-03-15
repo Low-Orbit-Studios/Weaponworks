@@ -1,9 +1,9 @@
 package net.twomoonsstudios.moonsweaponry;
 
+
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -13,13 +13,13 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 //import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
-import net.minecraftforge.registries.RegistryObject;
+import net.minecraftforge.fml.loading.FMLPaths;
+import net.minecraftforge.forgespi.Environment;
 import net.twomoonsstudios.moonsweaponry.block.ModBlocks;
 import net.twomoonsstudios.moonsweaponry.block.entity.ModBlockEntities;
 import net.twomoonsstudios.moonsweaponry.block.entity.itemtemplates.TemplateCollectionController;
 import net.twomoonsstudios.moonsweaponry.config.MoonsWeaponsConfig;
 import net.twomoonsstudios.moonsweaponry.enchanting.ModEnchantments;
-import net.twomoonsstudios.moonsweaponry.entity.AbstractThrowable;
 import net.twomoonsstudios.moonsweaponry.entity.ThrownBombRenderer;
 import net.twomoonsstudios.moonsweaponry.entity.ThrownWeaponRenderer;
 import net.twomoonsstudios.moonsweaponry.entity.WeaponworksEntities;
@@ -27,6 +27,8 @@ import net.twomoonsstudios.moonsweaponry.events.SetupEvents;
 import net.twomoonsstudios.moonsweaponry.item.ModItems;
 import net.twomoonsstudios.moonsweaponry.item.ModifiableBowItem;
 import net.twomoonsstudios.moonsweaponry.item.weapons.BombCannonItem;
+import net.twomoonsstudios.moonsweaponry.newConfig.ConfigHelper;
+import net.twomoonsstudios.moonsweaponry.newConfig.WeaponworksConfig;
 import net.twomoonsstudios.moonsweaponry.recipe.ModRecipes;
 import net.twomoonsstudios.moonsweaponry.screen.ModMenuTypes;
 import net.twomoonsstudios.moonsweaponry.screen.WeaponStationScreen;
@@ -42,10 +44,13 @@ public class MoonsWeaponry
 //    public static final String MOD_ID_DEPRECATED = "moonsweaponry";
     // Directly reference a slf4j logger
     protected static final Logger LOGGER = LogUtils.getLogger();
+    protected static final ConfigHelper configHelper = new ConfigHelper(FMLPaths.CONFIGDIR.get());
 
     public static Logger getLogger() {
         return LOGGER;
     }
+
+    public static ConfigHelper getConfigHelper() {return configHelper;}
 
     public MoonsWeaponry() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -67,6 +72,10 @@ public class MoonsWeaponry
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
+
+        if (Environment.get().getDist().isClient()) {
+            new ConfigHelper(FMLPaths.CONFIGDIR.get());
+        }
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)

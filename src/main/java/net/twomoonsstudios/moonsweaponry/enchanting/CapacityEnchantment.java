@@ -2,12 +2,19 @@ package net.twomoonsstudios.moonsweaponry.enchanting;
 
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
-import net.twomoonsstudios.moonsweaponry.entity.AbstractThrowable;
+import net.minecraftforge.fml.loading.FMLPaths;
+import net.twomoonsstudios.moonsweaponry.MoonsWeaponry;
 import net.twomoonsstudios.moonsweaponry.item.ThrowableWeaponItem;
+import net.twomoonsstudios.moonsweaponry.newConfig.ConfigHelper;
 
-import static net.twomoonsstudios.moonsweaponry.constants.EnchantmentConstants.*;
+import java.util.Map;
 
 public class CapacityEnchantment extends WeaponworksThrowableEnchantment{
+
+    private static final Map<String,Object> config = MoonsWeaponry.getConfigHelper().weaponworksConfig.enchantmentConstants;
+    private static final int maxLevel = Math.round(((Double) config.get("capacityEnchantMaxLevel")).floatValue());
+    private static final float multiplierPerLevel = ((Double) config.get("capacityEnchantLevelIncrease")).floatValue();
+
     protected CapacityEnchantment(Rarity pRarity, EquipmentSlot... pApplicableSlots) {
         super(pRarity, pApplicableSlots);
     }
@@ -22,14 +29,14 @@ public class CapacityEnchantment extends WeaponworksThrowableEnchantment{
     }
 
     public int getMaxLevel(){
-        return CAPACITY_ENCHANTMENT_MAX_LEVEL;
+        return maxLevel;
     }
 
     public static int modifyDurability(int baseDurability, int enchantmentLevel){
-        if(enchantmentLevel > CAPACITY_ENCHANTMENT_MAX_LEVEL){
-            enchantmentLevel = CAPACITY_ENCHANTMENT_MAX_LEVEL;
+        if(enchantmentLevel > maxLevel){
+            enchantmentLevel = maxLevel;
         }
-        var totalIncrease = 1 + CAPACITY_MUL_PER_LEVEL * enchantmentLevel;//1 for easy multiplication
+        var totalIncrease = 1 + multiplierPerLevel * enchantmentLevel;//1 for easy multiplication
         var newDurability = baseDurability * totalIncrease;
         return Math.round(newDurability);
     }

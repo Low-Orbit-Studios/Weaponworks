@@ -34,7 +34,6 @@ public class SetupEvents {
             if (entity == null) {
                 return 0.0F;
             } else {
-                MoonsWeaponry.getLogger().debug("{}", (float) Math.min((bow.getUseDuration(stack) - entity.getUseItemRemainingTicks()), bow.getDrawDuration()) / bow.getDrawDuration());
                 return entity.getUseItem() != stack ? 0.0F :
                         (float) Math.min((bow.getUseDuration(stack) - entity.getUseItemRemainingTicks()), bow.getDrawDuration()) / bow.getDrawDuration();
             }

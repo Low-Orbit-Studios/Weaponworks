@@ -43,7 +43,6 @@ public class BombCannonItem extends Item {
                 bomb.shootFromRotation(pPlayer, xRot, yRot, zRot, bomb.getInitialVelocity(), 0.05f);
                 pLevel.addFreshEntity(bomb);
                 setArmed(usedItemStack,false);
-                MoonsWeaponry.getLogger().debug("test 1");
                 pPlayer.getCooldowns().addCooldown(usedItemStack.getItem(), 80);
                 return InteractionResultHolder.success(usedItemStack);
             } else return super.use(pLevel,pPlayer,pUsedHand);
@@ -72,7 +71,6 @@ public class BombCannonItem extends Item {
         int ammoSlot = findAmmoSlot((Player) pLivingEntity);
         if (!(ammoSlot == -1) || !needsAmmo) {
             if (ammoSlot != -1 && needsAmmo) {inventory.get(ammoSlot).shrink(1);}
-            MoonsWeaponry.getLogger().debug("test 4");
             return true;
         } else {
             return false;
@@ -95,7 +93,6 @@ public class BombCannonItem extends Item {
 
     @Override
     public boolean useOnRelease(ItemStack pStack) {
-        MoonsWeaponry.getLogger().debug("test 5");
         return pStack.is(this);
     }
 
@@ -103,6 +100,7 @@ public class BombCannonItem extends Item {
     public int getUseDuration(ItemStack pStack) {
         return 72000;
     }
+
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {

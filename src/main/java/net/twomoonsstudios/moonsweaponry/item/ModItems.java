@@ -2,6 +2,7 @@ package net.twomoonsstudios.moonsweaponry.item;
 
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tiers;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -10,8 +11,8 @@ import net.minecraftforge.registries.RegistryObject;
 import net.twomoonsstudios.moonsweaponry.MoonsWeaponry;
 import net.twomoonsstudios.moonsweaponry.config.objects.WeaponConfigObj;
 import net.twomoonsstudios.moonsweaponry.enums.WeaponTypesEnum;
-import net.twomoonsstudios.moonsweaponry.helpers.ThrowablesHelper;
 import net.twomoonsstudios.moonsweaponry.item.weapons.*;
+import net.twomoonsstudios.moonsweaponry.newConfig.ConfigHelper;
 
 import java.util.*;
 
@@ -24,69 +25,108 @@ public class ModItems {
 
     public static DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MoonsWeaponry.MOD_ID);
 
-    public static List<RegistryObject<Item>> createBaseThrowables() {
-        String[] tierNames = {"wood", "stone", "iron", "gold", "diamond", "netherite"};
-        String[] weaponNames = {"dagger", "javelin", "shuriken", "hatchet", "boomerang"};
-        var a = new ArrayList<RegistryObject<Item>>();
-        for (int i = 0; i < tierNames.length; i++) {
-            for (int j = 0; j < weaponNames.length; j++) {
-                String itemID = tierNames[i] + "_" + weaponNames[j];
-                var properties = getProperties(tierNames[i], weaponNames[j]);
-                int defaultUses = (int) ThrowablesHelper.getDefaultConfig().getOrDefault(itemID + "_default_uses",8);
-                int finalI = i;
-                if (j == 0) {
-                    a.add( ITEMS.register(itemID, () -> new DaggerItem(Tiers.valueOf(tierNames[finalI].toUpperCase()), properties, new Item.Properties().tab(CreativeModeTab.TAB_COMBAT).defaultDurability(defaultUses))));
+    static ConfigHelper config = MoonsWeaponry.getConfigHelper();
+
+    public static List<RegistryObject<Item>> createThrownWeapons() {
+        List<RegistryObject<Item>> listOfItems = new ArrayList<>();
+        LinkedHashSet<String> enabledMaterials = config.weaponworksConfig.enabledMaterials;
+        LinkedHashSet<String> enabledThrownWeapons = config.weaponworksConfig.enabledThrownWeapons;
+        for (String materialName : enabledMaterials) {
+            for (String typeName : enabledThrownWeapons) {
+                ThrowableWeaponItem.ThrowableProperties throwableProperties = getThrowableProperties(typeName, materialName);
+                int numberOfUses = Math.round(((Double) config.weaponworksConfig.materials.get(materialName + "Material").get("thrownUsesMultiplier")).intValue() *
+                        config.convertToInt(config.weaponworksConfig.thrownTypeConstants.get(typeName + "BaseConstants").get("defaultUses")));
+                String itemID;
+                if (materialName.equals("gold") || materialName.equals("wood")) {
+                    itemID = materialName + "en_" + typeName;
+                } else {
+                    itemID = materialName + "_" + typeName;
                 }
-                if (j == 1) {
-                    a.add( ITEMS.register(itemID, () -> new JavelinItem(Tiers.valueOf(tierNames[finalI].toUpperCase()), properties, new Item.Properties().tab(CreativeModeTab.TAB_COMBAT).defaultDurability(defaultUses))));
+                Item.Properties itemProperties = new Item.Properties().tab(CreativeModeTab.TAB_COMBAT).defaultDurability(numberOfUses);
+                if ((Boolean) config.weaponworksConfig.materials.get(materialName + "Material").get("fireResistant")) {
+                    itemProperties.fireResistant();
                 }
-                if (j == 2) {
-                    a.add( ITEMS.register(itemID, () -> new ShurikenItem(Tiers.valueOf(tierNames[finalI].toUpperCase()), properties, new Item.Properties().tab(CreativeModeTab.TAB_COMBAT).defaultDurability(defaultUses))));
+                if (typeName.equals("dagger")) {
+                    listOfItems.add(ITEMS.register(itemID, () -> new DaggerItem(Tiers.valueOf(materialName.toUpperCase()), throwableProperties, itemProperties)));
                 }
-                if (j == 3) {
-                    a.add( ITEMS.register(itemID, () -> new HatchetItem(Tiers.valueOf(tierNames[finalI].toUpperCase()), properties, new Item.Properties().tab(CreativeModeTab.TAB_COMBAT).defaultDurability(defaultUses))));
+                if (typeName.equals("javelin")) {
+                    listOfItems.add(ITEMS.register(itemID, () -> new JavelinItem(Tiers.valueOf(materialName.toUpperCase()), throwableProperties, itemProperties)));
                 }
-                if (j == 4) {
-                    a.add( ITEMS.register(itemID, () -> new BoomerangItem(Tiers.valueOf(tierNames[finalI].toUpperCase()), properties, new Item.Properties().tab(CreativeModeTab.TAB_COMBAT).defaultDurability(defaultUses))));
+                if (typeName.equals("hatchet")) {
+                    listOfItems.add(ITEMS.register(itemID, () -> new HatchetItem(Tiers.valueOf(materialName.toUpperCase()), throwableProperties, itemProperties)));
+                }
+                if (typeName.equals("boomerang")) {
+                    listOfItems.add(ITEMS.register(itemID, () -> new BoomerangItem(Tiers.valueOf(materialName.toUpperCase()), throwableProperties, new Item.Properties().tab(CreativeModeTab.TAB_COMBAT).defaultDurability(1))));
+                }
+                if (typeName.equals("shuriken")) {
+                    listOfItems.add(ITEMS.register(itemID, () -> new ShurikenItem(Tiers.valueOf(materialName.toUpperCase()), throwableProperties, itemProperties)));
                 }
             }
         }
-        return a;
+        return listOfItems;
     }
 
-    public static ThrowableWeaponItem.ThrowableProperties getProperties(String tier, String type) {
-        String id = tier + "_" + type;
-        var config = ThrowablesHelper.getDefaultConfig();
-        float throwVelocity = (float) config.get(type + "_default_velocity");
-        int cooldown = (int) config.get(type + "_default_cooldown");
-        float inaccuracy = (float) config.get(type+ "_default_inaccuracy");
-        int baseDamage = (int) config.get(id + "_default_dmg");
+    public static ThrowableWeaponItem.ThrowableProperties getThrowableProperties(String type, String material) {
+        Map<String, Object> thisMaterialData = config.weaponworksConfig.materials.get(material + "Material");
+        Map<String, Object> thisTypeData = config.weaponworksConfig.thrownTypeConstants.get(type + "BaseConstants");
+        float throwVelocity = ((Double) thisTypeData.get("defaultVelocity")).floatValue();
+        float inaccuracy = ((Double) thisTypeData.get("defaultInaccuracy")).floatValue();
+        int cooldown = config.convertToInt(thisTypeData.get("defaultCooldown"));
+        int baseDamage = config.convertToInt(thisTypeData.get("defaultDamage"));
+        int baseDamageModifier = config.convertToInt(thisMaterialData.get("damageModifier"));
         return new ThrowableWeaponItem.ThrowableProperties()
-                .setThrowVelocity(throwVelocity)
-                .setInaccuracy(inaccuracy)
                 .setCooldown(cooldown)
-                .setBaseDamage(baseDamage);
+                .setBaseDamage(baseDamage + baseDamageModifier)
+                .setInaccuracy(inaccuracy)
+                .setThrowVelocity(throwVelocity);
+    };
+
+    public static List<RegistryObject<Item>> createMeleeWeapons() {
+        ArrayList<RegistryObject<Item>> itemsToAdd = new ArrayList<>();
+        LinkedHashSet<String> enabledMaterials = config.weaponworksConfig.enabledMaterials;
+        LinkedHashSet<String> enabledTypes = config.weaponworksConfig.enabledMeleeWeapons;
+        for (String materialName : enabledMaterials) {
+            for (String typeName : enabledTypes) {
+                String itemID;
+                if (materialName.equals("gold") || materialName.equals("wood")) {
+                    itemID = materialName + "en_" + typeName;
+                } else {
+                    itemID = materialName + "_" + typeName;
+                }
+                Item.Properties itemProperties = new Item.Properties().tab(CreativeModeTab.TAB_COMBAT);
+                itemProperties.defaultDurability(config.convertToInt(config.weaponworksConfig.materials.get(materialName+"Material").get("defaultDurability")));
+                if ((Boolean) config.weaponworksConfig.materials.get(materialName + "Material").get("fireResistant")) {
+                    itemProperties.fireResistant();
+                }
+                var typeBaseConfigs = config.weaponworksConfig.meleeTypeConstants.get(typeName + "BaseConstants");
+                float attackSpeedModifier = ((Double) config.weaponworksConfig.meleeTypeConstants.get(typeName + "BaseConstants").get("defaultAttackSpeed")).floatValue();
+                String itemTierName = (String) config.weaponworksConfig.materials.get(materialName + "Material").get("tierName");
+                int weaponDamage = config.convertToInt(typeBaseConfigs.get("defaultDamage"))
+                        + config.convertToInt(config.weaponworksConfig.materials.get(materialName + "Material").get("damageModifier"))
+                        - (int) Tiers.valueOf(itemTierName).getAttackDamageBonus();
+                itemsToAdd.add(ITEMS.register(itemID, () -> new SwordItem(Tiers.valueOf(itemTierName), weaponDamage, -(4.0f - attackSpeedModifier), itemProperties)));
+            }
+        }
+        return itemsToAdd;
     }
 
-    //public static RegistryObject<Item> BOMB = ITEMS.register(
-    //        "bomb", () -> new BombItem(new Item.Properties().stacksTo(16).tab(CreativeModeTab.TAB_COMBAT))
-    //);
+     public static RegistryObject<Item> BOMB =
+            ITEMS.register(
+                    "bomb",
+                    () -> new BombItem(
+                            Tiers.IRON,
+                            new ThrowableWeaponItem.ThrowableProperties()
+                                    .setThrowVelocity(1.5f)
+                                    .setCooldown(40)
+                                    .setInaccuracy(0.5f)
+                                    .setBaseDamage(0)
+                            ,
+                            new Item.Properties()
+                                    .tab(CreativeModeTab.TAB_COMBAT)
+                                    .stacksTo(16)
+                    )
+            );
 
-    public static RegistryObject<Item> BOMB = ITEMS.register(
-            "bomb",
-            () -> new BombItem(
-                    Tiers.IRON,
-                    new ThrowableWeaponItem.ThrowableProperties()
-                            .setThrowVelocity(1.5f)
-                            .setCooldown(40)
-                            .setInaccuracy(0.5f)
-                            .setBaseDamage(0)
-                    ,
-                    new Item.Properties()
-                            .tab(CreativeModeTab.TAB_COMBAT)
-                            .stacksTo(16)
-            )
-    );
 
     /**Stores references to proper weapon items, excluding templates used in crafting stations.*/
     public static LinkedList<RegistryObject<Item>> WEAPONS_ITEMS = new LinkedList<>();
@@ -212,55 +252,57 @@ public class ModItems {
     }
 
     public static void register(IEventBus eventBus){
-        try{
-            var weaponConfigs = sortItems();
-            var weaponConfigTypes = weaponConfigs.keySet();
-            for (var weaponType : weaponConfigTypes) {
-                var weaponCategory = weaponConfigs.get(weaponType);
+//        try{
+//            var weaponConfigs = sortItems();
+//            var weaponConfigTypes = weaponConfigs.keySet();
+//            for (var weaponType : weaponConfigTypes) {
+//                var weaponCategory = weaponConfigs.get(weaponType);
+//
+//                for (var entry : weaponCategory.entrySet()) {
+//                    WeaponConfigObj weaponConfig = entry.getValue();
+//                    var weaponId = weaponConfig.getConfigObjId();
+//                    switch (weaponType) {
+//
+//                        case GREATSWORD -> {
+//                            WEAPONS_ITEMS.add(ITEMS.register(weaponId, () -> new GreatswordItem(weaponConfig)));
+//                        }
+//                        case HALBERD -> {
+//                            WEAPONS_ITEMS.add(ITEMS.register(weaponId, () -> new HalberdItem(weaponConfig)));
+//                        }
+//                        case HAMMER -> {
+//                            WEAPONS_ITEMS.add(ITEMS.register(weaponId, () -> new HammerItem(weaponConfig)));
+//                        }
+//                        case KATANA -> {
+//                            WEAPONS_ITEMS.add(ITEMS.register(weaponId, () -> new KatanaItem(weaponConfig)));
+//                        }
+//                        case RAPIER -> {
+//                            WEAPONS_ITEMS.add(ITEMS.register(weaponId, () -> new RapierItem(weaponConfig)));
+//                        }
+//                        case SCYTHE -> {
+//                            WEAPONS_ITEMS.add(ITEMS.register(weaponId, () -> new ScytheItem(weaponConfig)));
+//                        }
+//                        case WARGLAIVE -> {
+//                            WEAPONS_ITEMS.add(ITEMS.register(weaponId, () -> new WarglaiveItem(weaponConfig)));
+//                        }
+//                        case SPEAR -> {
+//                            WEAPONS_ITEMS.add(ITEMS.register(weaponId, () -> new SpearItem(weaponConfig)));
+//                        }
+//                        case MACE -> {
+//                            WEAPONS_ITEMS.add(ITEMS.register(weaponId, () -> new MaceItem(weaponConfig)));
+//                        }
+//                        default -> throw new Exception("Unknown weapon type to load: " + weaponId);
+//                    }
+//                }
+//            }
+//        }
+//        catch(Exception ex){
+//            MoonsWeaponry.getLogger().error("Failed to load weapons: " + ex.getMessage());
+//        }
 
-                for (var entry : weaponCategory.entrySet()) {
-                    WeaponConfigObj weaponConfig = entry.getValue();
-                    var weaponId = weaponConfig.getConfigObjId();
-                    switch (weaponType) {
+        createThrownWeapons();
 
-                        case GREATSWORD -> {
-                            WEAPONS_ITEMS.add(ITEMS.register(weaponId, () -> new GreatswordItem(weaponConfig)));
-                        }
-                        case HALBERD -> {
-                            WEAPONS_ITEMS.add(ITEMS.register(weaponId, () -> new HalberdItem(weaponConfig)));
-                        }
-                        case HAMMER -> {
-                            WEAPONS_ITEMS.add(ITEMS.register(weaponId, () -> new HammerItem(weaponConfig)));
-                        }
-                        case KATANA -> {
-                            WEAPONS_ITEMS.add(ITEMS.register(weaponId, () -> new KatanaItem(weaponConfig)));
-                        }
-                        case RAPIER -> {
-                            WEAPONS_ITEMS.add(ITEMS.register(weaponId, () -> new RapierItem(weaponConfig)));
-                        }
-                        case SCYTHE -> {
-                            WEAPONS_ITEMS.add(ITEMS.register(weaponId, () -> new ScytheItem(weaponConfig)));
-                        }
-                        case WARGLAIVE -> {
-                            WEAPONS_ITEMS.add(ITEMS.register(weaponId, () -> new WarglaiveItem(weaponConfig)));
-                        }
-                        case SPEAR -> {
-                            WEAPONS_ITEMS.add(ITEMS.register(weaponId, () -> new SpearItem(weaponConfig)));
-                        }
-                        case MACE -> {
-                            WEAPONS_ITEMS.add(ITEMS.register(weaponId, () -> new MaceItem(weaponConfig)));
-                        }
-                        default -> throw new Exception("Unknown weapon type to load: " + weaponId);
-                    }
-                }
-            }
-        }
-        catch(Exception ex){
-            MoonsWeaponry.getLogger().error("Failed to load weapons: " + ex.getMessage());
-        }
-
-        createBaseThrowables();
-
+        createMeleeWeapons();
+        
         ITEMS.register(eventBus);
     }
 }

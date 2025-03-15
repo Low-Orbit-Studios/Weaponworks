@@ -48,7 +48,7 @@ public class ThrownBombRenderer extends EntityRenderer<ThrownBombEntity> {
         float yRotModifier = 270.0F;
         poseStack.mulPose(Vector3f.YP.rotationDegrees(Mth.lerp(partialTicks, entity.getYRot(), entity.getYRot()) + yRotModifier));
 
-        if (entity.getDeltaMovement().length() >= 0.3) {
+        if (entity.getDeltaMovement().length() >= 0.0) {
             float zRotModifier = (float) (spinModifier * -entity.getDeltaMovement().length());
             poseStack.mulPose(Vector3f.ZP.rotationDegrees(Mth.lerp(partialTicks, entity.getXRot(), entity.getXRot()) + zRotModifier));
         } else {

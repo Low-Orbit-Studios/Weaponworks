@@ -18,9 +18,11 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.entity.IEntityAdditionalSpawnData;
 import net.minecraftforge.network.NetworkHooks;
+import net.twomoonsstudios.moonsweaponry.MoonsWeaponry;
 import net.twomoonsstudios.moonsweaponry.helpers.ThrowablesHelper;
-import net.twomoonsstudios.moonsweaponry.item.ModItems;
 import net.twomoonsstudios.moonsweaponry.item.ThrowableWeaponItem;
+import net.twomoonsstudios.moonsweaponry.newConfig.ConfigHelper;
+import net.twomoonsstudios.moonsweaponry.newConfig.WeaponworksConfig;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -33,6 +35,8 @@ public abstract class AbstractThrowable extends AbstractArrow implements IEntity
     /**The velocity assigned upon throwing. Includes enchantments effects.*/
     protected float initialVelocity;
     public boolean inGroundCheck;
+
+    private WeaponworksConfig config = MoonsWeaponry.getConfigHelper().weaponworksConfig;
 
     public AbstractThrowable(EntityType<? extends AbstractThrowable> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -62,6 +66,7 @@ public abstract class AbstractThrowable extends AbstractArrow implements IEntity
         if (this.inGround) {
             this.setDeltaMovement(new Vec3(0D,0D,0D));
         }
+
         super.tick();
         if (this.tickCount > 3600) {this.discard();}
     }
@@ -142,12 +147,13 @@ public abstract class AbstractThrowable extends AbstractArrow implements IEntity
         var isEnderman = hitEntity.getType() == EntityType.ENDERMAN;
 
         float velocity = Mth.floor(this.getDeltaMovement().length());
-        float dmgToDeal = 2 * ThrowablesHelper.getDmgByVelocity(THROWABLE_MAX_DMG_VELOCITY_THRESHOLD
-                , THROWABLE_MIN_DMG_VELOCITY_THRESHOLD
+        float dmgToDeal = 2 * ThrowablesHelper.getDmgByVelocity(
+                ((Double) config.throwingWeaponConstants.get("throwableMaxDmgVelocityPercent")).floatValue()
+                , ((Double) config.throwingWeaponConstants.get("throwableMinDmgVelocityPercent")).floatValue()
                 , velocity
                 , getDefaultVelocity()
                 , itemBaseDamage
-                , THROWABLE_MIN_DMG_COEF
+                , ((Double) config.throwingWeaponConstants.get("throwableMinDmgCoefficient")).floatValue()
         );
 
         if(hitEntity.hurt(DamageSource.mobAttack((LivingEntity) this.getOwner()), dmgToDeal)){
@@ -156,7 +162,7 @@ public abstract class AbstractThrowable extends AbstractArrow implements IEntity
                     return; //Endermen are known to be unsmackable with ranged physical attacks.
                 }
                 if(this.isOnFire()){
-                    hitEntity.setSecondsOnFire(THROWABLES_FLAME_ENCHANT_ENTITY_SECONDS);
+                    hitEntity.setSecondsOnFire(Math.round(((Double) config.throwingWeaponConstants.get("flameEnchantEntitySeconds")).floatValue()));
                 }
                 //From AbstractArrow. We don't need everything found in there.
                 if (knockback > 0) {
@@ -165,6 +171,9 @@ public abstract class AbstractThrowable extends AbstractArrow implements IEntity
                     if (vec3.lengthSqr() > 0.0D) {
                         livingHitEntity.push(vec3.x, 0.1D, vec3.z);
                     }
+                }
+                if(livingHitEntity.is(this.getOwner())) {
+                    this.tryPickup((Player) this.getOwner());
                 }
             }
         }
