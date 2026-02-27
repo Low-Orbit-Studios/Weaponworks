@@ -23,7 +23,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.twomoonsstudios.moonsweaponry.MoonsWeaponry;
 import net.twomoonsstudios.moonsweaponry.item.ModItems;
-import net.twomoonsstudios.moonsweaponry.item.weapons.BombCannonItem;
+//import net.twomoonsstudios.moonsweaponry.item.weapons.BombCannonItem;
 import net.twomoonsstudios.moonsweaponry.item.weapons.BombItem;
 
 public class ThrownBombEntity extends AbstractThrowable {
@@ -100,9 +100,9 @@ public class ThrownBombEntity extends AbstractThrowable {
                 this.setDeltaMovement(this.getDeltaMovement().add(0,-2,0) );
             }
         }
-        if (getUsedItem().getItem() instanceof BombCannonItem && solid) {
-            blowUpBomb();
-        }
+//        if (getUsedItem().getItem() instanceof BombCannonItem && solid) {
+//            blowUpBomb();
+//        }
     }
 
     @Override
@@ -111,13 +111,12 @@ public class ThrownBombEntity extends AbstractThrowable {
     }
 
     public void dropBombItem() {
-        level.addFreshEntity(new ItemEntity(level, this.getX(),this.getY(),this.getZ(), this.getUsedItem()));
+        level.addFreshEntity(new ItemEntity(level, this.getX(),this.getY(),this.getZ(), ModItems.BOMB.get().getDefaultInstance()));
         this.discard();
     }
 
-    @Override
-    protected void onHitEntity(EntityHitResult pResult) {
-        if (getUsedItem().getItem() instanceof BombCannonItem && !level.isClientSide) {blowUpBomb();}
-    }
-
+//    @Override
+//    protected void onHitEntity(EntityHitResult pResult) {
+//        if (getUsedItem().getItem() instanceof BombCannonItem && !level.isClientSide) {blowUpBomb();}
+//    }
 }

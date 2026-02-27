@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "moonsweaponry:item/diamond_hatchet"
+    "layer0": "moonsweaponry:item/longbow_pulling_1"
   }
 }

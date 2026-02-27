@@ -65,7 +65,7 @@ public class WeaponworksConfig {
                     Map.entry("tierName","NETHERITE"),
                     Map.entry("damageModifier",2.0),
                     Map.entry("defaultDurability",2031),
-                    Map.entry("thrownUsesMultiplier",1.5),
+                    Map.entry("thrownUsesMultiplier",2.0),
                     Map.entry("fireResistant",true)
             ))
     );
@@ -112,26 +112,26 @@ public class WeaponworksConfig {
 
     @Expose
     public Map<String, Object> throwingWeaponConstants = Map.ofEntries(
-            Map.entry("throwableMaxDmgVelocityPercent", 0.8f),
-            Map.entry("throwableMinDmgVelocityPercent", 0.4f),
-            Map.entry("throwableMinDmgCoefficient", 0.2f),
+            Map.entry("throwableMaxDmgVelocityPercent", 1.2),
+            Map.entry("throwableMinDmgVelocityPercent", 0.7),
+            Map.entry("throwableMinDmgCoefficient", 0.2),
             Map.entry("boomerangReturnTicks",10.0)
     );
 
     @Expose
     public Map<String, Map<String, Object>> thrownTypeConstants = Map.ofEntries(
             Map.entry("daggerBaseConstants", Map.ofEntries(
-                    Map.entry("defaultCooldown", 25.0),
+                    Map.entry("defaultCooldown", 20.0),
                     Map.entry("defaultInaccuracy", 0.05),
                     Map.entry("defaultVelocity", 1.8),
                     Map.entry("defaultDamage", 7.0),
                     Map.entry("defaultUses",20.0)
             )),
             Map.entry("javelinBaseConstants", Map.ofEntries(
-                    Map.entry("defaultCooldown",10.0),
+                    Map.entry("defaultCooldown",8.0),
                     Map.entry("defaultInaccuracy", 0.1),
                     Map.entry("defaultVelocity", 1.6),
-                    Map.entry("defaultDamage", 4.0),
+                    Map.entry("defaultDamage", 5.0),
                     Map.entry("defaultUses",24.0)
             )),
             Map.entry("hatchetBaseConstants", Map.ofEntries(
@@ -149,7 +149,7 @@ public class WeaponworksConfig {
                     Map.entry("defaultUses",1.0)
             )),
             Map.entry("shurikenBaseConstants", Map.ofEntries(
-                    Map.entry("defaultCooldown",15),
+                    Map.entry("defaultCooldown",6),
                     Map.entry("defaultInaccuracy", 0.15),
                     Map.entry("defaultVelocity", 1.5),
                     Map.entry("defaultDamage", 4),
@@ -162,9 +162,30 @@ public class WeaponworksConfig {
             Map.entry("flameEnchantProjectileSeconds",100f),
             Map.entry("flameEnchantEntitySeconds",5f),
             Map.entry("velocityEnchantMaxLevel", 3.0),
-            Map.entry("velocityEnchantLevelIncrease", 0.1),
+            Map.entry("velocityEnchantLevelSpeedIncrease", 0.1),
+            Map.entry("velocityEnchantLevelDmgIncrease", 1.0),
             Map.entry("capacityEnchantMaxLevel",2.0),
             Map.entry("capacityEnchantLevelIncrease",  0.25)
+    );
+
+    @Expose
+    public Map<String, Map<String,Object>> bowConstants = Map.ofEntries(
+            Map.entry("shortbow", Map.ofEntries(
+                    Map.entry("drawDuration",15),
+                    Map.entry("maxArrowVelocity",2.2),
+                    Map.entry("minArrowVelocity",0.3),
+                    Map.entry("inaccuracy",.4),
+                    Map.entry("damageMultiplier",.75),
+                    Map.entry("defaultDurability",192)
+            )),
+            Map.entry("longbow", Map.ofEntries(
+                    Map.entry("drawDuration",50),
+                    Map.entry("maxArrowVelocity",3.0),
+                    Map.entry("minArrowVelocity",0.5),
+                    Map.entry("inaccuracy",.1),
+                    Map.entry("damageMultiplier",1.3),
+                    Map.entry("defaultDurability",192)
+            ))
     );
 
     public static WeaponworksConfig load(File configFile) {
@@ -172,21 +193,21 @@ public class WeaponworksConfig {
         if (configFile.exists()) {
             try (FileReader reader = new FileReader(configFile)) {
                 weaponworksConfig = gson.fromJson(reader, WeaponworksConfig.class);
-                MoonsWeaponry.getLogger().debug("Weaponworks config {} loaded successfully.", configFile.getAbsolutePath());
+                MoonsWeaponry.getLogger().debug("Weaponworks config @ {} loaded successfully.", configFile.getAbsolutePath());
             } catch (Exception e) {
-                MoonsWeaponry.getLogger().error("Config finding error at {}", configFile.getAbsolutePath());
+                MoonsWeaponry.getLogger().error("Config error @ {}", configFile.getAbsolutePath());
                 MoonsWeaponry.getLogger().error("{}", e.getMessage());
             }
         }
         else {
             configFile.getParentFile().mkdirs();
-            MoonsWeaponry.getLogger().debug("Created new config at {}", configFile.getAbsolutePath());
+            MoonsWeaponry.getLogger().debug("Created new config @ {}", configFile.getAbsolutePath());
         }
         try (FileWriter writer = new FileWriter(configFile)) {
             gson.toJson(weaponworksConfig, writer);
             MoonsWeaponry.getLogger().debug("Saved config file.");
         } catch (Exception e) {
-            MoonsWeaponry.getLogger().error("Failed to make config at {}", configFile.getAbsolutePath());
+            MoonsWeaponry.getLogger().error("Config error @ {}", configFile.getAbsolutePath());
             MoonsWeaponry.getLogger().error("{}",e.getMessage());
         }
         return weaponworksConfig;

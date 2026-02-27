@@ -19,18 +19,15 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.entity.IEntityAdditionalSpawnData;
 import net.minecraftforge.network.NetworkHooks;
 import net.twomoonsstudios.moonsweaponry.MoonsWeaponry;
+import net.twomoonsstudios.moonsweaponry.enchanting.ModEnchantments;
 import net.twomoonsstudios.moonsweaponry.helpers.ThrowablesHelper;
 import net.twomoonsstudios.moonsweaponry.item.ThrowableWeaponItem;
 import net.twomoonsstudios.moonsweaponry.newConfig.ConfigHelper;
 import net.twomoonsstudios.moonsweaponry.newConfig.WeaponworksConfig;
 import org.jetbrains.annotations.NotNull;
 
-
-import static net.twomoonsstudios.moonsweaponry.constants.ThrownWeaponDataConstants.*;
-
 public abstract class AbstractThrowable extends AbstractArrow implements IEntityAdditionalSpawnData {
     private ItemStack usedItem;
-    protected ResourceLocation throwableTexture;
     protected int velocityEnchantmentLevel = 0;
     /**The velocity assigned upon throwing. Includes enchantments effects.*/
     protected float initialVelocity;
@@ -41,6 +38,7 @@ public abstract class AbstractThrowable extends AbstractArrow implements IEntity
     public AbstractThrowable(EntityType<? extends AbstractThrowable> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
+
     public AbstractThrowable(EntityType<? extends AbstractThrowable> entityType, Level level, LivingEntity entity, ItemStack stack, float velocityIn) {
         super(entityType, entity, level);
         usedItem = stack.copy();
@@ -82,9 +80,6 @@ public abstract class AbstractThrowable extends AbstractArrow implements IEntity
     public void setInitialVelocity(float initialVelocity){
         this.initialVelocity = initialVelocity;
     }
-    public float getInitialVelocity(){
-        return this.initialVelocity;
-    }
     public void setVelocityEnchantmentLevel(int newLevel){
         this.velocityEnchantmentLevel = newLevel;
     }
@@ -125,6 +120,11 @@ public abstract class AbstractThrowable extends AbstractArrow implements IEntity
         return false;
     }
 
+    public float getInitialVelocity() {
+        //moved from velocity enchantment for testing
+        return initialVelocity;
+    }
+
     public float getDefaultVelocity() {
         return ((ThrowableWeaponItem) usedItem.getItem()).getBaseVelocity();
     }
@@ -146,14 +146,12 @@ public abstract class AbstractThrowable extends AbstractArrow implements IEntity
 
         var isEnderman = hitEntity.getType() == EntityType.ENDERMAN;
 
-        float velocity = Mth.floor(this.getDeltaMovement().length());
-        float dmgToDeal = 2 * ThrowablesHelper.getDmgByVelocity(
-                ((Double) config.throwingWeaponConstants.get("throwableMaxDmgVelocityPercent")).floatValue()
-                , ((Double) config.throwingWeaponConstants.get("throwableMinDmgVelocityPercent")).floatValue()
-                , velocity
+        float velocity = (float) (this.getDeltaMovement().length());
+        float dmgToDeal = ThrowablesHelper.getDmgByVelocity(
+                velocity
                 , getDefaultVelocity()
                 , itemBaseDamage
-                , ((Double) config.throwingWeaponConstants.get("throwableMinDmgCoefficient")).floatValue()
+                , getVelocityEnchantmentLevel()
         );
 
         if(hitEntity.hurt(DamageSource.mobAttack((LivingEntity) this.getOwner()), dmgToDeal)){
@@ -171,9 +169,6 @@ public abstract class AbstractThrowable extends AbstractArrow implements IEntity
                     if (vec3.lengthSqr() > 0.0D) {
                         livingHitEntity.push(vec3.x, 0.1D, vec3.z);
                     }
-                }
-                if(livingHitEntity.is(this.getOwner())) {
-                    this.tryPickup((Player) this.getOwner());
                 }
             }
         }

@@ -71,11 +71,12 @@ public class ThrownWeaponRenderer extends EntityRenderer<AbstractThrowable> {
         float spinModifier = entity.tickCount + partialTicks;
         // Points away from player
         float yRotModifier = 270.0F;
-        poseStack.mulPose(Vector3f.YP.rotationDegrees(Mth.lerp(partialTicks, entity.getYRot(), entity.getYRot()) + yRotModifier));
-
+        //poseStack.mulPose(Vector3f.YP.rotationDegrees(Mth.lerp(partialTicks, entity.getYRot(), entity.getYRot()) + yRotModifier));
+        poseStack.mulPose(Vector3f.YP.rotationDegrees(entity.getYRot() + yRotModifier));
         //epic spinny
         float zRotModifier = spinModifier * -60f;
-        poseStack.mulPose(Vector3f.ZP.rotationDegrees(Mth.lerp(partialTicks, entity.getXRot(), entity.getXRot()) + zRotModifier));
+        //poseStack.mulPose(Vector3f.ZP.rotationDegrees(Mth.lerp(partialTicks, entity.getXRot(), entity.getXRot()) + zRotModifier));
+        poseStack.mulPose(Vector3f.ZP.rotationDegrees(entity.getXRot() + zRotModifier));
 
         poseStack.mulPose(Vector3f.XP.rotationDegrees(180.0f));
     }
@@ -84,8 +85,8 @@ public class ThrownWeaponRenderer extends EntityRenderer<AbstractThrowable> {
         poseStack.mulPose(Vector3f.XP.rotationDegrees(90));
         poseStack.mulPose(Vector3f.YP.rotationDegrees(-45));
         if (shouldSpin) {
-            float spinModifier = (entity.tickCount + partialTicks) * -60f;
-            poseStack.mulPose(Vector3f.ZP.rotationDegrees(Mth.lerp(partialTicks, entity.getXRot(), entity.getXRot() + spinModifier)));
+            float spinModifier = (entity.tickCount + partialTicks) * -40f;
+            poseStack.mulPose(Vector3f.ZP.rotationDegrees(entity.getXRot() + spinModifier));
         }
     }
 

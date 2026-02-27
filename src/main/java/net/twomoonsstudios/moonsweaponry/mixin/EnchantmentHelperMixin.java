@@ -14,13 +14,13 @@ import java.util.Map;
 @Mixin(EnchantmentHelper.class)
 public abstract class EnchantmentHelperMixin {
 
-    @Inject(method = "setEnchantments", at = @At("HEAD"), cancellable = true)
-    private static void setEnchantments(Map<Enchantment, Integer> pEnchantmentsMap, ItemStack pStack, CallbackInfo ci) {
-        if (pEnchantmentsMap.containsKey(Enchantments.UNBREAKING) && pStack.getItem() instanceof ThrowableWeaponItem) {
-            pEnchantmentsMap.remove(Enchantments.UNBREAKING);
-            if (pEnchantmentsMap.isEmpty()) {
-                ci.cancel();
-            }
-        }
-    }
+//    @Inject(method = "setEnchantments", at = @At("HEAD"), cancellable = true)
+//    private static void setEnchantments(Map<Enchantment, Integer> pEnchantmentsMap, ItemStack pStack, CallbackInfo ci) {
+//        if (pEnchantmentsMap.containsKey(Enchantments.UNBREAKING) && pStack.getItem() instanceof ThrowableWeaponItem) {
+//            pEnchantmentsMap.remove(Enchantments.UNBREAKING);
+//            if (pEnchantmentsMap.isEmpty()) {
+//                ci.cancel();
+//            }
+//        }
+//    }
 }

@@ -24,7 +24,7 @@ public class BoomerangItem extends ThrowableWeaponItem {
     }
 
     @Override
-    protected void applyEnchantments(ItemStack itemStack, AbstractThrowable projectile) {
+    public void applyEnchantments(ItemStack itemStack, AbstractThrowable projectile) {
         super.applyEnchantments(itemStack, projectile);
         var piercingEnchantmentLevel = itemStack.getEnchantmentLevel(Enchantments.PIERCING);
         if (piercingEnchantmentLevel > 0) {

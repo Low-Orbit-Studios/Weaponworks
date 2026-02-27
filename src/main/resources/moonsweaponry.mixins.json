@@ -4,10 +4,12 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "moonsweaponry.refmap.json",
   "mixins": [
+    "AnvilMenuMixin",
     "DigDurabilityEnchantmentMixin",
     "EnchantmentHelperMixin"
   ],
   "client": [
+    "PlayerRendererMixin"
   ],
   "minVersion": "0.8"
 }

@@ -1,6 +1,10 @@
 package net.twomoonsstudios.moonsweaponry.item;
 
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
@@ -23,6 +27,7 @@ import net.twomoonsstudios.moonsweaponry.entity.AbstractThrowable;
 import net.twomoonsstudios.moonsweaponry.entity.ThrownBombEntity;
 import net.twomoonsstudios.moonsweaponry.item.weapons.BombItem;
 import net.twomoonsstudios.moonsweaponry.newConfig.ConfigHelper;
+import org.apache.logging.log4j.core.tools.picocli.CommandLine;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,9 +35,6 @@ import java.util.List;
 
 public abstract class ThrowableWeaponItem extends TieredItem {
 
-    /**Set to TRUE after registering the events since the events have to be
-     * registered only once.*/
-    private static boolean eventsRegistered;
     protected float throwVelocity;
     /**
      * Cooldown, in ticks, between throwing two throwables.*/
@@ -49,14 +51,14 @@ public abstract class ThrowableWeaponItem extends TieredItem {
         this.cooldown = throwableProperties.cooldown;
         this.inaccuracy = throwableProperties.inaccuracy;
         this.baseDamage = throwableProperties.baseDamage;
-        MinecraftForge.EVENT_BUS.addListener(EventPriority.LOW, this::OnAnvilUpdate);
+        //MinecraftForge.EVENT_BUS.addListener(EventPriority.LOW, this::OnAnvilUpdate);
         //MinecraftForge.EVENT_BUS.addListener(EventPriority.LOW, this::OnAnvilRepair);
     }
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-        pTooltipComponents.add(Component.literal( (getMaxDamage(pStack) - getDamage(pStack)) +" uses remaining"));
-        pTooltipComponents.add(Component.literal( (this.baseDamage) + " damage"));
+        pTooltipComponents.add(Component.literal( (getMaxDamage(pStack) - getDamage(pStack)) +" uses remaining").withStyle(ChatFormatting.DARK_GREEN));
+        pTooltipComponents.add(Component.literal( (this.baseDamage) + " damage").withStyle(ChatFormatting.DARK_GREEN));
     }
 
     @Override
@@ -141,7 +143,7 @@ public abstract class ThrowableWeaponItem extends TieredItem {
             //for easier debugging.
             var playerXRot = player.getXRot();
             var playerYRot = player.getYRot();
-            shootingAction(level, entityForThrowing, player, playerXRot, playerYRot, 0, entityForThrowing.getInitialVelocity(), inaccuracy, itemStack);
+            shootingAction(level, entityForThrowing, player, playerXRot, playerYRot,  0,  entityForThrowing.getInitialVelocity(), inaccuracy, itemStack);
             for (RegistryObject<Item> item : ModItems.ITEMS.getEntries()) {
                 if (item.get() instanceof ThrowableWeaponItem throwingItem) {
                     player.getCooldowns().addCooldown(throwingItem, cooldown);
@@ -157,7 +159,7 @@ public abstract class ThrowableWeaponItem extends TieredItem {
 
     // having this allows for more complex things than just "throw one thing where the player is looking" like shurikens
     public void shootingAction(Level level, AbstractThrowable entity, Player player, float xRot, float yRot, float zRot, float initialVelocity, float inaccuracy, ItemStack itemStack) {
-        entity.shootFromRotation(player, xRot, yRot, zRot, initialVelocity, inaccuracy);
+        entity.shootFromRotation(player, xRot, yRot, zRot, entity.getInitialVelocity(), inaccuracy);
         level.addFreshEntity(entity);
     }
 
@@ -166,35 +168,35 @@ public abstract class ThrowableWeaponItem extends TieredItem {
         return 1f;
     }
 
-    protected void OnAnvilUpdate(AnvilUpdateEvent event){
-        if(event.getPlayer().getLevel().isClientSide){
-            return;
-        }
-        var outputItemStack = event.getOutput();
-
-        var isLeftItemThrowable = false;
-        var isRightItemThrowable = false;
-
-        var rightItemStack = event.getRight();
-        var rightItem = rightItemStack.getItem();
-        if(rightItem instanceof  ThrowableWeaponItem){
-            isRightItemThrowable = true;
-            rightItemStack.setRepairCost(0);
-        }
-
-        var leftItemStack = event.getLeft();
-        var leftItem = leftItemStack.getItem();
-        if(leftItem instanceof ThrowableWeaponItem){
-            isLeftItemThrowable = true;
-            leftItemStack.setRepairCost(0);
-
-            if(leftItem.isValidRepairItem(leftItemStack, rightItemStack) && !isRightItemThrowable){
-                outputItemStack = leftItemStack.copy();
-                outputItemStack.setDamageValue(0);//We need only one item to fix a throwable fully.
-                event.setOutput(outputItemStack);
-            }
-        }
-    }
+//    protected void OnAnvilUpdate(AnvilUpdateEvent event){
+//        if(event.getPlayer().getLevel().isClientSide){
+//            return;
+//        }
+//        var outputItemStack = event.getOutput();
+//
+//        var isLeftItemThrowable = false;
+//        var isRightItemThrowable = false;
+//
+//        var rightItemStack = event.getRight();
+//        var rightItem = rightItemStack.getItem();
+//        if(rightItem instanceof  ThrowableWeaponItem){
+//            isRightItemThrowable = true;
+//            rightItemStack.setRepairCost(0);
+//        }
+//
+//        var leftItemStack = event.getLeft();
+//        var leftItem = leftItemStack.getItem();
+//        if(leftItem instanceof ThrowableWeaponItem){
+//            isLeftItemThrowable = true;
+//            leftItemStack.setRepairCost(0);
+//
+//            if(leftItem.isValidRepairItem(leftItemStack, rightItemStack) && !isRightItemThrowable){
+//                outputItemStack = leftItemStack.copy();
+//                outputItemStack.setDamageValue(0);//We need only one item to fix a throwable fully.
+//                event.setOutput(outputItemStack);
+//            }
+//        }
+//    }
 
     @Override
     public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
@@ -235,7 +237,7 @@ public abstract class ThrowableWeaponItem extends TieredItem {
 //        }
 //    }
 
-    protected void applyEnchantments(ItemStack itemStack, AbstractThrowable projectile) {
+    public void applyEnchantments(ItemStack itemStack, AbstractThrowable projectile) {
         var punchEnchantmentLevel = itemStack.getEnchantmentLevel(Enchantments.PUNCH_ARROWS);
         var flameEnchantmentLevel = itemStack.getEnchantmentLevel(Enchantments.FLAMING_ARROWS);
         var velocityEnchantmentLevel = itemStack.getEnchantmentLevel(ModEnchantments.VELOCITY_ENCHANTMENT.get());

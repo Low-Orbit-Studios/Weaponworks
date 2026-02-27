@@ -184,13 +184,6 @@ dependencies {
     runtimeOnly fg.deobf('maven.modrinth:better-combat:1.7.1+1.19-forge')
     runtimeOnly fg.deobf("me.shedaniel.cloth:cloth-config-forge:8.0.75")
 
-    compileOnly "io.github.hornster.itemfig:itemfig:${itemfigver}:api"
-    runtimeOnly "io.github.hornster.itemfig:itemfig:${itemfigver}"
-
-
-    testCompileOnly "io.github.hornster.itemfig:itemfig:${itemfigver}:api"
-    testRuntimeOnly "io.github.hornster.itemfig:itemfig:${itemfigver}"
-
     testImplementation  'org.junit.jupiter:junit-jupiter:5.8.1'
 
     // compile against the JEI API but do not include it at runtime

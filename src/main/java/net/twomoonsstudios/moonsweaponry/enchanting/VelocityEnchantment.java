@@ -11,7 +11,7 @@ public class VelocityEnchantment extends WeaponworksThrowableEnchantment {
 
     private static final Map<String,Object> config = MoonsWeaponry.getConfigHelper().weaponworksConfig.enchantmentConstants;
     private static final int maxLevel = Math.round(((Double) config.get("velocityEnchantMaxLevel")).floatValue());
-    private static final float multiplierPerLevel = ((Double) config.get("velocityEnchantLevelIncrease")).floatValue();
+    private static final float multiplierPerLevel = ((Double) config.get("velocityEnchantLevelSpeedIncrease")).floatValue();
 
     protected VelocityEnchantment(Rarity pRarity, EquipmentSlot pApplicableSlots) {
         super(pRarity, pApplicableSlots);

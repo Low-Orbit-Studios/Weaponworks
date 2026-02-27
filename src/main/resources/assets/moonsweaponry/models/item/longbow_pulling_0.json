@@ -1,6 +1,21 @@
 {
   "parent": "moonsweaponry:item/longbow",
+  "loader": "forge:separate_transforms",
   "textures": {
-    "layer0": "moonsweaponry:item/longbow_pulling_0"
+    "layer0": "moonsweaponry:item/longbow_gui_pulling_00"
+  },
+  "base": {
+    "parent": "moonsweaponry:item/longbow_handheld_pulling_0"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "moonsweaponry:item/longbow_gui_pulling_00"
+    },
+    "fixed": {
+      "parent": "moonsweaponry:item/longbow_gui_pulling_00"
+    },
+    "ground": {
+      "parent": "moonsweaponry:item/longbow_gui_pulling_00"
+    }
   }
 }

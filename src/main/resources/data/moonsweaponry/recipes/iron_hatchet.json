@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " /i",
+    " /i",
+    "  /"
+  ],
+  "key": {
+    "i": {
+      "item": "minecraft:iron_ingot"
+    },
+    "/": {
+      "item": "moonsweaponry:thrown_handle"
+    }
+  },
+  "result": {
+    "item": "moonsweaponry:iron_hatchet"
+  }
+}
